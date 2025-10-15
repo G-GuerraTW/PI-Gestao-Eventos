@@ -1,0 +1,142 @@
+<div class="row mt-4">
+	<div class="col-md-6 d-none d-md-block" style="height: 450px;">
+		<div class="text-center col-md-12 my-auto side-heder">
+			<h1>Cadastro de Usuário</h1>
+			<img src="../../../../assets/img/img2.png" class="my-4" alt="" width="400px">
+			<!-- <p>Form Value: {{form.value | json}}</p>
+			<p>Form Status: {{form.status | json}}</p> -->
+		</div>
+	</div>
+	<div class="col-md-6">
+<form class="p-1" [formGroup]="form" (ngSubmit)="onClickRegistrar()">
+	<div class="pb-2 d-block d-md-none">
+		<h3 class="border-bottom">Cadastro de Usuário</h3>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<label class="form-label" for="primeiroNome">Primeiro Nome</label>
+    		<input type="text" class="form-control"
+			  [ngClass]="
+			  {
+				'is-invalid': (f.primeiroNome?.errors && f.primeiroNome?.touched),
+				'is-valid': f.primeiroNome?.touched && f.primeiroNome?.touched
+			  }"
+			  formControlName="primeiroNome" placeholder="Primeiro Nome"
+			>
+			<div *ngIf="f.primeiroNome?.invalid && (f.primeiroNome?.dirty || f.primeiroNome?.touched)" class="invalid-feedback">	
+				<div *ngIf="f.primeiroNome?.errors.required">Nome Obrigatório.</div>
+				<div *ngIf="f.primeiroNome?.errors.minlength">Nome é muito curto.</div>
+			</div>
+			<div *ngIf="f.primeiroNome?.valid" class="valid-feedback">Nome Valido.</div>
+		</div>
+		<div class="col-sm-6">
+			<label class="form-label" for="ultimoNome">Último nome</label>
+			  <input type="text" class="form-control"
+			  [ngClass]="
+			  {
+				'is-invalid': (f.ultimoNome?.errors && f.ultimoNome?.touched),
+				'is-valid': f.ultimoNome?.valid && f.ultimoNome?.touched
+			  }
+			  "
+			  formControlName="ultimoNome" placeholder="Ultimo nome"
+			>
+			<div *ngIf="f.ultimoNome?.invalid && (f.ultimoNome?.dirty || f.ultimoNome?.touched)" class="invalid-feedback">
+				<div *ngIf="f.ultimoNome?.errors.required && f.ultimoNome?.touched">Ultimo nome é Obrigatorio.</div>
+				<div *ngIf="f.ultimoNome?.errors.minlength && f.ultimoNome?.touched">Ultimo nome Muito Curto.</div>
+			</div>
+			<div *ngIf="f.ultimoNome?.valid" class="valid-feedback">Ultimo Nome Valido.</div>
+
+		</div>
+	</div>
+	<div>
+		<label class="form-label" for="email">Email</label>
+		<input type="email" class="form-control"
+		[ngClass]="
+		{
+			'is-invalid': f.email?.errors && f.email?.touched,
+			'is-valid': f.email?.valid && f.email?.touched
+		}"
+		formControlName="email" placeholder="E-mail"
+		>
+		<div *ngIf="f.email?.invalid && (f.ultimoNome?.dirty || f.email?.touched)" class="invalid-feedback">
+			<div *ngIf="f.email?.errors.required && f.email?.touched">E-mail é Obrigatorio.</div>
+			<div *ngIf="f.email?.errors.email && f.email?.touched">E-mail Inválido</div>
+		</div>
+		<div *ngIf="f.ultimoNome?.valid" class="valid-feedback">E-mail Valido.</div>
+	</div>
+	<div>
+		<label class="form-label" for="userName">user Name:</label>
+		<input type="text" class="form-control" autocomplete="username"
+		[ngClass]="
+		{
+		   'is-invalid': f.userName?.errors && f.userName?.touched,
+		   'is-valid': f.userName?.valid && f.userName?.touched
+		}"
+		formControlName="userName" placeholder="Username"
+		>
+		<div *ngIf="f.userName?.invalid && (f.userName?.dirty || f.userName?.touched)" class="invalid-feedback">
+			<div *ngIf="f.userName?.errors.required && f.userName?.touched">Username é Obrigatorio.</div>
+		</div>
+		<div *ngIf="f.userName?.valid" class="valid-feedback">UserName Valido.</div>
+		
+	</div>
+	<div class="row mt-2">
+		<div class="col-sm-6">
+			<label for="password" class="form-label">Senha:</label>
+			<input type="password" class="form-control" autocomplete="new-password"
+			[ngClass]="
+			{
+			   'is-invalid': f.password?.invalid && f.password?.touched,
+			   'is-valid': f.password?.valid && f.password?.touched
+			}"
+			formControlName="password" placeholder="Password"
+			>
+			<div *ngIf="f.password?.invalid && (f.password?.dirty || f.password?.touched)" class="invalid-feedback">
+				<div *ngIf="f.password?.errors.required && f.password?.touched">Senha é Obrigatório.</div>
+			</div>
+			<div *ngIf="f.password?.valid" class="valid-feedback">Password Valido.</div>
+		</div>
+		<div class="form-group col-sm-6">
+			<label for="passwordConfirm" class="form-label">Confirmar Senha:</label>
+			<input type="password" class="form-control" autocomplete="new-password"
+			[ngClass]="
+			{
+				'is-invalid': f.passwordConfirm?.errors && f.passwordConfirm?.touched,
+				'is-valid': f.passwordConfirm?.valid && f.passwordConfirm?.touched,
+			}"
+			formControlName="passwordConfirm" placeholder="Password"
+			>
+			<div *ngIf="f.passwordConfirm?.invalid && (f.passwordConfirm?.dirty || f.passwordConfirm?.touched)" class="invalid-feedback">
+				<div *ngIf="f.passwordConfirm?.errors.required && f.passwordConfirm?.touched">Confirme a senha!</div>				
+				<div *ngIf="f.passwordConfirm?.errors.passwordMismatch && f.passwordConfirm.touched">Senhas não coincidem!</div>				
+			</div>
+			<div *ngIf="f.passwordConfirm.valid" class="valid-feedback">Confirmação Valida.</div>
+		</div>
+	</div>
+	<div class="row p-1 mb-3">
+		<div class="custom-control custom-checkbox">
+			<input type="checkbox" class="custom-control-input mx-2" id="customCheck1"formControlName="termos"   [ngClass]="{'is-invalid': f.termos.invalid && f.termos.touched}">
+			<label class="custom-control-label" for="customCheck1">Eu concordo com os <a href="#">Termos de Uso</a>.</label>
+			<div *ngIf="f.termos?.invalid && (f.termos?.dirty || f.termos?.touched)" class="invalid-feedback">
+				<div *ngIf="f.termos?.invalid && f.termos?.touched" class="d-block">Termo é Obrigatorio.</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-12">
+			<!-- <p>{{form.status | json}}</p> -->
+			<button type="submit" class="btn btn-lg btn-success px-5" [disabled]="!form.valid">
+				Registrar
+			</button>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col-12">
+			<a class="btn btn-link btn-block" routerLink="/user/login">
+				Já sou Cadastrado
+			</a>
+		</div>
+	</div>
+</form>
+	</div>
+</div>
