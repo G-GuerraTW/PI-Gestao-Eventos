@@ -35,7 +35,7 @@ import { LoginComponent } from './components/user/login/login.component';
 import { RegistrationComponent } from './components/user/registration/registration.component';
 
 @NgModule({
-  declarations: [		
+  declarations: [
     AppComponent,
     EventosComponent,
     PalestrantesComponent,
