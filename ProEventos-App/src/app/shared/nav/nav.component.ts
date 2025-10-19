@@ -16,10 +16,6 @@ export class NavComponent {
 
   user: User | null = null;
 
-  constructor() {
-    this.authService.user$.subscribe(u => this.user = u);
-  }
-
   showmenu(): boolean {
     return this.router.url !== '/user/login';
   }
