@@ -42,13 +42,13 @@
         <td>
           <ul>
             <li *ngFor="let lote of evento.lotes">
-              {{ lote.nome }} - {{ lote.preco | currency }} ({{ lote.quantidade }} unidades)
+              {{ lote.nome }} - {{ lote.valor | currency }} ({{ lote.quantidade }} unidades)
             </li>
           </ul>
         </td>
         <td>
           <ul>
-            <li *ngFor="let rede of evento.redesSociais">
+            <li *ngFor="let rede of evento.redeSociais">
               <a [href]="" target="_blank">{{ rede.nome }}</a>
             </li>
           </ul>

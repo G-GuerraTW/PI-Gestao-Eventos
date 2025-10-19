@@ -1,6 +1,6 @@
+import { Evento } from './../../../models/Evento';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { EventoDTO } from 'src/app/models/EventoDTO';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +8,7 @@ import { EventoDTO } from 'src/app/models/EventoDTO';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  eventos: EventoDTO[] = [];
+  eventos: Evento[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -17,11 +17,11 @@ export class DashboardComponent implements OnInit {
   }
 
   carregarEventos() {
-    this.http.get<EventoDTO[]>('http://localhost:5241/api/Eventos')
+    this.http.get<Evento[]>('http://localhost:5241/api/Eventos')
       .subscribe((res) => this.eventos = res);
   }
 
-  editarEvento(evento: EventoDTO) {
+  editarEvento(evento: Evento) {
     this.http.put(`http://localhost:5241/api/Eventos/${evento.id}`, evento)
       .subscribe(() => alert('Evento atualizado com sucesso!'));
   }
