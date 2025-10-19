@@ -12,7 +12,7 @@ import { User } from 'src/models/User';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-  private toastR = inject(ToastrService); 
+  private toastR = inject(ToastrService);
   private userService = inject(UserService);
   private ngxSpinnerService = inject(NgxSpinnerService);
   private fb = inject(FormBuilder);
@@ -50,7 +50,9 @@ export class RegistrationComponent implements OnInit {
       return;
     }
 
-    const user: User = this.form.value;
+    const user = { ...this.form.value };
+    delete user.passwordConfirm;
+    delete user.termos;
 
     this.ngxSpinnerService.show();
 

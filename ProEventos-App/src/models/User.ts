@@ -8,4 +8,5 @@ export interface User {
     descricao: string;
     funcao: Funcao;
     imagemPerfil: string;
+    password: string;
 }

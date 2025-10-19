@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/enviroment/enviroment';
 import { User } from 'src/models/User';
 
 @Injectable({
@@ -8,8 +9,8 @@ import { User } from 'src/models/User';
 })
 export class UserService {
 
-  private http = inject(HttpClient); 
-  baseURL = 'http://localhost:5241/api/Account/Register';
+  private http = inject(HttpClient);
+  baseURL = `${environment.baseUrl}/Account/Register`
 
   registerUser(user: User): Observable<User> {
     return this.http.post<User>(this.baseURL, user);
