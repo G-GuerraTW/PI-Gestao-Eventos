@@ -1,0 +1,138 @@
+// Paleta de cores base
+$primary-color: #007bff;
+$success-color: #28a745;
+$error-color: #dc3545;
+$gray-light: #f8f9fa;
+$border-color: #dee2e6;
+$shadow-color: rgba(0, 0, 0, 0.08);
+
+.card {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px $shadow-color;
+  background-color: white;
+  overflow: hidden;
+
+  form {
+    .p-3 {
+      background: linear-gradient(180deg, #ffffff, #f9f9f9);
+      padding: 2rem !important;
+    }
+
+    label {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.3rem;
+    }
+
+    input.form-control {
+      border-radius: 0.6rem;
+      border: 1px solid $border-color;
+      transition: all 0.2s ease;
+      padding: 0.6rem 0.9rem;
+      font-size: 0.95rem;
+
+      &:focus {
+        border-color: $primary-color;
+        box-shadow: 0 0 0 0.15rem rgba($primary-color, 0.2);
+      }
+
+      &.is-valid {
+        border-color: $success-color;
+        background-color: #f6fffa;
+      }
+
+      &.is-invalid {
+        border-color: $error-color;
+        background-color: #fff6f6;
+      }
+    }
+
+    .invalid-feedback,
+    .valid-feedback {
+      font-size: 0.85rem;
+      margin-top: 0.2rem;
+      transition: all 0.2s ease;
+    }
+
+    .invalid-feedback {
+      color: $error-color;
+    }
+
+    .valid-feedback {
+      color: $success-color;
+    }
+
+    pre {
+      background-color: $gray-light;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  }
+
+  // Rodapé
+  .card-footer {
+    background-color: #fafafa;
+    border-top: 1px solid $border-color;
+    padding: 1rem 1.5rem !important;
+
+    .btn {
+      border-radius: 0.6rem;
+      font-weight: 600;
+      padding: 0.6rem 1.3rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 6px $shadow-color;
+      }
+    }
+
+    .btn-outline-secondary {
+      color: #555;
+      border-color: #ccc;
+
+      &:hover {
+        background-color: #f1f1f1;
+      }
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #28a745, #218838);
+      border: none;
+
+      &:hover {
+        background: linear-gradient(135deg, #218838, #1e7e34);
+      }
+    }
+  }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .card {
+    form {
+      .row {
+        flex-direction: column;
+      }
+
+      input.form-control {
+        font-size: 1rem;
+      }
+
+      label {
+        font-size: 0.95rem;
+      }
+    }
+
+    .card-footer {
+      text-align: center;
+
+      .col {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}

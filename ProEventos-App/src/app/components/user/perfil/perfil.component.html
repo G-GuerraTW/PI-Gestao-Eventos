@@ -1,4 +1,4 @@
-<app-titulo [titulo]="'Perfil'" [botaoListar]="false"></app-titulo>
+<app-titulo [titulo]="'Perfil'"></app-titulo>
 <div class="card rounded shadow-sm">
 	<form [formGroup]="formularioPerfil">
 		<div class="row p-3">
@@ -49,8 +49,8 @@
 					<div class="col-sm-3">
 						<label>Título</label>
 						<select
-							class="form-control" 
-							formControlName="titulo" 
+							class="form-control"
+							formControlName="titulo"
 							[ngClass]="
 							{
 								'is-invalid': f.titulo?.invalid && f.titulo?.touched,
@@ -87,7 +87,7 @@
 					</div>
 					<div class="col-sm-4">
 						<label>Último nome</label>
-						<input 
+						<input
 							type="text"
 							class="form-control"
 							formControlName="ultimoNome"
@@ -107,8 +107,8 @@
 					<div class="col-sm-5">
 						<label>E-mail</label>
 						<input
-							type="email" 
-							class="form-control" 
+							type="email"
+							class="form-control"
 							formControlName="email"
 							[ngClass]="
 							{
@@ -124,18 +124,11 @@
 					</div>
 					<div class="col-sm-4">
 						<label>Telefone</label>
-						<input 
-							type="tel" 
-							class="form-control" 
-							placeholder="(000) 0000000"
-							formControlName="telefone"
-							pattern="[0-9]*"
-							[ngClass]="
-							{
-								'is-invalid': f.telefone?.errors && f.telefone?.touched,
-								'is-valid': f.telefone?.valid
-							}"
-						/>
+					   <input type="text" class="form-control" prefix="+55 " mask="(00) 0 0000-0000" formControlName="telefone"
+            placeholder="(00) 90000-0000" [ngClass]="{
+    'is-invalid': f.telefone?.errors && f.telefone?.touched,
+    'is-valid': f.telefone?.valid && f.telefone?.dirty
+  }" />
 					<div *ngIf="f.telefone?.errors && (f.telefone?.touched || f.telefone?.dirty)" class="invalid-feedback">
 						<div *ngIf="f.telefone?.errors.pattern">Numero Inválido.</div>
 						<div *ngIf="f.telefone?.errors.required">Numero Obrigatório.</div>
@@ -163,7 +156,7 @@
 					</div>
 					<div class="col-12">
 						<label>Descrição</label>
-						<input 
+						<input
 							type="text"
 							class="form-control"
 							formControlName="descricao"
@@ -178,9 +171,9 @@
 				<div class="row mb-2">
 					<div class="col-sm">
 						<label>Senha</label>
-						<input 
-							type="password" 
-							class="form-control" 
+						<input
+							type="password"
+							class="form-control"
 							formControlName="senha"
 							[ngClass]="
 							{

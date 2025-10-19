@@ -16,22 +16,19 @@ export class EventoDetalheComponent implements OnInit {
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
   private _eventoService = inject(EventoService);
-  private toastR = inject(ToastrService); 
+  private toastR = inject(ToastrService);
   private ngxSpinnerService = inject(NgxSpinnerService);
-
 
   form!: FormGroup;
   idEvento : any
   evento! : Evento
 
-
-
-  ngOnInit(): void {  
+  ngOnInit(): void {
 
     this.validation();
     this.idEvento = this.route.snapshot.paramMap.get('id');
 
-    if(this.validaRota()) 
+    if(this.validaRota())
       {
         this.recuperarEvento();
       }
@@ -41,12 +38,12 @@ export class EventoDetalheComponent implements OnInit {
     if (!this.idEvento) return;
 
     this._eventoService.getEventoById(this.idEvento).subscribe({
-      next: (evento) => 
+      next: (evento) =>
         {
           this.evento = evento
           this.form.patchValue(evento)
         },
-      error: (err) => 
+      error: (err) =>
         {
           console.error('Erro ao recuperar evento', err);
         }
@@ -64,13 +61,13 @@ export class EventoDetalheComponent implements OnInit {
       this.evento = {...this.form.value, id: this.idEvento}
       this._eventoService.updateEvento(this.idEvento, this.evento).subscribe(
       {
-        next: (evento: Evento) => 
+        next: (evento: Evento) =>
           {
             this.evento = evento
             this.form.patchValue(evento)
             this.toastR.success('Registro Atualizado com sucesso!');
           },
-        error: (err) => 
+        error: (err) =>
         {
           console.error('Erro ao recuperar evento', err);
         },
@@ -82,7 +79,7 @@ export class EventoDetalheComponent implements OnInit {
 
     this._eventoService.postEvento(this.evento).subscribe(
       {
-        next: (evento: Evento) => 
+        next: (evento: Evento) =>
         {
             this.evento = evento;
             this.form.patchValue(evento);
@@ -91,7 +88,7 @@ export class EventoDetalheComponent implements OnInit {
         error: (err) => console.error('Erro ao registrar Evento: ', err),
         complete: () => this.ngxSpinnerService.hide()
       })
-  
+
   }
 
   private validaRota(): boolean {

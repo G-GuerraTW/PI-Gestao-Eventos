@@ -15,7 +15,6 @@ export class TituloComponent {
   @Input() titulo: string | undefined;
   @Input() iconClass = 'fa fa-user';
   @Input() subtitulo =  'Desde 2025'
-  @Input() botaoListar = false;
 
   redirecionarListagem(): void {
     this.router.navigate(['lista'], {relativeTo: this.route})

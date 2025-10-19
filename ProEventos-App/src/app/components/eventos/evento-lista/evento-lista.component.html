@@ -2,11 +2,11 @@
 <div action="" class="form-inline mb-2">
     <div class="mb-2 row">
         <div class="col form-group d-flex align-items-center gap-2">
-            <input 
+            <input
                 type="text" class="form-control" placeholder=Buscar
                 [(ngModel)]="filtroLista"
             >
-        </div>                
+        </div>
         <div class="col text-end">
             <button type="button" class="btn btn-success" routerLink="/eventos/detalhes">
                 Novo
@@ -15,7 +15,7 @@
     </div>
 </div>
 <table class="table table-dark table-hover" style="cursor: pointer">
-    <thead class="text-center"> 
+    <thead class="text-center">
         <tr>
             <th>#</th>
             <th>
@@ -51,7 +51,7 @@
     </tbody>
     <tfoot *ngIf="eventos && eventosFiltrados.length === 0">
             <tr class="table table-danger">
-                <td  colspan="8" class="text-center"> 
+                <td  colspan="8" class="text-center">
                     <h3>Nenhum Evento Encontrado</h3>
                 </td>
             </tr>
