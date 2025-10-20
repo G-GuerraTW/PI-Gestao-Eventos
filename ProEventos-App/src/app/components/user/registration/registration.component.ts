@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/service/user.service';
@@ -11,11 +12,15 @@ import { User } from 'src/models/User';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
+
+
 export class RegistrationComponent implements OnInit {
   private toastR = inject(ToastrService);
+    private router = inject(Router);
   private userService = inject(UserService);
   private ngxSpinnerService = inject(NgxSpinnerService);
   private fb = inject(FormBuilder);
+
 
   form!: FormGroup;
   public _user!: User;
@@ -60,6 +65,7 @@ export class RegistrationComponent implements OnInit {
       next: () => {
         this.toastR.success('Usuário registrado com sucesso!');
         this.form.reset();
+        this.router.navigate(['/dashboard']);
       },
       error: (error) => {
         this.toastR.error('Erro ao registrar usuário.');

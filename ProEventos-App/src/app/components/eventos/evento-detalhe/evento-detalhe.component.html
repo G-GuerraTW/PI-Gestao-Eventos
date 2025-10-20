@@ -1,116 +1,116 @@
-<div class="card rounded shadow-sm">
-  <form [formGroup]="form">
-    <!-- <p>Form Name {{form.hasError}}</p>
-		<p>Form Value {{form.value | json}}</p>
-		<p>Form value: {{form.status | json}}</p> -->
-    <div class="p-3">
-      <div class="row">
-        <div class="col-md-12">
-          <label for="tema">Tema</label>
-          <input type="text" class="form-control" [ngClass]="
-					  {
-						'is-invalid': f.tema?.errors && f.tema?.touched,
-						'is-valid': f.tema?.valid && f.tema?.dirty
-					  }" formControlName="tema" placeholder="Insira o Tema">
-          <div *ngIf="f.tema?.invalid && (f.tema?.dirty || f.tema?.touched)" class="invalid-feedback">
-            <div *ngIf="f.tema?.errors.required && f.tema.touched">tema é Obrigatorio.</div>
-            <div *ngIf="f.tema?.errors.minlength && f.tema.touched">tema deve ter no mínimo 4 caracteres</div>
-            <div *ngIf="f.tema?.errors.maxlength && f.tema.touched">Tema deve ter no máximo 50 caracteres.</div>
+<div class="container mt-5">
+  <div class="card rounded shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Detalhes do Evento</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form">
+        <div class="row">
+          <div class="col-md-12">
+            <label for="tema">Tema</label>
+            <input type="text" class="form-control" [ngClass]="
+              {
+                'is-invalid': f.tema?.errors && f.tema?.touched,
+                'is-valid': f.tema?.valid && f.tema?.dirty
+              }" formControlName="tema" placeholder="Insira o Tema">
+            <div *ngIf="f.tema?.invalid && (f.tema?.dirty || f.tema?.touched)" class="invalid-feedback">
+              <div *ngIf="f.tema?.errors.required && f.tema.touched">tema é Obrigatorio.</div>
+              <div *ngIf="f.tema?.errors.minlength && f.tema.touched">tema deve ter no mínimo 4 caracteres</div>
+              <div *ngIf="f.tema?.errors.maxlength && f.tema.touched">Tema deve ter no máximo 50 caracteres.</div>
+            </div>
+            <div *ngIf="f.tema?.valid" class="valid-feedback">Tema Valido.</div>
           </div>
-          <div *ngIf="f.tema?.valid" class="valid-feedback">Tema Valido.</div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-8">
-          <label for="local">Local</label>
-          <input type="text" class="form-control" [ngClass]="
-					{
-					   'is-invalid': f.local?.errors && f.local?.touched,
-					   'is-valid': f.local?.valid && f.local?.dirty
-					}" formControlName="local" placeholder="Local...">
-          <div *ngIf="f.local?.invalid && (f.local?.dirty || f.local.touched)" class="invalid-feedback">Local é
-            Obrigatório</div>
-          <div *ngIf="f.local?.valid" class="valid-feedback">Local Valido.</div>
-        </div>
-        <div class="col-md-4">
-          <label for="dataEvento">Data e Hora</label>
-          <input type="text" class="form-control" bsDatepicker [bsConfig]="{
-						adaptivePosition: true,
-						dateInputFormat: 'DD/MM/YYYY hh:mm a'
-					}" [ngClass]="
-						{
-							'is-invalid': f.dataEvento?.errors && f.dataEvento?.touched,
-							'is-valid': f.dataEvento?.valid && f.dataEvento?.dirty
-						}" formControlName="dataEvento" placeholder="">
-          <div *ngIf="f.dataEvento?.invalid && (f.dataEvento?.dirty || f.dataEvento?.touched)" class="invalid-feedback">
-            Data é Obrigatório</div>
-          <div *ngIf="!f.dataEvento?.required" class="valid-feedback">Data Valida.</div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2">
-          <label for="qtdPessoas">Qtd Pessoas</label>
-          <input type="number" class="form-control" min="1" [ngClass]="
-						{
-							'is-invalid': f.qtdPessoas?.errors && f.qtdPessoas?.touched,
-							'is-valid': f.qtdPessoas?.valid && f.qtdPessoas?.dirty,
-						}" formControlName="qtdPessoas" placeholder="">
-          <div *ngIf="f.qtdPessoas?.invalid && f.qtdPessoas?.touched" class="invalid-feedback">
-            <div *ngIf="f.qtdPessoas?.errors.required && f.qtdPessoas?.touched">Qtd Pessoas é Obrigatório.</div>
-            <div *ngIf="f.qtdPessoas?.maxlength && f.qtdPessoas?.touched">Qtd Pessoas muito alta</div>
+        <div class="row mt-3">
+          <div class="col-md-8">
+            <label for="local">Local</label>
+            <input type="text" class="form-control" [ngClass]="
+              {
+                 'is-invalid': f.local?.errors && f.local?.touched,
+                 'is-valid': f.local?.valid && f.local?.dirty
+              }" formControlName="local" placeholder="Local...">
+            <div *ngIf="f.local?.invalid && (f.local?.dirty || f.local.touched)" class="invalid-feedback">Local é
+              Obrigatório</div>
+            <div *ngIf="f.local?.valid" class="valid-feedback">Local Valido.</div>
           </div>
-          <div *ngIf="f.qtdPessoas?.valid" class="valid-feedback">Ok !</div>
-        </div>
-        <div class="col-md-2">
-          <label for="telefone">Telefone</label>
-          <input type="text" class="form-control" prefix="+55 " mask="(00) 0 0000-0000" formControlName="telefone"
-            placeholder="(00) 90000-0000" [ngClass]="{
-    'is-invalid': f.telefone?.errors && f.telefone?.touched,
-    'is-valid': f.telefone?.valid && f.telefone?.dirty
-  }" />
-          <div *ngIf="f.telefone?.invalid && f.telefone?.touched" class="invalid-feedback">Telefone é obrigatório</div>
-          <div *ngIf="f.telefone?.valid" class="valid-feedback">Telefone é Valido!</div>
-        </div>
-        <div class="col-md-4">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" [ngClass]="
-						{
-							'is-invalid': f.email?.errors && f.email?.touched,
-							'is-valid': f.email?.valid && f.email?.dirty
-						}" formControlName="email" placeholder="e-mail">
-          <div *ngIf="f.email?.invalid && (f.email.touched || f.email?.dirty)" class="invalid-feedback">
-            <div *ngIf="f.email?.errors.required">É Necessario digitar o E-mail.</div>
-            <div *ngIf="f.email?.errors.email && f.email">Email Inválido</div>
+          <div class="col-md-4">
+            <label for="dataEvento">Data e Hora</label>
+            <input type="text" class="form-control" bsDatepicker [bsConfig]="{
+                  adaptivePosition: true,
+                  dateInputFormat: 'DD/MM/YYYY hh:mm a'
+                }" [ngClass]="
+                  {
+                    'is-invalid': f.dataEvento?.errors && f.dataEvento?.touched,
+                    'is-valid': f.dataEvento?.valid && f.dataEvento?.dirty
+                  }" formControlName="dataEvento" placeholder="">
+            <div *ngIf="f.dataEvento?.invalid && (f.dataEvento?.dirty || f.dataEvento?.touched)" class="invalid-feedback">
+              Data é Obrigatório</div>
+            <div *ngIf="!f.dataEvento?.required" class="valid-feedback">Data Valida.</div>
           </div>
-          <div *ngIf="f.email?.valid" class="valid-feedback">Email Valido</div>
         </div>
-        <div class="col-md-4">
-          <label for="imagemURL">Imagem</label>
-          <input type="text" class="form-control" [ngClass]="
-						{
-							'is-invalid': f.imagemURL.errors && f.imagemURL.touched,
-							'is-valid': f.imagemURL.valid && f.imagemURL.dirty
-						}" formControlName="imagemURL" placeholder="imagem">
-          <div *ngIf="f.imagemURL?.errors?.required && f.imagemURL?.touched" class="invalid-feedback">Imagem é
-            obrigatório</div>
-          <div *ngIf="f.imagemURL?.valid && f.imagemURL?.touched" class="valid-feedback">Imagem é Valida</div>
+        <div class="row mt-3">
+          <div class="col-md-2">
+            <label for="qtdPessoas">Qtd Pessoas</label>
+            <input type="number" class="form-control" min="1" [ngClass]="
+                  {
+                    'is-invalid': f.qtdPessoas?.errors && f.qtdPessoas?.touched,
+                    'is-valid': f.qtdPessoas?.valid && f.qtdPessoas?.dirty,
+                  }" formControlName="qtdPessoas" placeholder="">
+            <div *ngIf="f.qtdPessoas?.invalid && f.qtdPessoas?.touched" class="invalid-feedback">
+              <div *ngIf="f.qtdPessoas?.errors.required && f.qtdPessoas?.touched">Qtd Pessoas é Obrigatório.</div>
+              <div *ngIf="f.qtdPessoas?.maxlength && f.qtdPessoas?.touched">Qtd Pessoas muito alta</div>
+            </div>
+            <div *ngIf="f.qtdPessoas?.valid" class="valid-feedback">Ok !</div>
+          </div>
+          <div class="col-md-2">
+            <label for="telefone">Telefone</label>
+            <input type="text" class="form-control" prefix="+55 " mask="(00) 0 0000-0000" formControlName="telefone"
+              placeholder="(00) 90000-0000" [ngClass]="{
+      'is-invalid': f.telefone?.errors && f.telefone?.touched,
+      'is-valid': f.telefone?.valid && f.telefone?.dirty
+    }" />
+            <div *ngIf="f.telefone?.invalid && f.telefone?.touched" class="invalid-feedback">Telefone é obrigatório</div>
+            <div *ngIf="f.telefone?.valid" class="valid-feedback">Telefone é Valido!</div>
+          </div>
+          <div class="col-md-4">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" [ngClass]="
+                  {
+                    'is-invalid': f.email?.errors && f.email?.touched,
+                    'is-valid': f.email?.valid && f.email?.dirty
+                  }" formControlName="email" placeholder="e-mail">
+            <div *ngIf="f.email?.invalid && (f.email.touched || f.email?.dirty)" class="invalid-feedback">
+              <div *ngIf="f.email?.errors.required">É Necessario digitar o E-mail.</div>
+              <div *ngIf="f.email?.errors.email && f.email">Email Inválido</div>
+            </div>
+            <div *ngIf="f.email?.valid" class="valid-feedback">Email Valido</div>
+          </div>
+          <div class="col-md-4">
+            <label for="imagemURL">Imagem</label>
+            <input type="text" class="form-control" [ngClass]="
+                  {
+                    'is-invalid': f.imagemURL.errors && f.imagemURL.touched,
+                    'is-valid': f.imagemURL.valid && f.imagemURL.dirty
+                  }" formControlName="imagemURL" placeholder="imagem">
+            <div *ngIf="f.imagemURL?.errors?.required && f.imagemURL?.touched" class="invalid-feedback">Imagem é
+              obrigatório</div>
+            <div *ngIf="f.imagemURL?.valid && f.imagemURL?.touched" class="valid-feedback">Imagem é Valida</div>
 
+          </div>
         </div>
-      </div>
+      </form>
     </div>
-    <div class="card card-footer p-2">
-      <div class="row justify-content-evenly mx-1">
-        <div class="col">
-          <button class="btn btn-outline-secondary mr-auto border" (click)="resetarForm()">
-            Cancelar Alteração
+    <div class="card-footer">
+      <div class="row">
+        <div class="col d-flex justify-content-end">
+          <button class="btn btn-outline-secondary me-2" (click)="resetarForm()">
+            Cancelar
           </button>
-        </div>
-        <div class="col text-end">
           <button class="btn btn-success" type="submit" (click)="salvarAlteracao()" [disabled]="form.invalid">
-            Salvar Alteração
+            Salvar
           </button>
         </div>
       </div>
     </div>
-  </form>
+  </div>
 </div>

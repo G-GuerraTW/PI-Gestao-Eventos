@@ -119,4 +119,9 @@ export class EventoListaComponent implements OnInit {
   Redirecionardetalhes(id: number) {
       this.router.navigate(['eventos/detalhes', id]);
   }
+
+  editarEvento(id: number, event: MouseEvent): void {
+    event.stopPropagation();
+    this.router.navigate([`eventos/detalhes/`, id]);
+  }
 }

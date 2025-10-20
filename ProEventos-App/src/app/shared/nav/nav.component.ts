@@ -12,7 +12,7 @@ export class NavComponent {
   isCollapsed = true;
 
   private router = inject(Router);
-  private authService = inject(AuthService);
+  public authService = inject(AuthService);
 
   user: User | null = null;
 

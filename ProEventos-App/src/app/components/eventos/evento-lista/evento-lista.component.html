@@ -47,10 +47,15 @@
               <td class="align-middle d-none d-md-table-cell">{{evento.qtdPessoas}}</td>
               <td class="align-middle d-none d-md-table-cell">{{evento.lotes.length > 0 ? evento.lotes[0].nome : 'N/A'}}</td>
               <td class="align-middle">
-                <button tooltip="Excluir" type="button" class="btn btn-danger btn-sm"
-                  (click)="openModal(template, $event, evento.tema, evento.id )">
-                  <i class="fa fa-trash-alt"></i>
-                </button>
+                <div class="d-flex justify-content-center gap-2">
+                  <button tooltip="Editar" type="button" class="btn btn-warning btn-sm" (click)="editarEvento(evento.id, $event)">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button tooltip="Excluir" type="button" class="btn btn-danger btn-sm"
+                    (click)="openModal(template, $event, evento.tema, evento.id )">
+                    <i class="fa fa-trash-alt"></i>
+                  </button>
+                </div>
               </td>
             </tr>
           </tbody>

@@ -5,6 +5,7 @@ import { Evento } from 'src/models/Evento';
 import { EventoService} from 'src/app/service/evento.service'
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -15,6 +16,7 @@ export class EventoDetalheComponent implements OnInit {
 
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
+  private location = inject(Location);
   private _eventoService = inject(EventoService);
   private toastR = inject(ToastrService);
   private ngxSpinnerService = inject(NgxSpinnerService);
@@ -113,8 +115,7 @@ export class EventoDetalheComponent implements OnInit {
   }
 
   resetarForm() {
-    if(this.validaRota()) this.form.patchValue(this.evento)
-      else this.form.reset();
+    this.location.back();
   }
 
 }

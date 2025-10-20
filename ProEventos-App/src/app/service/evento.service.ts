@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/enviroment/enviroment';
 import { Evento } from 'src/models/Evento';
 
 @Injectable(
   //{providedIn: 'root'}
 )
 export class EventoService {
-  
-  baseURL = 'http://localhost:5241/api/Evento/';
+
+  baseURL = `${environment.baseUrl}/Evento`;
   // eslint-disable-next-line @angular-eslint/prefer-inject
   constructor(private http: HttpClient) { }
 
