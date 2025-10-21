@@ -5,15 +5,15 @@ O **Evento Fácil** é uma **plataforma web Full Stack** desenvolvida para **sim
 
 | Funcionalidades-Chave | Stack Principal |
 | :--- | :--- |
-| ? Gestão Completa de Eventos (CRUD). | **Backend:** ASP.NET 7+ (C#) |
-| ? Autenticação Segura (Identity & JWT). | **Frontend:** Angular 17+ (TypeScript) |
-| ? Listagem Pública de Programação. | **ORM:** Entity Framework Core |
+| ✅ Gestão Completa de Eventos (CRUD). | **Backend:** ASP.NET 7+ (C#) |
+| ✅ Autenticação Segura (Identity & JWT). | **Frontend:** Angular 17+ (TypeScript) |
+| ✅ Listagem Pública de Programação. | **ORM:** Entity Framework Core |
 
 ---
 
-## ??? Arquitetura e Estrutura
+## 🗺️ Arquitetura e Estrutura
 
-### ?? Backend: ASP.NET Core em Camadas
+### ⚙️ Backend: ASP.NET Core em Camadas
 A API segue o princípio da **Separação de Preocupações (SoC)**, adotando uma arquitetura em camadas para escalabilidade e manutenção.
 
 | Camada | Objetivo | Foco Técnico |
@@ -25,7 +25,7 @@ A API segue o princípio da **Separação de Preocupações (SoC)**, adotando um
 
 **Segurança:** A autenticação é gerenciada pelo **ASP.NET Identity** e a autorização utiliza **JWT** (JSON Web Tokens), protegendo as rotas que exigem login.
 
-### ?? Frontend: Angular (Single Page Application - SPA Reativa)
+### 🎨 Frontend: Angular (Single Page Application - SPA Reativa)
 O frontend é construído com Angular, promovendo modularidade e alta performance com foco em experiência de usuário.
 
 | Módulo/Conceito | Detalhamento da Implementação |
@@ -38,7 +38,7 @@ O frontend é construído com Angular, promovendo modularidade e alta performanc
 
 ---
 
-## ?? Guia de Configuração e Execução
+## 🚀 Guia de Configuração e Execução
 
 Para rodar o projeto localmente, siga os passos abaixo para as duas aplicações:
 
