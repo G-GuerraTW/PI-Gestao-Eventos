@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Evento } from 'src/models/Evento';
 import { EventoService} from 'src/app/service/evento.service'
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -20,6 +20,7 @@ export class EventoDetalheComponent implements OnInit {
   private _eventoService = inject(EventoService);
   private toastR = inject(ToastrService);
   private ngxSpinnerService = inject(NgxSpinnerService);
+  private router = inject(Router)
 
   form!: FormGroup;
   idEvento : any
@@ -68,6 +69,7 @@ export class EventoDetalheComponent implements OnInit {
             this.evento = evento
             this.form.patchValue(evento)
             this.toastR.success('Registro Atualizado com sucesso!');
+            this.router.navigate(['/eventos/lista']);
           },
         error: (err) =>
         {
@@ -86,7 +88,8 @@ export class EventoDetalheComponent implements OnInit {
             this.evento = evento;
             this.form.patchValue(evento);
             this.toastR.success('Evento cadastrado com sucesso !');
-        },
+                this.router.navigate(['/eventos/lista']);
+          },
         error: (err) => console.error('Erro ao registrar Evento: ', err),
         complete: () => this.ngxSpinnerService.hide()
       })

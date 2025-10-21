@@ -1,6 +1,7 @@
 import { Evento } from './../../../models/Evento';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/enviroment/enviroment';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,17 +18,17 @@ export class DashboardComponent implements OnInit {
   }
 
   carregarEventos() {
-    this.http.get<Evento[]>('http://localhost:5241/api/Eventos')
+    this.http.get<Evento[]>(`${environment.baseUrl}/Eventos`)
       .subscribe((res) => this.eventos = res);
   }
 
   editarEvento(evento: Evento) {
-    this.http.put(`http://localhost:5241/api/Eventos/${evento.id}`, evento)
+    this.http.put(`${environment.baseUrl}/Eventos/${evento.id}`, evento)
       .subscribe(() => alert('Evento atualizado com sucesso!'));
   }
 
   excluirEvento(id: number) {
-    this.http.delete(`http://localhost:5241/api/Eventos/${id}`)
+    this.http.delete(`${environment.baseUrl}/Eventos/${id}`)
       .subscribe(() => {
         this.eventos = this.eventos.filter(e => e.id !== id);
         alert('Evento excluído com sucesso!');

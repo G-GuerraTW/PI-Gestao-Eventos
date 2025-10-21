@@ -18,7 +18,6 @@ export class AuthGuard implements CanActivate {
       map((user) => {
         if(user) return true;
 
-        this.toastR.info('Usuario não autenticado.');
         this.router.navigate(['/user/login']);
         return false;
       })

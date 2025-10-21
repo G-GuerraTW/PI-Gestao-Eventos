@@ -1,0 +1,64 @@
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  padding: 1rem;
+}
+
+.card-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+  padding: 1rem;
+}
+
+.rounded-circle {
+  border: 3px solid #007bff;
+  padding: 3px;
+}
+
+.h4.text-center.mb-3 {
+  color: #007bff;
+}
+
+.h7.text-bold b {
+  color: #343a40;
+}
+
+.list-group-item {
+  border-color: #e9ecef;
+}
+
+.btn-outline-secondary {
+  color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.invalid-feedback {
+  color: #dc3545;
+}
+
+.is-invalid {
+  border-color: #dc3545;
+}
+
+.valid-feedback {
+  color: #28a745;
+}
+
+.is-valid {
+  border-color: #28a745;
+}

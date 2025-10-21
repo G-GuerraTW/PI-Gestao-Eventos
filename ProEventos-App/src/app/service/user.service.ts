@@ -10,9 +10,17 @@ import { User } from 'src/models/User';
 export class UserService {
 
   private http = inject(HttpClient);
-  baseURL = `${environment.baseUrl}/Account/Register`
+  baseURL = `${environment.baseUrl}/Account`
 
   registerUser(user: User): Observable<User> {
-    return this.http.post<User>(this.baseURL, user);
+    return this.http.post<User>(`${this.baseURL}/Register`, user);
+  }
+
+  getUser(): Observable<User> {
+    return this.http.get<User>(`${this.baseURL}/getUser`);
+  }
+
+  updateUser(user: User): Observable<User> {
+    return this.http.put<User>(`${this.baseURL}/updateUser`, user);
   }
 }

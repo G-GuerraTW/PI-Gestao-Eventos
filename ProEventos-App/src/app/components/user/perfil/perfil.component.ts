@@ -1,61 +1,74 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/service/auth.service';
-import { CustomValidators } from '../../../shared/custom-validators/custom-Validators.directive'
+import { User } from 'src/models/User';
+import { UserService } from 'src/app/service/user.service';
+import { CustomValidators } from '../../../shared/custom-validators/custom-Validators.directive';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
-
-export class PerfilComponent implements OnInit, OnDestroy {
+export class PerfilComponent implements OnInit {
+  formularioPerfil!: FormGroup;
+  user!: User;
 
   private fb = inject(FormBuilder);
-  private authService = inject(AuthService);
-  formularioPerfil! : FormGroup;
-  private userSubscription!: Subscription;
+  private userService = inject(UserService);
 
   ngOnInit(): void {
     this.criarFormulario();
     this.carregarUsuario();
   }
 
-  ngOnDestroy(): void {
-    if (this.userSubscription) {
-      this.userSubscription.unsubscribe();
-    }
+  private criarFormulario(): void {
+    this.formularioPerfil = this.fb.group({
+      titulo: ['', Validators.required],
+      primeiroNome: ['', Validators.required],
+      ultimoNome: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      telefone: ['', Validators.required],
+      funcao: ['', Validators.required],
+      descricao: [''],
+      senha: ['', [Validators.required, Validators.minLength(6)]],
+      confirmarSenha: ['', Validators.required]
+    }, {
+      validators: CustomValidators.passwordMatch('senha', 'confirmarSenha')
+    });
+  }
+
+  private carregarUsuario(): void {
+    this.userService.getUser().subscribe(
+      (user: User) => {
+        this.user = user;
+        this.formularioPerfil.patchValue(this.user);
+      },
+      (error: any) => {
+        console.error('Erro ao carregar usuário', error);
+      }
+    );
   }
 
   get f(): any {
     return this.formularioPerfil.controls;
   }
 
-  private carregarUsuario(): void {
-    this.userSubscription = this.authService.currentUser$.subscribe(user => {
-      if (user) {
-        this.formularioPerfil.patchValue(user);
-      } else {
-        this.formularioPerfil.reset();
-      }
-    });
+  onSubmit(): void {
+    if (this.formularioPerfil.valid) {
+      this.userService.updateUser(this.formularioPerfil.value).subscribe(
+        () => {
+          console.log('Usuário atualizado com sucesso');
+        },
+        (error: any) => {
+          console.error('Erro ao atualizar usuário', error);
+        }
+      );
+    }
   }
 
-  criarFormulario(): void {
-    this.formularioPerfil = this.fb.group({
-      titulo:['', Validators.required],
-      primeiroNome:['', Validators.required],
-      ultimoNome:['', Validators.required],
-      email:['', [Validators.required, Validators.email]],
-      telefone:['', Validators.required],
-      funcao:['', Validators.required],
-      descricao:[''],
-      senha:['', Validators.required],
-      confirmarSenha:['',Validators.required]
-    },
-    {
-      validators: CustomValidators.passwordMatch('senha', 'confirmarSenha')
-    })
+  public resetForm(event: any): void {
+    event.preventDefault();
+    this.formularioPerfil.reset();
+    this.carregarUsuario();
   }
 }

@@ -34,6 +34,6 @@ export class EventoService {
   }
 
   deleteEvento(id: number): Observable<any> {
-    return this.http.delete(`${this.baseURL}${id}`, { responseType: 'text'});
+    return this.http.delete(`${this.baseURL}/${id}`, { responseType: 'text'});
   }
 }
