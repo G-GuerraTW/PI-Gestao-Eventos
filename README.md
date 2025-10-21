@@ -1,26 +1,3 @@
-Your Next Five Moves: Master the Art of Business Strategy
-
-Venda
-Negociação 
-Natureza humana e psicologia
-Dinheiro
-
-
-Baixar capas PS2:
-
-https://raw.githubusercontent.com/xlenore/ps2-covers/main/covers/default/${serial}.jpg
-
-
-
-the social network
-clube da luta
-fome de poder
-chef
-o lob ode wall street
-scarface
-
-
-
 # Evento Fácil: Plataforma de Gestão de Eventos
 ## Projeto Integrador UNIVESP | Full Stack .NET + Angular
 
