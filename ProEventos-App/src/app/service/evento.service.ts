@@ -5,12 +5,12 @@ import { environment } from 'src/enviroment/enviroment';
 import { Evento } from 'src/models/Evento';
 
 @Injectable(
-  //{providedIn: 'root'}
+  {providedIn: 'root'}
 )
 export class EventoService {
 
   baseURL = `${environment.baseUrl}/Evento`;
-  // eslint-disable-next-line @angular-eslint/prefer-inject
+
   constructor(private http: HttpClient) { }
 
   postEvento(evento: Evento): Observable<Evento> {

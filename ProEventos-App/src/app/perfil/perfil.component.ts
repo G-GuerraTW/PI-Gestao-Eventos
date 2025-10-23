@@ -2,7 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/models/User';
 import { UserService } from 'src/app/service/user.service';
-import { CustomValidators } from '../../../shared/custom-validators/custom-Validators.directive';
+import { CustomValidators } from '../shared/custom-validators/custom-Validators.directive';
+import { UserDTO } from 'src/models/DTOs/UserDTO';
 
 @Component({
   selector: 'app-perfil',
@@ -11,7 +12,7 @@ import { CustomValidators } from '../../../shared/custom-validators/custom-Valid
 })
 export class PerfilComponent implements OnInit {
   formularioPerfil!: FormGroup;
-  user!: User;
+  user!: UserDTO;
 
   private fb = inject(FormBuilder);
   private userService = inject(UserService);
@@ -39,7 +40,7 @@ export class PerfilComponent implements OnInit {
 
   private carregarUsuario(): void {
     this.userService.getUser().subscribe(
-      (user: User) => {
+      (user: UserDTO) => {
         this.user = user;
         this.formularioPerfil.patchValue(this.user);
       },
@@ -56,7 +57,9 @@ export class PerfilComponent implements OnInit {
   onSubmit(): void {
     if (this.formularioPerfil.valid) {
       this.userService.updateUser(this.formularioPerfil.value).subscribe(
-        () => {
+        (user: UserDTO) => {
+          this.formularioPerfil.reset(user);
+          this.carregarUsuario();
           console.log('Usuário atualizado com sucesso');
         },
         (error: any) => {
