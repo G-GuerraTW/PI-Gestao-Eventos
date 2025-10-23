@@ -28,11 +28,11 @@ export class PerfilComponent implements OnInit {
       primeiroNome: ['', Validators.required],
       ultimoNome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      telefone: ['', Validators.required],
+      phoneNumber: [''],
       funcao: ['', Validators.required],
       descricao: [''],
-      senha: ['', [Validators.required, Validators.minLength(6)]],
-      confirmarSenha: ['', Validators.required]
+      senha: [''],
+      confirmarSenha: ['']
     }, {
       validators: CustomValidators.passwordMatch('senha', 'confirmarSenha')
     });
@@ -56,7 +56,14 @@ export class PerfilComponent implements OnInit {
 
   onSubmit(): void {
     if (this.formularioPerfil.valid) {
-      this.userService.updateUser(this.formularioPerfil.value).subscribe(
+      const { senha, confirmarSenha, ...rest } = this.formularioPerfil.value;
+      const userUpdate = { ...this.user, ...rest };
+
+      if (senha) {
+        userUpdate.password = senha;
+      }
+
+      this.userService.updateUser(userUpdate).subscribe(
         (user: UserDTO) => {
           this.formularioPerfil.reset(user);
           this.carregarUsuario();

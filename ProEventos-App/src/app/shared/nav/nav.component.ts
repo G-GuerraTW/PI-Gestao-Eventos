@@ -9,7 +9,7 @@ import { User } from 'src/models/User';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent {
-  isCollapsed = true;
+  
 
   private router = inject(Router);
   public authService = inject(AuthService);

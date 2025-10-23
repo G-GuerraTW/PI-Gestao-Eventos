@@ -17,7 +17,6 @@
           <div class="card-body">
             <div class="h4 text-center mb-3">@{{user.primeiroNome}}</div>
             <div class="h7">
-              {{user.descricao}}
             </div>
           </div>
           <ul class="list-group list-group-flush">
@@ -34,9 +33,6 @@
               </div>
             </li>
           </ul>
-          <div class="card-footer">
-            <small class="text-muted">Usuário desde: {{user.primeiroNome}}</small>
-          </div>
         </div>
       </div>
       <div class="col-lg-9">
@@ -91,12 +87,12 @@
           </div>
           <div class="col-sm-6">
             <label>Telefone</label>
-            <input type="text" class="form-control" prefix="+55 " mask="(00) 0 0000-0000" formControlName="telefone"
+            <input type="text" class="form-control" prefix="+55 " mask="(00) 0 0000-0000" formControlName="phoneNumber"
               placeholder="(00) 90000-0000" [ngClass]="{
                 'is-invalid': f.telefone?.invalid && f.telefone?.touched,
                 'is-valid': f.phoneNumber?.valid
               }" />
-            <div *ngIf="f.telefone?.errors?.required" class="invalid-feedback">Número Obrigatório.</div>
+            <div *ngIf="f.phoneNumber?.errors?.required" class="invalid-feedback">Número Obrigatório.</div>
             <div *ngIf="f.phoneNumber?.errors?.pattern" class="invalid-feedback">Número Inválido.</div>
           </div>
         </div>
@@ -145,7 +141,7 @@
       </div>
     </div>
     <div class="card-footer p-2">
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end gap-2">
         <button class="btn btn-outline-secondary mr-2" (click)="resetForm($event)">
           Cancelar Alteração
         </button>

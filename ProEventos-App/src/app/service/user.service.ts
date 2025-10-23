@@ -29,6 +29,12 @@ export class UserService {
   }
 
   updateUser(user: UserDTO): Observable<UserDTO> {
-    return this.http.put<UserDTO>(`${this.baseURL}/updateUser`, user);
+    const userStorege = JSON.parse(localStorage.getItem('user') || '{}');
+    const token = userStorege?.token;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.put<UserDTO>(`${this.baseURL}/Update`, user, { headers });
   }
 }
