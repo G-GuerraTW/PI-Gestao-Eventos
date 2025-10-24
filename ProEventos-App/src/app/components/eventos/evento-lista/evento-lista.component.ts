@@ -13,9 +13,9 @@ import { EventoService } from 'src/app/service/evento.service';
 })
 export class EventoListaComponent implements OnInit {
 
-  private eventoService = inject(EventoService);       // ✔️ injeção correta
-  private modalService = inject(BsModalService);      // ✔️ injeção do serviço de modal
-  private toastR = inject(ToastrService);            // ✔️ injeção do package de aviso
+  private eventoService = inject(EventoService);
+  private modalService = inject(BsModalService);
+  private toastR = inject(ToastrService);            
   private ngxSpinnerService = inject(NgxSpinnerService);
 
   private router = inject(Router)
@@ -77,7 +77,7 @@ export class EventoListaComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<unknown>, event: MouseEvent, tema: string, eventoID: number) {
-    event.stopPropagation(); 
+    event.stopPropagation();
     this.idEventoExclusao = eventoID;
     this.temaEventoExclusao = tema;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
@@ -90,7 +90,7 @@ export class EventoListaComponent implements OnInit {
       this.ngxSpinnerService.show();
       this.eventoService.deleteEvento(this.idEventoExclusao).subscribe(
         {
-          next: () => 
+          next: () =>
             {
               this.toastR.success(`Evento excluido com sucesso.`, 'Deletado!');
               this.getEventos();
@@ -98,7 +98,7 @@ export class EventoListaComponent implements OnInit {
               this.ngxSpinnerService.hide();
 
             },
-          error: (err) => 
+          error: (err) =>
             {
               this.toastR.error(`Erro ao deletar Evento: ${err.message}`);
               this.ngxSpinnerService.hide();

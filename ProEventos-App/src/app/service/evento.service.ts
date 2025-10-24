@@ -1,19 +1,22 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/enviroment/enviroment';
 import { Evento } from 'src/models/Evento';
 
 @Injectable(
-  {providedIn: 'root'}
+  { providedIn: 'root' }
 )
 export class EventoService {
 
   baseURL = `${environment.baseUrl}/Evento`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+  }
 
   postEvento(evento: Evento): Observable<Evento> {
+
     return this.http.post<Evento>(this.baseURL, evento)
   }
 
@@ -34,6 +37,6 @@ export class EventoService {
   }
 
   deleteEvento(id: number): Observable<any> {
-    return this.http.delete(`${this.baseURL}/${id}`, { responseType: 'text'});
+    return this.http.delete(`${this.baseURL}/${id}`, { responseType: 'text' });
   }
 }
