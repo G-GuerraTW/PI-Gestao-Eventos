@@ -41,6 +41,7 @@ namespace Application.Services
         {
             try
             {
+                
                 var user = mapper.Map<User>(userDTO);
                 var result = await userManager.CreateAsync(user, userDTO.Password);
 

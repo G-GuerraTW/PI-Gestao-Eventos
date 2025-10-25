@@ -12,8 +12,9 @@ namespace Application.Helpers.ProEvento
             // Mapeamento entre Evento e EventoDTO
             CreateMap<Evento, EventoDTO>().ReverseMap();
             CreateMap<Lote, LoteDTO>().ReverseMap();
-            CreateMap<Palestrante, PalestranteDTO>().ReverseMap(); 
+            CreateMap<Palestrante, PalestranteDTO>().ReverseMap();
             CreateMap<RedeSocial, RedeSocialDTO>().ReverseMap();
+            CreateMap<ChavePalestrantes, ChavePalestrantesDTO>().ReverseMap();
 
             // Mapemanento da Autorizção
             CreateMap<User, UserDTO>().ReverseMap();

@@ -43,6 +43,7 @@ export class RegistrationComponent implements OnInit {
         primeiroNome: ['', [Validators.required, Validators.minLength(4)]],
         ultimoNome: ['', [Validators.required, Validators.minLength(4)]],
         termos: [false, [Validators.requiredTrue]],
+        codigoPalestrante: ['']
       },
       { validators: CustomValidators.passwordMatch('password', 'passwordConfirm') } // validador de grupo, mais de um formControll
     );

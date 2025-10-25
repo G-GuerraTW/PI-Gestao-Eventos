@@ -13,7 +13,6 @@ using Microsoft.IdentityModel.Tokens;
 
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -90,10 +89,12 @@ builder.Services.AddScoped<IGeralPersist, GeralPersist>();
 builder.Services.AddScoped<IEventoPersist, EventoPersist>();
 builder.Services.AddScoped<IPalestrantePersist, PalestrantePersist>();
 builder.Services.AddScoped<IUserPersist, UserPersist>();
+builder.Services.AddScoped<IChavePalestrantesPersist, ChavePalestrantesPersist>();
 
 // Serviços
 builder.Services.AddScoped<IEventoService, EventoService>();
 builder.Services.AddScoped<IPalestranteService, PalestranteService>();
+builder.Services.AddScoped<IChavePalestranteService, ChavePalestranteService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
@@ -162,13 +163,14 @@ if (app.Environment.IsDevelopment())
 
 #region 🚀 Pipeline de Execução
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
+
 app.UseRouting();
+
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 app.MapControllers();
 
