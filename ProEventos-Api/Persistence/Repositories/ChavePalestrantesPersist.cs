@@ -15,15 +15,10 @@ namespace Persistence.Repositories
 
 
 
-    public async Task<ChavePalestrantes> GetChavePalestranteByIdAsync(int Id)
-    {
-
-        IQueryable<ChavePalestrantes> query = context.ChavePalestrantes;
-
-        query = query.AsNoTracking()
-                     .Where(c => c.Id == Id);
-
-        return await query.FirstOrDefaultAsync();
-    }
+// Na classe ChavePalestrantesPersist.cs
+        public async Task<ChavePalestrantes> GetChavePalestranteByChaveAsync(string chave)
+        {
+            return await context.ChavePalestrantes.FirstOrDefaultAsync(C => C.Chave == chave);
         }
     }
+}

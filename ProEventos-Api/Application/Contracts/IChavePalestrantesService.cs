@@ -1,4 +1,3 @@
-// No arquivo Application/Contracts/IChavePalestranteService.cs
 using Application.DTOs;
 using System.Threading.Tasks;
 

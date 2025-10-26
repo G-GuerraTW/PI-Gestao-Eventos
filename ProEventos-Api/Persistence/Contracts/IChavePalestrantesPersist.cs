@@ -4,6 +4,6 @@ namespace Persistence.Contracts
 {
     public interface IChavePalestrantesPersist
     {
-        public Task<ChavePalestrantes> GetChavePalestranteByIdAsync(int Id);
+        Task<ChavePalestrantes> GetChavePalestranteByChaveAsync(string chave);
     }
 }

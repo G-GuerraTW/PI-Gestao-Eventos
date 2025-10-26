@@ -1,6 +1,7 @@
 using Application.DTOs;
 using Application.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controller
 {
@@ -15,6 +16,7 @@ namespace API.Controller
             _palestranteService = palestranteService;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddPalestrante(PalestranteDTO model)
         {
@@ -32,6 +34,7 @@ namespace API.Controller
             }
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePalestrante(int id, PalestranteDTO model)
         {
@@ -40,6 +43,7 @@ namespace API.Controller
             return Ok(palestrante);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePalestrante(int id)
         {
@@ -57,6 +61,7 @@ namespace API.Controller
             }
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetPalestrantes()
         {
@@ -73,6 +78,7 @@ namespace API.Controller
             }
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPalestranteById(int id)
         {
@@ -89,6 +95,7 @@ namespace API.Controller
             }
         }
 
+        [Authorize]
         [HttpGet("search")]
         public async Task<IActionResult> GetPalestranteByName(string name)
         {

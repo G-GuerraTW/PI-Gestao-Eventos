@@ -19,14 +19,14 @@ namespace API.Controller
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> AddEvento(EventoDTO model) 
         {
             try
             {
                 if(model == null) return BadRequest("Erro ao tentar adicionar evento");
                 //var evento = await _eventoSerivce.AddEvento(User.GetUserId(), model);
-                var evento = await _eventoSerivce.AddEvento(1, model);
+                var evento = await _eventoSerivce.AddEvento(User.GetUserId(), model);
                 if(evento != null) return Ok(evento);
                 return BadRequest("Erro ao persistir cadastro ao banco");
             }
@@ -42,12 +42,12 @@ namespace API.Controller
         public async Task<IActionResult> UpdateEvento(int id, EventoDTO model) 
         {
             //var evento = await _eventoSerivce.UpdateEvento(User.GetUserId(), id, model); 
-            var evento = await _eventoSerivce.UpdateEvento(1, id, model);
+            var evento = await _eventoSerivce.UpdateEvento(User.GetUserId(), id, model);
             if(evento == null) return BadRequest("Erro ao tentar adicionar evento");
             return Ok(evento);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEvento(int Id) 
         {
@@ -55,7 +55,7 @@ namespace API.Controller
             {
                 if(Id == null || Id < 0) return BadRequest("Erro ao tentar deletar usuario");
                 //var resultado = await _eventoSerivce.DeleteEvento(User.GetUserId(), Id);
-                var resultado = await _eventoSerivce.DeleteEvento(1, Id);
+                var resultado = await _eventoSerivce.DeleteEvento(User.GetUserId(), Id);
 
                 if(resultado) return Ok("Evento deletado");
                 return BadRequest("Evento não deletado");
@@ -73,7 +73,7 @@ namespace API.Controller
         {
             try
             {
-                var eventos = await _eventoSerivce.GetAllEventosAsync(1, false);
+                var eventos = await _eventoSerivce.GetAllEventosAsync(User.GetUserId(), false);
                 if (eventos == null) return NoContent();
                 return Ok(eventos);
             }
@@ -84,14 +84,14 @@ namespace API.Controller
             }
         }
 
-        // [Authorize]
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEventoById(int id)
         {
             try
             {
                 //var eventos = await _eventoSerivce.GetEventoByIdAsync(User.GetUserId(), id, false);
-                var eventos = await _eventoSerivce.GetEventoByIdAsync(1, id, false);
+                var eventos = await _eventoSerivce.GetEventoByIdAsync(User.GetUserId(), id, false);
                 if(eventos == null) return NoContent();
                 return Ok(eventos);
             }

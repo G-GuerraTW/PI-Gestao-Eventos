@@ -1,13 +1,11 @@
-// No arquivo API/Controller/ChavePalestrantesController.cs
-
 using API.Extensions;
 using Application.DTOs;
 using Application.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using System; // Necessário para Exception
-using System.Threading.Tasks; // Necessário para Task
-using Microsoft.AspNetCore.Http; // Necessário para StatusCodes
+using System;
+using System.Threading.Tasks; 
+using Microsoft.AspNetCore.Http; 
 
 namespace API.Controller
 {
@@ -15,7 +13,6 @@ namespace API.Controller
     [ApiController]
     public class ChavePalestrantesController : ControllerBase
     {
-        // Injeta os serviços necessários, igual ao EventoController
         private readonly IChavePalestranteService _chaveService;
         private readonly IAccountService _accountService;
 
@@ -26,21 +23,19 @@ namespace API.Controller
             _chaveService = chaveService;
         }
 
-        /// <summary>
-        /// Endpoint para criar uma nova chave de palestrante.
-        /// </summary>
         [HttpPost]
-        //[Authorize]
-        public async Task<IActionResult> AddChave(ChavePalestrantesDTO model) 
+        [Authorize]
+        public async Task<IActionResult> AddChave() 
         {
             try
-            {
-                if(model == null) return BadRequest("Erro ao tentar adicionar chave");
-                
-                //var chave = await _chaveService.AddChavePalestrante(User.GetUserId(), model);
-                var chave = await _chaveService.AddChavePalestrante(1, model); // Usando '1' como no seu exemplo
+            { 
+                var chave = await _chaveService.AddChavePalestrante(User.GetUserId(), null);
 
-                if(chave != null) return Ok(chave);
+                if(chave != null) 
+                {
+                    return Ok(chave);
+                }
+
                 return BadRequest("Erro ao persistir cadastro da chave ao banco");
             }
             catch (Exception ex)

@@ -5,6 +5,10 @@ using Application.Contracts;
 using Persistence.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Persistence.Repositories;
+using Domain.entities;
+using Domain.Enum;
+using AutoMapper.Internal.Mappers;
 
 namespace Application.Services
 {
@@ -14,13 +18,17 @@ namespace Application.Services
         private readonly UserManager<User> userManager;
         private readonly IUserPersist userPersist;
         private readonly SignInManager<User> signInManager;
+        private readonly IGeralPersist geralPersist;
+        private readonly IChavePalestrantesPersist chavePersist;
 
-        public AccountService(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IUserPersist userPersist)
+        public AccountService(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IUserPersist userPersist, IGeralPersist geralPersist, IChavePalestrantesPersist chavePersist)
         {
             this.userManager = userManager;
             this.mapper = mapper;
             this.userPersist = userPersist;
             this.signInManager = signInManager;
+            this.geralPersist = geralPersist;
+            this.chavePersist = chavePersist;
             
         }
         public async Task<SignInResult> CheckUserPasswordAsync(UserUpdateDTO userUpdateDTO, string password)
@@ -41,20 +49,50 @@ namespace Application.Services
         {
             try
             {
-                
                 var user = mapper.Map<User>(userDTO);
+                ChavePalestrantes chave = null;
+
+                if (!string.IsNullOrWhiteSpace(userDTO.ChavePalestrante))
+                {
+                    chave = await chavePersist.GetChavePalestranteByChaveAsync(userDTO.ChavePalestrante);
+
+                    if (chave == null || chave.Utilizada)
+                    {
+                        throw new Exception("Chave de Palestrante inválida ou já utilizada.");
+                    }
+
+                    user.Funcao = Funcao.Palestrante;
+                }
+                else
+                {
+                    user.Funcao = Funcao.Participante;
+                }
+
                 var result = await userManager.CreateAsync(user, userDTO.Password);
 
-                if(result.Succeeded) 
+                if (result.Succeeded)
                 {
+                    if (chave != null)
+                    {
+                        chave.Utilizada = true;
+                        chave.DataUso = DateTime.Now;
+                        chave.UserId = user.Id; 
+
+                        geralPersist.Update(chave);
+                        if (!await geralPersist.SaveChangesAsync())
+                        {
+                            throw new Exception("Usuário criado, mas falha ao atualizar o status da Chave Palestrante.");
+                        }
+                    }
+                    
                     var userRetorno = mapper.Map<UserDTO>(user);
                     return userRetorno;
                 }
+
                 return null;
             }
             catch (Exception ex)
             {
-                
                 throw new Exception($"Erro ao tentar Criar Conta. Erro: {ex.Message}");
             }
         }
