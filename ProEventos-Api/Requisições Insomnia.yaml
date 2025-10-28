@@ -2,30 +2,34 @@ type: collection.insomnia.rest/5.0
 name: Scratch Pad
 meta:
   id: wrk_scratchpad
-  created: 1735389601867
-  modified: 1735389601867
+  created: 1761420896836
+  modified: 1761420896836
+  description: ""
 collection:
   - name: ProEvento
     meta:
-      id: fld_e670b81c60ee43a1865e20064e70489f
+      id: fld_7cb4ea9136ce446994089dd7a9278dad
       created: 1746020017702
-      modified: 1746020250359
+      modified: 1761484642749
       sortKey: -1746020017702
+      description: ""
     children:
       - name: Evento
         meta:
-          id: fld_5ae5a5b4308c4f05a5d832fc6c0683b4
+          id: fld_e7eb674bd9574512a57fa325578d79b8
           created: 1746020225218
-          modified: 1746044235669
+          modified: 1761484577410
           sortKey: -1746020025168
+          description: ""
         children:
           - url: http://localhost:5241/api/Evento/
             name: Create Evento
             meta:
-              id: req_d655e58b6533460abd8e3472c012dfec
+              id: req_755f52283ae14740bac12b640bf494d5
               created: 1746020728050
               modified: 1746044487925
               isPrivate: false
+              description: ""
               sortKey: -1746020732112
             method: POST
             body:
@@ -59,10 +63,11 @@ collection:
           - url: http://localhost:5241/api/Evento/
             name: Buscar eventos Por Usuario
             meta:
-              id: req_b4566e76e5cc414898915da44ead544b
+              id: req_2aa979ddc33949dda0aeff17b6d1beb9
               created: 1746044237021
               modified: 1746044394655
               isPrivate: false
+              description: ""
               sortKey: -1746044237021
             method: GET
             headers:
@@ -79,224 +84,199 @@ collection:
                 send: true
                 store: true
               rebuildPath: true
-      - url: http://localhost:5241/api/Account/Login
-        name: Login
+      - name: chave palestrante
         meta:
-          id: req_29ec5567db72418e9823b9014f74649b
-          created: 1744742390525
-          modified: 1746020030231
-          isPrivate: false
-          sortKey: -1746020025068
-        method: POST
-        body:
-          mimeType: application/json
-          text: |-
-            {
-              "userName": "Teste",
-              "password": "Teste@123"
-            }
-        headers:
-          - name: Content-Type
-            value: application/json
-          - name: User-Agent
-            value: insomnia/10.3.1
-        authentication:
-          type: bearer
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
-      - url: http://localhost:5241/api/Account/Update
-        name: Update Account
+          id: fld_ae976de6a4d846bb9808ae519ccf43b3
+          created: 1761484535273
+          modified: 1761484541773
+          sortKey: -1761484535273
+          description: ""
+        children:
+          - url: http://localhost:5241/api/ChavePalestrantes
+            name: Gerar Nova Chave
+            meta:
+              id: req_d7a8a473719b465f90c3343f5a78f911
+              created: 1761484583832
+              modified: 1761490669505
+              isPrivate: false
+              description: ""
+              sortKey: -1761484562478
+            method: POST
+            body:
+              mimeType: application/json
+              text: ""
+            headers:
+              - name: Content-Type
+                value: application/json
+              - id: pair_aea2dccc10bb4fdebc981c244ac347a0
+                name: ""
+                value: ""
+                description: ""
+                disabled: true
+            authentication:
+              type: bearer
+              token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJUZXN0ZSIsIm5iZiI6MTc2MTQ5MDY2MywiZXhwIjoxNzYxNTc3MDYzLCJpYXQiOjE3NjE0OTA2NjN9.5m45tSyu4OpWCPM3DXPSQKPxUHH8fpA9lo0OVxJSM5tgKPvbfgweK3qR3s9cUrK_wK4e5WTu3fd6XZ63os_7mA
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: usuario
         meta:
-          id: req_536b6e9e9d264d48a72047080488e11a
-          created: 1745432886494
-          modified: 1746020024860
-          isPrivate: false
-          sortKey: -1746020024768
-        method: PUT
-        body:
-          mimeType: application/json
-          text: |-
-            {
-            	"id": "1",
-            	"titulo": "2",
-            	"userName": "Teste",
-            	"primeiroNome": "Teste Alteradosss",
-            	"ultimoNome": "Teste",
-            	"email": "Teste@hotmail.com",
-            	"phoneNumber": "123123",
-            	"funcao": "2",
-            	"descricao": "Teste123",
-            	"password": "Teste@1234"
-            }
-        headers:
-          - name: Content-Type
-            value: application/json
-          - name: User-Agent
-            value: insomnia/11.0.2
-            id: pair_99dbf4023adf4fe3991b375627b12084
-        authentication:
-          type: bearer
-          token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJUZXN0ZSIsIm5iZiI6MTc0NTk1MzI3MCwiZXhwIjoxNzQ2MDM5NjcwLCJpYXQiOjE3NDU5NTMyNzB9.NpFweoYhwMu5SZxPOQMCSnva9fEvqWlB4eGI1QUjgSa11U1wjDXcyRouOxk0gGUHfushcEEA4JNxXahva4sZtg
-          disabled: false
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
-      - url: http://localhost:5241/api/Account/Register
-        name: Create User
-        meta:
-          id: req_3f5d9d2f4eda433a8c2fc8bacc3f25b0
-          created: 1745437450431
-          modified: 1746035647735
-          isPrivate: false
-          sortKey: -1746020024968
-        method: POST
-        body:
-          mimeType: application/json
-          text: |-
-            {
-              "userName": "Teste",
-              "email": "Teste@hotmail.com",
-              "password": "Teste@123",
-              "primeiroNome": "Teste",
-              "ultimoNome": "Teste"
-            }
-        headers:
-          - name: Content-Type
-            value: application/json
-          - name: User-Agent
-            value: insomnia/10.3.1
-        authentication:
-          type: bearer
-          token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJUZXN0ZSIsIm5iZiI6MTc0NjAzNTYzNywiZXhwIjoxNzQ2MTIyMDM3LCJpYXQiOjE3NDYwMzU2Mzd9.SDw_vsYeyjD3P73acLFcp4yCfCxemLyUc73ncD8DQ7kI5zgkX4biVl9o1pUPCywNhfhXEov4LoTnpK97JSnFMQ
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
-      - url: http://localhost:5241/api/Account/getuser
-        name: Get User
-        meta:
-          id: req_0d8a9d94568c41cbb7bf9b7014fd61c5
-          created: 1745867704281
-          modified: 1746035661952
-          isPrivate: false
-          sortKey: -1746020024868
-        method: GET
-        headers:
-          - id: pair_18981d11c2d04ab58d8bf7b874fa91f0
-            disabled: false
-        authentication:
-          type: bearer
-          token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJUZXN0ZSIsIm5iZiI6MTc0NjAzNTYzNywiZXhwIjoxNzQ2MTIyMDM3LCJpYXQiOjE3NDYwMzU2Mzd9.SDw_vsYeyjD3P73acLFcp4yCfCxemLyUc73ncD8DQ7kI5zgkX4biVl9o1pUPCywNhfhXEov4LoTnpK97JSnFMQ
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
-  - name: SmartZ
-    meta:
-      id: fld_fcbcb3b1568b4f81b91fbf62b9897a21
-      created: 1746020037996
-      modified: 1746035666364
-      sortKey: -1746020037996
+          id: fld_24d3a5e1f7584bf1a63250c846c2c54b
+          created: 1761484622189
+          modified: 1761484622189
+          sortKey: -1761484622189
+          description: ""
+        children:
+          - url: http://localhost:5241/api/Account/Login
+            name: Login
+            meta:
+              id: req_2610e47e9a0e423483818dec70582d10
+              created: 1744742390525
+              modified: 1761490689001
+              isPrivate: false
+              description: ""
+              sortKey: -1761484625356
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                  "userName": "Teste1",
+                  "password": "Teste@123"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/10.3.1
+            authentication:
+              type: bearer
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:5241/api/Account/Update
+            name: Update Account
+            meta:
+              id: req_334e5d690403412781bd44c51b542330
+              created: 1745432886494
+              modified: 1761484649220
+              isPrivate: false
+              description: ""
+              sortKey: -1761484625206
+            method: PUT
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"id": "1",
+                	"titulo": "2",
+                	"userName": "Teste",
+                	"primeiroNome": "Teste Alteradosss",
+                	"ultimoNome": "Teste",
+                	"email": "Teste@hotmail.com",
+                	"phoneNumber": "123123",
+                	"funcao": "2",
+                	"descricao": "Teste123",
+                	"password": "Teste@1234"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            authentication:
+              type: bearer
+              disabled: false
+              token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJUZXN0ZSIsIm5iZiI6MTc0NTk1MzI3MCwiZXhwIjoxNzQ2MDM5NjcwLCJpYXQiOjE3NDU5NTMyNzB9.NpFweoYhwMu5SZxPOQMCSnva9fEvqWlB4eGI1QUjgSa11U1wjDXcyRouOxk0gGUHfushcEEA4JNxXahva4sZtg
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:5241/api/Account/Register
+            name: Create User
+            meta:
+              id: req_1a028f57a7804c2ba9ba3acc858fc13b
+              created: 1745437450431
+              modified: 1761490677642
+              isPrivate: false
+              description: ""
+              sortKey: -1761484625456
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                  "userName": "Teste1",
+                  "email": "Teste@hotmail.com",
+                  "password": "Teste@123",
+                  "primeiroNome": "Teste",
+                  "ultimoNome": "Teste",
+                	"chavepalestrante" : "80438620"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/10.3.1
+            authentication:
+              type: bearer
+              token: ""
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:5241/api/Account/getuser
+            name: Get User
+            meta:
+              id: req_329bf1ee1e5b4a23a59243cf13e46396
+              created: 1745867704281
+              modified: 1761484636344
+              isPrivate: false
+              description: ""
+              sortKey: -1761484625056
+            method: GET
+            headers:
+              - name: ""
+                value: ""
+            authentication:
+              type: bearer
+              token: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJUZXN0ZSIsIm5iZiI6MTc0NjAzNTYzNywiZXhwIjoxNzQ2MTIyMDM3LCJpYXQiOjE3NDYwMzU2Mzd9.SDw_vsYeyjD3P73acLFcp4yCfCxemLyUc73ncD8DQ7kI5zgkX4biVl9o1pUPCywNhfhXEov4LoTnpK97JSnFMQ
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
     id: jar_99d30891da4bdcebc63947a8fc17f076de878684
-    created: 1735389609485
-    modified: 1739381765018
-  cookies:
-    - key: .AspNetCore.Identity.Application
-      value: chunks-4
-      domain: 192.168.2.19
-      path: /
-      httpOnly: true
-      hostOnly: true
-      creation: 2024-12-30T13:47:39.424Z
-      lastAccessed: 2025-02-12T17:36:05.015Z
-      sameSite: lax
-      id: d5b099e0-4944-453e-b733-95c62bfcdc5c
-    - key: .AspNetCore.Identity.ApplicationC1
-      value: CfDJ8APAfItStqVBl407eefUM99CLUQ9u6b9ld6hMwt2cIFAnTuWPOHwa20YsFJvcQX6yWl3xex3hWXkg8jULT5afKctt0O_IJx22lLwcqimxOR4sqjS-8-9-S56b2_r5ydKHB3VQOBNrSHdG_CKN3BnyEf_Qx8bnxfmZDp1MHE98C7r8u_5zeLlGDbxWVqtSchsrQCa9dMAsn3RB05-XmpxyNl4vfwFEXN4CTwActGyJsnUbVydYNVXR-AVmqNtI8JjFwJefJGICDgwnqf1N1GRxNQHGeNxg4S3SkGSebV8tPiMbtSJl63hcA93lGlPdieJORV_0PLauOsEbXMlblhvqGeq9PS7SNLZ13lqAFBWMz95gCvs9lRPXIghXZ7qbqzpekTXAspQki-WqtXE4xVWkr-jROMKYwpNy6vStU6qBsmtnGgn7lA4F24NEh3JSROJVFRUYs4Mo4e95gh9jQnA9Ho4AU3wLDv-QdIiLOJ_V1nXDVzphSVD_6JxBP9z1BJBXxD1mMySuT8Y_ofsQErkBA1tExHSuYcIgz0AsuUzSkOdUSImkMIV0dC4fPsDfd8fdZ1HUcGtRGBe9ku6_LMa7Ws9D8HmBR4tSaYUYXRXEw_IkByJE-slt1nX1WY3f15zw1vbaGozO7uYwfjYlrIFwR8DVwckrafTCiDYTXWPOyoIwbFuw-vHqgw6c9DrEDhlNaS8yHFp26BdujIjjaJKht1MtrXD3_VVTn9SUeybg0ZyJIt0HEY84vH7Qavp__a54srKonDry1k6Jhwaf49TJZ6tyMU8cIa1aQN-KJ361GCd0DFQ8lY7ghT56shqdIRBbZj1g0qNI7ORjpsD3K-g0l3KGPebLgLAIvkaDaF0XcHc1e-v43v9arSq5AjXOa_GW1bHAGA319JtW_v2DQK8bw50ukNWxwwQPmuBR2tsa399ZqsaUw1JuXdWFSLaPldff8rvd7pq-ywY_Y7rEo1kyPXba0rIedqTLrNc4Vald2Qkesf9gkvseHf7kNFF-rCCMwdzypUD6KK5NZW1cVTpy5HpwCBFrpPrpPDq4ygSBHRBYhSYInEytSwRjLBJvYxvsNqwmNT0f_3c33AU0inKhRmb8bwPs6LCllazLQ8PyYUxvvGLFD3hLnE1G49mMeivHPCcP72WylOLQCzyU-nt64520SeSo9EX7BRkhsxvun0NizKnQxkEsJ5O08ZYWmnIpOSsF9lznZPb2j9WSsWHFS7p8GOa0F8HZhZCMCut3ybthofItOmTaRm6jpBN28kZY0v4RirDT7rYjwJbIdsXtZ2tTCkEiaT2TYPHvisrTMESUFyMC3Qt1iCLgNzn2xHoUTk1F4UC6qj_B8TIP8qzQjdX-96RYoa-AJbr6KT2i8ll85gGkHD0K50Idrfp2ivZ5PiNV4Q7ueReLJKuq6t19VaigQp8hsfWSLhJX82xBTcIWMzj9-nQ-FzjEszUaOabK1YUyyvIvQNYEnrA2otqxOlrCd9oAr76YX_0id776qadJ-REqHzrN5kaZE3TTRC59ZOKMqQy4Ac6CZkSFI7e0HftSKQ1sEp9rB1KjvyD8UcBeO-56NvtCIzW7hR53bpVKHnA8xjthp_O-IYRNlmbG5Qgqv7hwDKIDJ74vGucoHTE_LjIMPZfShpOC90YHF6mKssVO8a3xl93tkH_C7BM2E7jOrkiYmiF4Dw9eRIpkGvhuhAKUZjwJEE1QXk6paS2zSMyysw0k8G0YAxap4FhZmfKuwmTbDEoLtYZX-npVbVZf4_aqBpgAYU-3PG49st4-2Z3yrG6zkkeY2VGt5rUvfWhsLhXUQIVjx95RrX6XWzsRGYvLa4Tuse6_RHROOEPqn0Ylq0BTPfdq4AcB1GFVJ9F5ay3juricQXgPu82RqHumMav8bhxsd6cGTaOz4YtcLaVow5_7_CNZV6RUT2iWE_6xJwbk9eTgrxcc1YI9gRxF_yZ3EpKmSgBO265vw76UwWkS6W7EnJNdsnV9vkLeryY40pBGvRS2Trw7tYbanpEV4RbuohxeLW0_bZq--p5NeB2nVLJXZekXksF1jjSYVYcc9N43-Mknk7EBNNafxRHo6s8yKgLXZ-DNbWnc2tOgS9uVLCMz5-R6weBrRUBPLXby1Q5N4HHTCU1NUwvgpJtpzfcsZ0_Xw4j0pS-g2fWX1Qhif0aZ7sjkmO5p2onPjocY8EyZboQWIDbACdwuxnkbhHC9omoLpZpw3OlHvloR-RMIZRNQSYZCbc4jMge4W0d8_EHlXHYpLks2yjnNz3ALCwB_pQ_oBGOp8ghGnYIoS6i2NQLefh43mzrxvs-BQ5Q9CK_y9kfRPkHjyrTaAJ9NDmdo0j2VT_MHMnc5pejD2WPvsCezDW0N2mM94GPSlz_iIbX9qOJs9NctZ-cLFDuNPg3wrNwvVrcdfTzZUZ9I8fntRGTjELyJU5KrKTbdYrqFQ-0pW52qHSnC17WeRlJgRoFIrH1vXxoNzSqQxt5ZheW79-XLhkG3Tvdw7Ic-zq37-sQgh2Z9EsbCTXCTqtI1fCh1KoErK4wI4nw-Dnxr7EeuYOVYjBBIMAv60PJSenWDziTB0flU5Nq8RtmbA5Z8f5SzFL4-uR6qULpRwENLtHsGmrt0WAd3mdRzXHGIEogGxRgNK4fOsZm19CUALuHe58sHwCyOqpKKYgd-roza-UZblG7alW17mxD_h_mfSzaABAXqx6eBPVJ0Q7Bp9iZI2yoTqgt-g-et3uEEQoHExfsQVzbXqjvu1HXp8M2opBctRc6nnCb7eHNypfdyDdEKvTRSLIHLoodLadtYZX-gJecSRKX2b5k-MYdBUCwJI-E4jIMyKFBYPheGg1QWMLHBxQxLnet0H5iFTp6oWL6WSAv32TWlybIsqfNGO8-VFxXPaXdum9TSl35FzkfthJWSKTSHrNu5E6IsGZ4L0R2ltr0Ld883M5_aWls-gFjAFtokExJWgNst4FPBLpQCM81aIIu-8MldSkg0w5UAs4ghYV-v4RNwCsJMks10tfNEu7xb8OPWtLaXb7xvcjuveBsXUuVIdwCW9oH9LhSyb0683FtfpNa4SAbFWQxMK4rVeN7C55_PuLWtOR7hmzpAVlcJ_GzAE23y4Nu86bCIsmKTFI0bKKOurMlfjTBx_sd9D4xb5TsefqNd8Bjmqo7azgmPillJ0MLcNPeHqlqPQIZ69LzjHoIAqGxHCwe0-a6DqAvGO61F8AN4_15DCUMDpn3aeQyQBT65pBviRqK7bxcHnS3mffL_SUhEkFc0avYQzukNARiR2xgoyTMoLHG2R5VZ_kOzwobfFyv1yeOTlseZ0WVyzZ9WWkKkr_0qTKHOr6ijphNfxXSA0fkXXpvXaLbUmewF4wKmETiO1X_7b4q0U5gA9liTjFMmyEgxznigbPJcx3Itw6jysRB2tp_ik_CFsHLS41eIHeeRSiGlNGvWY1cGOpbgnH4VH59syk7wypDR6AfTjo8Sl3oB161-Qcvp0gHH4vClwlesNGmYocxqweRbXsbbKQKUSPK1BOBknXKQzSM3MUepQIlcxhsJ39k_Jf2Almsy6WMxn58E8FT0DvdqdjD59IRV8HsZ5pcASclooYv-g2iCEEWEc8QHv9M2XyVh_9xf6w--1coMpHoaaNPjeGqr4sRYdtTu9nhqEQmZfzUHWidgM45fLzfdH8ei0763VMpvL0mmUcKLkKHh-bfp8WCSo6qxDvlrFeC1Ry42-xGQaRUobbTmR8ZxwerMY8Xm-Iq5vPPW3qe5n0wDx98KW30RQ_lhwgxPhXlsAGyGK2Zbp0uP57cgbl_FGmhPRQgsG8tqKcVvqB4wy50C4PGhbqq3ncpJGNFVSTfa1XgtfSXGNeHH41-NQ8KW5zRzglpgqpu3mPnudMxgffResGWlaZ2kYvmy81ul9hMDHwWeHPI4dn_TjgbXIPkOpq3ew6F60S0Sk-88QxU_XQyBYanHvHOn-
-      domain: 192.168.2.19
-      path: /
-      httpOnly: true
-      hostOnly: true
-      creation: 2024-12-30T13:47:39.425Z
-      lastAccessed: 2025-02-12T17:36:05.017Z
-      sameSite: lax
-      id: 27cba765-2668-4f5b-a29c-853c45471da1
-    - key: .AspNetCore.Identity.ApplicationC2
-      value: mohED4LngtPHS_oFNWAQ56mQkiOF6aorsogEp_uhQjY23srMMcgG6x7yTSTR-xyOUGvm2jZquJ5l4EqgYvBFmaTRd7JRinMUYVsNq15U_iWCKcSQCVQlLvyU2VzcqweK4uxC193_SDv-mhaVBxfgmwffoJtRKmHhpcTNJmrbCbWbo3jStX41YQq21rFFnnb4m_rxqzd-QHrCGydbwwuHn5HxBzPTIc6Xq_7NNEmARB_M72mf-YN07Yy-LE4Jc4oKjVvstOWrDwWttt3GmlihbEWEresixU23DcggOqJvv0CkdqC5XjhN0lC5LhvA2eB15_1q4Xchq3su5uL5cuo-_gdM0VX4Js8bOGiPXua3bjNmbzowh8--P5Uhv5Uue_k2exSH3mc0WWBH5a025tx0P62IA6jkrIOcH5yZhp2sA04ybbn15zPvmtMU1G1kdKiqOS54ELdER7-SevspZIQum5gtTFStrj8wQ04AX00eVgJMVU8nW4XAWCYEM3NYrlmlzng3bu2B5olFuhB5vd1Qq6z9g2zFi6Pf25dlE2fq7hT_RRq3FfQdk6xKDzuxrR2fQHcKA53F6O01UZiYQLCKDpGM_EPf5DrLMUUP69Px31De9FAzsvSnFMeipqF727Wpw_5FuEJduxdqUvW9kzZ3Rcy61eKc_7rJfAetIZ47MPgt1rcSvmLQ1RWr7dQDwj36jr3B5hHDDz10p3RktKxMbIJHz1bBkHjCxGpl9765hLGu_5PWKaD9k7k_IzPZn9GhTIjmoDgpmeMrfb5a8TCJgx__fgWm61xGB3_xo8dwytO7-Kf_0gFekaSiX8rgl0njxzOiTGTl4KFZ-OSyNdFWlcDe1hPMJOBBHIrSOA4NuYQ8fC6ZcuRjHsoDq1rHpYE-NQ06XZRfia4r2vvXt_l3OidbUZDZ9U90m9M6baSjeZ6DERzonb3dktHm8O52U96B0tVRa-mPuW8GX-l75ue9DyjdAzjFZIBzID7rrJJTJVJg3pdvY4h3aeR8Eo3HlqngqOwCjoUkLWQEFosy0_nBfHY0nBHkfI2G6PWdH-KFudCwuCUSC-whpsvz2wuV1QnvlN13BSC4dOH1mddL4dTvLPk8_CnfjkzAB9u6XwARYktETwo39MFeRLZ3s-wdMFiODcRknh8yiXZ5iqg8MSdXYWlrYM8udmHbuIr3oFzJdbIrqqvi7lGvxxP0rMXyuLy4eYBWCqfPDVgvd9TDffANrNAcHsiFsgCm9vCAJS21WezMQ8CVxH6dXUe8g7NeMYbsK7xHjXojOlzGjU46SRhAJ1_nVmsldrvcBuqHhUuF_fWy4M-EufO0SdCPW0b4f0HsAqb8COTOrDyIqAhioRlAwmoq9J7dShNnSz627ppWsnHw31fdXH2b0qHCztjFm82OGBRunR3YcuXrUuy3as8lw57NGZYO1Z-gHNjyeANho6YDvWHEU776_WikX9XqZHnzQGMtSQpsQO0cKeFajkKu8OTMa7xiSxrisoJh5S9_a8U7YQT1R5i_VwA_1_uFA3yZ8lcCv2cv2Nj75albBNgyksyk3uAH6xkN61lo0-x2h5EmDot3eUJPXp0rpmJQ8AfarKc7h_c3FJoI1yyXsx0sls4ZaLechfmE2KQ0zplVBg3U8FbcbqniIxrrAcKHnXZGqQRdStPA4V-dni3CbL3p0qmluUAgxlQ-TBdWaqPtFYtRMRVt8wr4dtFoCCmO9i66Ez-CKzIRWpLDg8F8TbPKGAuPvcK4G9MMPPi3E9we63t7Dhh9120rsrwsgSOaGPm6HKbF4vJAqJUEqVr3Svmfllwom3368xsNqDt4r7qqGYqBk5JZoMfx8sQEeo9mGRW6UGRXIaNb4DSiqHyL-i6RxFG4VnKiIs9u7n721b-mFKgIV-ZX78gElGCLHA1RrJwfG47tXF31jWHmONHZImlMqfFbCBISovPBWj7a5gYJ9CuBXDb2kkmoQjbvZHMj01U4AfbzoyL9E0L3V9Cikfz57ZejLmxH0PV2N_xgrBAilPJspyy_UBVOSkY8sUoZcbpYqrm0QnDzK8qFDH_BG1uJR7Lyll7qsZWL8uI5ZxCU0nh4gpETTqlcLhxSGDgMgZCawFL4t0jA_1PbdJid-5wWylK59K5VXNd0pP7wHzwEQM2QBg3FDgfXw1wRRVHvb2awuYX2zwH2ed4_1PtjMKq8c0yhe6oMJ9gbXMopVbx7fH3GAryyET3MXHWESV6ywytIRLij7jG7ERNHbE61XFcmUciUnwh3g4N7ThhT3prOzTS5apjfbCZw90MyYLOb7I8ZjW6fdCOcnkNiBHq9RyMt6Dpo2x-A41xPEe32k9430qhbfZq3AO0urj52Qw27hkBHfYGqKFQ8Lgz-ofgcAEI379tDi-0xmrYoHnHKonZz2VoCA5Sy6PYfQaAo6tqInhPjuGrFjhDxKb85NKmOzSpYS_ISLJgACQYDIpT2vGqQCVmjyXUMuN6PrOGVpUZb5doiDG730pYkY3uhKr1nWImvweKmCw0SukP7wGn489tAnfZ1BIdy_3Jj4L6ByhCVHwtSEcnK6WW7CtxxN77VlzgFEjIGk5bIv5FsZmhKQ46yYiiO51q9EZ0y0b4OcoOlrKSpQs4u_CvmgViPDEtxUfQ6qSESBn6q7hhg8AN8QZu724LYpkoWY_wJRo2N3k6SUJNjEci9PS_cUNhIaLMDeQEwm0dGZ4mgHkJoj_550BGPRghJiXgVWWG3Ai8IQAj5uKoddF1rk5i0HE-XqFBtzhHyHVC0vVafSYp4M2ePhpqcvvCpFTJhdr5g5JZeCu3mNcpxYn0oImx0lnYCSHSECzf4NI5q365k4mK85zQNpOKWK9GwpXOIzAiuZY9VfRo2gq10jgIGNBWsKix-QF6rzGv3mDiG2zxgjgD5YVgJejHUdbooPNPo94LgWMhpisgCtYa1KA2GmITee8WOc4SXzybxdPineYkIdDZgWKqdrraw9BE2JwAMzoue_h7focZ80i04YEaPk3pgnMCH6CuEksl5nXg2P7tpGNBJSwfo2ywiCDpHIbUFnuxNlAifEI__AiQIByueaFgtaOGyL3aFmu5GdH699IgGLusvysLWerByTn_bmLDvMtesLn5V8WU3HCxpqHCx1dvCCS2uWFhx8i8BzV6AbhSwk961vJOBwoKcDOg1-dHWfo1EVtmRz9e8OKJbtNHet3ZYS3nH85vMtGlqhgp-RyJwMoOyPCo7DzFSfSHFypIlY1GKhKquOjFnUJV16ygOohEzcbyQoKO1TOPF04T8LRZSzfZlECKzQzRqVN4nkoVVYadJk3REw1cqgj3G9h_RrwpUENH3QL-r9as5qPwJZTYUWDN0fRz0ErOeMQE2Jza-be6_IfSLKgtU_YS_tSMBJ6gmjrtNSgjAcc_qtsv19zlWWuufN8kK950Hpwc3IQG1aZ4Vm0dffOGAMrAgfQejAwY62vjEiG2TEfw_J3rXPoNPCiwpAnLpzYotVc7DjSujgWPvw5_eEhoK5R7jI0IZej89Kk-3rJI71JhdvyNf3YkamcAxsQwziol_i4qozBQVQClviA3NGgH22SFqW5veCdM42GOpK5p6q8K2L_tgybrwK_kkoQNcaX51ZyGRAlw09cS7G7ERUliMC6tAMLnNI6unFDrDzdbb-kDEVdfMICYp3dEDxqk6B81NreQCF8L-ZhtF355A-qEKRl_aElYuaeVB5Cks1CTo7NxxpEN8CXE3IctaLmAxCAtouHgDeaWm7k3ams61i-VMRbTExhbJIcB3R1x3U9K5G7WrK06I81vw5mMh42EdIwyRRx-DJ3KDIsCo7ujytReMD2YwmCrC8jS5CxGH73WqTdTEQiqseYpkLIVrMzdWXr9P_AHPeAwsyyDqzGcfNe57VOERbWn51Smzwwzoq-JiGpEUs2a1JUvZZJRk3aulHQNDPoZKlA0SvMRLHjxwZOtY5um2Ok9Q-a39vA04SI
-      domain: 192.168.2.19
-      path: /
-      httpOnly: true
-      hostOnly: true
-      creation: 2024-12-30T13:47:39.425Z
-      lastAccessed: 2025-02-12T17:36:05.018Z
-      sameSite: lax
-      id: b03228c6-15e0-4edc-84de-d35409968f8b
-    - key: .AspNetCore.Identity.ApplicationC3
-      value: BgTDnjwuEiJqz5K6sYHgepxuE3sCl_b9JZ8UjUYi61tHZvHbC6B1-lQDzfBynnBfq4f7RtrPttdQ4oz1NoNeusGSsp15vFjtjLFvQRmkQlF3yckj28r0-djy3tdyNiFZ2QHFHnWd41uzV4LFxXwiYEiwx0n2UzsgOiPvopeyzpzLclhoizL3k_6Fo0dZHlaUgncvfCKAJ3RldtNQnvZWKcx2LGgXjeyVx88JOD6rXlBSG_hxAw7ocA0IWruUhGZ4n0AUt_i0aelwo6pTlNXOlktCHM84dXpYh3Jd9bjIHl1LcPbSt_EgqrpMOj8KQ4Uvfd3cE0TD7d_-z4Axd8Zo4AZ5glMP9Nrl5w-7fhhQE2S_-p3y3xe4IRLFtJRFboVo_DbT3wN0GHNnRlCsB1yUZiiTjMjNkv9mvN3EM1HtDbq0ZOGYEyDdlSk-yMdMXi7zezb9bsu5CbkMRSfPookv8Hx2R7yfB7wy1uQKdjo9qm5kTi4AIt99Onqz5el3YgJenxoH9ViN7QjUsefiAIe_ZeAaZBSlGAuhGC6KNu59crr_f9BWKy88K6VX2phZrRCUBeDyncuS-fehuVFEoftVuqKMrojMWAViAHU__iL-liWB4M6rg7AXFx7EIabfEMxKgZhVJMr83CdVlUcha3JKHoUn6Y9EgpW-8wPVWmlRnS-OQmY8U1Nx6RcLXVJoKY5FgYXFkxjsbv_76afVOfjyE1aYpeOqKL-5r4bEfh6ea866eOAMXGTXq1W0Yggj9vCWJ733d2LlMxuIMcwwS25B926143EDtXVkAVxe2wIzWtzFCarUaCohwQrHjweDkwG_RQMWTiYEL2U7UF_jhiHx01EOLrBecBNIIA-ey_7QXae-0jITKYbTn-XnDi_42GZPyTqQ1EH4RPTJ_pRPtojoIELYO89NH1aBgnya3FnNhrDBnY-dXkI39T3UMUnjeqhpuDtwZSZLjtS3EMkp_Afq0Dml9zj-fLRLZfBLrSCIY6gQCR_qzMPI_laHrjbBizwknB3zAm5s1ODgDSf3qeMT6eAhDJJvyGx3ehANAVnEgaS-xenl0mEIzv9PhIwKDYeXvj9hGGMl2zNzYVnszt5_6bIXjmVe2MwzGYrMviFo5DThXoHbkdOtCD90jQcvL3Z-MBtiFZKnGF06JoQkM4j2muvI3n2Rr-coDpJWy58_Rqg7fGFjk6hOlqKEvGAXd3_YzGsT73XG0O3FOBt_v2Sz7l9PpK9aLz38M1NIdUrUqEEJ9XrUFUMzWThXa45W258M3NBvyFNDD3h0orGJs00sV9GtKj5yfdYK6GNc2YJzL-eogMsEfPsRfwhgdrQHq88i9Xbxg3n51WLBIfrw9anLZBqC0x2S2jUYZBAnHlPT7vHH1Nbl8CB-6SkhbVeJ0ipJ-m_XojKMSEi2TNg90VyAmRKkRgCzL-VyXgpauEbOuDp4m2rDoDmfey11gXn4Qa-CtRQ-P7-6SMzyx-AXShs8cQ5UdF7lnxBSOY9ugBDVhtuyMj0RlrQO4OKvVuC2xAKZsxKNnZr2gzsVUuX-zUoGnZLjNVjM5BQxzBh1ia06M_fGgHknyIx6VJ69ZAeChHEBhEYKnCmzC40LJuXesz18mKIjkwYB6pNt3xi8EpL0TwMzw3lLDv4JUL7fcD7K0C2s2uXsYDLEIeCey7NWAUir3PIyABkhyaKtlpo7ciTXi04kyxInF9xsp55Ge88BDSCoxX4Gsqt6NztcXEkLRmyfXOW3-VTM2FMuJqezzWvf-x4QzxwU9XYauNoxBsC4Cnvegv9idaSGMS1Jy79c8kaLQEQG40PnsxxjSR_GMZhZlEk2cFjC0a1O2nHuNv0Vw6FJWfmpfsVbTplc2G73rsavrfW2RO-xNJSYql-YvpKD8hGWtx2ETRRcsqHAHiGKY7UVyM78RUXHv0ztsgtfsYmeczvM9SgE8EibiygJbpIfh-ckooNKYHL32geu2aYe98XTe8Td3jnAfroyA_HCfx1xiHGaZIOHFPX5ew8ywPBdSJE7zaFAHozoCE9sOZ7UnbNcZBD0DdgKv-zeQ5bS99R4QM3fxF7bSKEueSSU_FRagKfA7vTd0Dd2rr--QxbTAqaW_y416UD3Gkl6rsx4sqd_en1j6Ip8pCBwsVsUk_jUOuM2-gyRafBHLY_k4PPVrMkyYV_JMt679MU6G-3hAf2SRCALF6RWLzHCTt9Ke_AsZTaXiUQGAijxOTPW_SIAzSglBwbBucMG7ZIZs2LYQspZfphd4ZkZeGSRjjILDBKEqhNGVnlHicv2kncDrGqrie2cDtL7RT6WAjhZo0MZ709jn6Lv0O0qydOgr1piiZcFwZ2RKhUlCFVg7WPltpVejlu_YNZiWordUyHLJqLr0yNEsWYz4DsvooK4gyW37WSqpk0Y6qoXfDEn1y07hL4pGhhi6iBrilTbLZWTtnxSduXTPiq_UHzlzasi_TbptveyEi6umEdyuiL8BlddZREchwBBm7jSdrQ35HoC8PhDkqyBh9IeNUdjl-Pxj-eg-076KYuEjwgS-bxK2wqMaNY2lFLelrZDt6nDN05uuitY4fQNFRn2lhepPYW4yFES369I9qQZ7i-M11AZNuW5vRVBUpRv_8L41QAocdmhcVbqASS_yzOi1z1AGlj1_Jxch5_bV6hlcFYOT1orVYzuvLshKkA1ZA-3xv8cMRhbZsbVjjzxuzUTTl9fg-h8a4cm2Q5TLMe13bwL5jGJmSUpcfycbyUahJJ8E3nKa51gUUHHwCbPoRis6Pc4T-o2TNPZ9jll5yj-IkTjAsQFzPfi9K8gNPZjY5DMCfy83hPF4BPlwR6cGV5ZpndWwwob0iwL59H5cU6feO3jdIpCiP_hGs4RNYsdGXCaoB3qVTkTLlFS5DaWyR1O1WYDswd8eOxueIoSa6Bqvq6FhRfqFrbIjKQYIfKdt9HBIbrOmtsmABRjN1cemQp8CTkjoVbL6QkVrMcUmdLH3WrRNYinvhgxG1CUGZNoKFli29EFE8a0-8CSrOmW6A1bbBoWEXroXQYoz0S_GJriArnQ9YM3IfpXC27VW8gyMsgOx4NQKkw5FYRWrN9qZ5gj4-jRDmJdklnf4Vi5Ef2Tf65i5UWftbYxdZI6z5sBcJK2KSTzdzDYyk62qVvtWsD76b5HuB9bpEqrUuD_4WVCxJkUIafZl3nnDtwgblrwgzXyBEAn4jilbecF4zi5n4frrrFFhNtjzb_rsMQ8FHV2zfLeBSSNEC9zeTHbWrznbQs-LeXdeBx_SUmxB3HqXVLcV4_yLgN71wqKCh1HkwxoBdFS-2BCCSipL4xoBGGMxmWaaDnSk_a2-8r5RrceTtzpgqKSLc8K3kEhfCwnR5VNT2q-_impBOPKDyyWGM7wcI1WIqVjF3Je86HV7FcQLM1x9NtdX2dgycn05_wwaozJ9HVzkmz-LFpttrn4VRgw5v8eikF0Rc5ivi-tWhZr6ckXiYENNXK9qETbQ_dtKCoCHjkzptQhBX39rRAreayhRHHofZWYsCmP_vctyRLy54FJ9Jls9HCOu6W5zFzOe_H-SzAcLyawxqdFAsia7U-7N4wj7dOrwoKmIFeBhAq8PjIWQlprFny1w51wSHWH6uQQcEfU_Z-sZeddydYs2Fi_An2-XycRx1dHucumD5NdRqTAjtuPydh_X2-UEPg8YkbmfxqCDQEW5eD8OdDGdG2DBad9sV4L07GIgy2yZIZfZH8dSTHJQtvUuqCORcs-_5PNxn8AuJDn3nnlifq-DXumiisaJjgG8Ol5b0LH9Yd1Pj-sJjL3AZ4NwKoQj2S4yoTt7vxGR4M87ME3UIDiklx0aWTCPLd5j5T58ewJJVPtmqXz_GlIFVgS9nA8nVEsJmHEwBR_O8fijn1hXMWYLKry0IC8pyrDzndD0DCOiqbDHfEfxL08qDgaPqXBP4Q8QT50YfmknUSGg1RGresZXkjqZ1wCnBDZwHAFaP
-      domain: 192.168.2.19
-      path: /
-      httpOnly: true
-      hostOnly: true
-      creation: 2024-12-30T13:47:39.425Z
-      lastAccessed: 2025-02-12T17:36:05.018Z
-      sameSite: lax
-      id: b8d77228-14b1-457f-9ea1-d0dfa33897c5
-    - key: .AspNetCore.Identity.ApplicationC4
-      value: 7imQ5-0fgCmwUuQLlsVgFihBuMGBnB1MJQDvWV4YWj-oT9b59PfZ8jZXETSCZ-IuPZAQBfWvh7knNs1_4Dl-vPaQCAQxrkCzhxEXmfEcwvvKbbfElWTKGuQBJVGRunH36XBEfvTOL9M-_fUco168OdFJEtkRswdHcR5tf4b-Dv6-s4r305umpsU0rbWDpPJcejYFFut2cSjQjO2O_LuSZEYKnHPDkZBD0H1Xp6OG53_qxhQjRUEcEYm9cx9KbEbkC0vDOZ3tzzMrf5yZfB9TJKxyfh3PWwhWx72ns6jEBrLQnk6RsUu93wscNGFQ_o2TAd1V46xttAkdS9hI2j4LaP2xSnFtUWz7IcZm0PKirjWho9gzeNpc1YT5O_57uUx5c0chDXlkoXVXRcymcS20KaR2fLuSCjoosvKTFGg85FLGhSp1nnbHNNATN0CxPq1bv_RXPp47lEjuz7yoOZTLPXdDFphF7WCy-8JNyZDPWY_-UHnp_h3Ab5fl23q4jsbbb7JhOtr7FI6JlEMWeU0dWLMfIgx2B3p2VsiBZnplrBbE6XVJAstLJyjwuLBnBXh6_QG7fnjtT6_i5mv8MPk3lTrt74dnetD6qI9spSbUzv_51HHk0HtUxc3dwXlXkwxnpDfinR8axpydp3H2sD6mlWzZf6XB6Gv43dSIC5EsUEnF307K696DdhdCfQJu4E3tk5jYZZ_a88iABoFH8FT7zsESoz2Ty_prSgsvPzfnymxv4IO-a0QaXBhxpBS9flAaLaSu_b8F3CWtNgbYTxVR6purS6x56p3aY7TUdA1rnoDTXxX9JOUI_GX4yD0fVDjGevuyX9
-      domain: 192.168.2.19
-      path: /
-      httpOnly: true
-      hostOnly: true
-      creation: 2024-12-30T13:47:39.426Z
-      lastAccessed: 2025-02-12T17:36:05.018Z
-      sameSite: lax
-      id: f9993b6b-83c2-4134-ade4-5e7679d284e1
-    - key: .AspNetCore.Identity.ApplicationC5
-      value: Zn5whWaT8YkpyYM2QAT0fTA9dJkEUWZOz4YSiUDl5H5Ckx9jJ8ENjqtp7SaJuDTlyjxLziBmIqBP8DwF5qTn5-2mw_G7JeROIMI11AF--Cn9NkCmklEpJauIaad1wjKIieVRrH7UrMNWcoJjTTBLjvV0PpoyPyO7LKHD9fLNETv_GQE6H7jOdq1SI1wXCjsE8tCXsWIpqeWuKAUcZI-ZKB61kI9eszG8PzPrNcmbmd7VvSyMZJ4gTIcNh173LdZ6rgZhnf7zsdxQGdmtRREeB6WTZh4uobH8gKAVnsU6ouvOrKZHf4b9DtH00Y8SSS-QtxzPpVSJrYFVnEH4c88l9zz5Xx5ZEw1RYvKzb18417Carhfnkn5RT-_7cuxKy_r-1KqB3EbgxcPGEipNGzi6cbBEJlgPVzySS4exEGicjZVXXTz5B87Q6h5GjYZOcY3TPMvtNlWloNNNbx0E5VH2vF4w8GAAeANOeqhRPxUEnqyjQghqxx1S2wkgcyS3G0MY4WS9GyCFoEhDhFMyivtdSEGUTYqKjPKp00FGAISjU9Qu67eYR9zn4Y4ay3nFr06CL7npvMV7DojoZoSI5oGE_HuTOgy6gY92uWpZ69B-I_GvjikxPDB6L6E-BD5sIPMNg_UfXm1DW2F6IwLw1ZNn1YSDnr64hYtsa47z-2IR9FjrVKuj9DAb7SXNGIdARYVkKRBYnJ3fLn_79JaehCyVU5Qy5O-Qu0XN-Gofx2CF7MdQty58_EFL-_jOO5ZSjWVME44FZzb0-2b9QwVBzJMxfln5d64ylg0a97McNOEa4VzTPdHeViR-WfkWQEr1oe0IGIVz4BlgEqRWwDMWp71_wdnaHofMINf1WDcxrviteBJ6APiDxZEu4kxac07F7s-cF-8KfjL7fwSAn4T-fUibb-R7az3IUKKpR7MPhFVQpAxkUmjqcbG9PKlSBOV0JFy6_-jaLBni5EYwsSG-DreW3CeVi0juihBm0Cb6YkDI24htXs8uSQ6Z1gL5H2VbaNY2HRqbJUCuXZzndZq8bQREr5oSbCy68LpuBEjSP-RtNUglvVr_U7yia4gOaI8skSpjAyleIbw1oXmrcc6B0ixbnx6pQjt1yLxMk29AN4mJn6HX1U1X36zYvS25DqOCuNrR8k1um30G1pUtPmIAWN4Ll0boACMuMnIC9TJJBb4Wn6ZVXAhSJDzaUvMlRtlBGpPkQkkUcUZIcvd4Bvt3C313vqTjAdA0ht_0fdWkJUTfMGV1jZaJv28Hnfge0iouWK7t8pLlAQHON4aen9s-VdEjGGKiVaJNVoSBrkBB1enn8SB2Sm3rZyn2YetpOktxoVxSk2KGSj-EpRE3eriTcoAWln_hvR0K67Iv3VDDe8YNf1ySOzeT2uq9bnroLT9W8kiX_AkuKbwN37-IaFNvjTIcEo919P3UOmE2JdVRL9Vf6J8gRQtggXmFaAcEKQNJF_t00FiXntNO0KTV3vSC1HQP9Yn0DiPFh3JDNn4awFl3UNIm0IlYJ8LdBidNse82x96Y3YRutYT2cuIOjqQXmBz1lYUgcslU0a8hFerg5ehzzvjIQx2H7xGbia7SELWhn_YjvLjWLJQOTkGSA8t6zw5Y5CUengry_x3hrZ-x7jALlQNytBLKoORD--ofzpBWTk2KMZqAyXebvO0aiJTsX0uH1zlXxIRe4aIbFbvSSWiKgxCeQProy7Nus8MwjcJAHza3GA68_KDp7j2H2Xf-SnM2b4vUYdyMnNfGTSBZMWV7-YRGa1jIiISO1a11WUt9aCpvt1fEUDpKw4vUAGvfPu4o4dtQOQLmAJ4ZT6GQQKRO_Wt7C6AWwxi7uMvthFdjxpWOKxx66MB5w_h0Z8thT2DpB4c3eWmHs0LcTA9hBYd0z1bOZBaeh4dtcQkeuAWgJn-9ZuezW1TNCZso_8lSfhqIzN9WJpy-AE4sVv8eCipDNn7qK9WLW78h8AEY7Y95Yu2qVyAUEJ8Vhbh2bh9gJVHgqKlaqtIbntgHlOaxDXzVW8vWZulccslKJVbG-2-eypWBMdgTI3AsGdovQuSnB3H7ThlmaXVGW8WVqBCNXtVc_lR524sJfdTpC2CpiJqBShs5ZnQn_C6uclFH1A7jVfUbfbQ8XAzOYaIEJ0MOR9mljlF5jBcAj3WZpKLQsmiBuH-IZ95sswz6K1LRlfXJNpTPitlcwdkFHmDTAiESZnbttP6PnyIl9t3BFe4Wc4tBj0WRlgUH4oRE0FM3lEUKY2F1BCaXtNrgIkMZB_wgWh4488e--IDv3-4IiDiFGJjHIw9lwgWlz-usfc3yPgckzX20bLfAoduQ4YmJRBS9eEHIjfrDSKdMqTFNB8f9klqWpFvSulCEp-7Gt6_9xEFFoCmyxIwngnJ67iHUqPf0jtYXmnBGEJR7QPpKZkOBqEZeYPuYdftXhCCt93DEnvYzC8HLxcQZ0FGLozFVPXS0vtbXQIPKxaPLyQ47VDhF2mDdWv4f30xd8T0hKgFXWHZD0lQ9nZSgS_nSyHlcZiKDmNIkmaP_1UEr0x0r-E35ThYVqO3xu10ZTzzImBa76lLCo7TPzI79hO-7r_1pZjfaox-LxAqM9yB-ORHQ8BZXRtF_Nxyg2ME0sp7jiI2PE9guxGp2jCIu-T_0zT03JkhIiXMAbpH8uyCmiztYTuQtDWYL2nM1cVmxlRfZIQrtTV9OBSsAhjyRo3GAmSEaaZ7_ho78cGbaw-l197uFgw04rTmSIzLRN6GcRcrYsMO6sCSVb4fma6XcYHpRWlsst9yahYt7pAo5gvD49wsKv-7He5dSGKjixFC4ezhrsBJlP61CKXumzjgSdP4qwxY1OtYGTiIRTI-U3VOrsyeSEK05ZK_qP8BhfsyQtVgicNUi_xMcMeZuwD3LBNho3FJeAwr-5VtB5l0HdljCUAZA7j6dQ35TYIRocqzrKvYYp6pxOjwU3kJazsf_mUiVVm_l5XEJ79P79sNXN-Ja7qJBXBQsz71-voBfgMZ0GyKoA_8JLd6XGttqZN0do6r7aGkRCO36KfBIc5H0DMpNWwonC2FY2XmBv2BydS-zlCb0z4MGV-MIYu_JHZBT2QoZwq1wTPFXgj_Xxolo1Hfwdi5b59fBjh_AiDNQnUhbPNOU-0sOrH9fZc9UHjwXm-fgnZTeVs5vW4zko4x1k_UJ4xrjShTiV4ZN6DQIVJSlQ_ZIb9QDlS9j4lG9xv6pI8wqBg-6fZNG2A3zt_8LPU6_-XUlThubeLnPY38rAQSKZ1Zwr8KHWoN3K36HOrQGf2rVIX0kH48E3bXeu6UPP3HN_Rc0ht6PHvLwQVBClr2_FNUroiBg9F4WcFRQXXaKdQKDwbzUdNWwc2S2VgudCzG2sjvGGj0nrXKlBYeFu7b_tfgoltE4t6khCGtHGz9w6BTtqmFzq9CSAdXAHxOqQfS_MhAXDuFw1gadsNwqQbwxpwcRgKwQflr5HmkgJt4rfKSoUR8uSM1kC6FyrgotQTFyA7MQQDxdkH92R_x2rMNLq-q6c00VLBwn9NVjrCUC6dAo47_2MKDqsx9luwVAecfiswwurb6LzhhD8hd2lotuiEjgmf5vdRmt4PMPD9y1p2_0qIsiy0KKdn7n0ww27nN9Jndw90iWJF8-eDxMsca-guIDLbyCN_T5J5SJcxDx9Je6lvCuIF97tmTqroGF31Jflm7UH5sALvfz06tUlbCqgrd1EB_ABy00GhrfhhCtsT9DaOncuOoc1h1gtReEK0wxvACzOjS900Bsyej37M9DFfmSr_5IUQ0ohbacaR5AdkhqVpKnd05znUpjpptqK6Vw-AF5hkMNvWFtYccnwYFADaINQ5NwZMMeYdoDCXi6Z5oR5_mEyTalJGujDVe8zHOfdI71IXGUdg5fBjd2Lg2k7PZXrqrbPFFAvYsAiknhJf4DNvCDGYu588ZXuZHzT2Xjanups8KHzFPReEHssE98xhtypYLw4Z
-      domain: 192.168.2.19
-      path: /
-      httpOnly: true
-      hostOnly: true
-      creation: 2024-12-30T13:47:39.426Z
-      lastAccessed: 2025-01-02T13:36:33.179Z
-      sameSite: lax
-      id: 5a67e384-868a-4c35-9f84-520ee113685d
-    - key: .AspNetCore.Identity.ApplicationC6
-      value: Byy5XUV_p6GBD4FUVcRBZ127oIX960lxZU6j3Rl6K0A_Yl41oEVyqP2xfyvfK445FHdQz8MBVaqo4NhAlkI5buaLTNm3PbeH1e_vVns0IlxoLUH26wDLWpd4Es49klNQl8JXt5kQcqbiQ0aeJ_tcSeYLqelo6IhM8Wu_ClPEGyV2WLpab6LGPUpaD4Q3mXhEdgRdruNjomX65MSFA-M9AlLU4XJZknjRnQ_m4uMwC0vRWiw3yyk-oYJcAh3aE2IIryMQOCqdRG_mwailFe1m1xnVvWNejM9Lx2EU_3hMAcTOUDh00CzQ68Dx3pt5OoRjc-AA1vHSXjqxuwORxMfJ5LvCsMTlLiY4vcuKznWKwNooH3sBGKonGLbKmfOv9JgXrXkHa7xuQ6sCAUqRVl5R3lzme1YOEZr7HjsFlaufKaqEaJITFMSofdxPBbM7XIxgLmdFsHHMRX__aUo7KfTb0OQkJQqRsxbxgsWY1C_W8ML2YbNOAXllmchbaevPq50KmBJVkPgM5pcEosdXZqGrHN45UOj48t0ef2y_WuYLq8k5HpwAqMQbHT6cs-29cF_6M2KxFGDLC6jlsAKVPjq79r_bxhcU2fsNqYjwGbHzx7yPatXAEf9mceBsNVJwJjmGLvZrsfMa4FWucI6lk9eD6JPzCKbGVPwlLp0KBFoVsX1GZpQnAnCrwGSk0cFAdwFpUr4h_4_K000WhPUdG3E-Bn9n-JE6lwHaZir7TouAXOqscpcIajJGDpEtCFH1hK52T_Cl5Hz2y8hfFvxv0PLCkx2gHeVSK5Kq-uIjUJ54hTJgsSmuivENr7PPwku15FxNd1KIaG6cM81f1sy64dlGeBuZC0xOKtuwbTm3A1ZhAsVqFNZNicE3_Mqfz7b4FX9PWWiPnN7yXRyRLH5f5ZGFvdk6dWpISzx4fEkZB7mRjbT5zQ22EMhNAzVNFAn6fT4WUinZjZ0hSKVlj4kKNhBDibvqTjUNxm9-SShoCg5h4si5IXP8TdiR18EzPkc_1uZLG-fnICDwplaIjPphE9PjZGsfuV48C3ssU2G8rO_9y4LuqT1q1TgS9BbLLfGDheHQfpCNMrVZ57YRajK7Gnq2LzEEUO84OC4uQ8gvOlHxqAEcdzctZjrp-fDDkyUeVHqBDhi9DogA8F9bTZzdUObXHUW-GFyHoPvtt60ClvoOZ-cyZfLry4Op96n3wizOm7o3oYCXUGu1NTDQWb-ojkvgxZOJD0-8P0DtXsfK1AFbCrxleikZQo9mYVkkPz9cstmWK72DX7IcRMeCnSjSHlT32oQlXmglOKj6_qUim3goH57wsmZ1uBtWSYncIAx6I2mlMLvlXIkTTpD5e93_Ot5tZd9JBbdthHUBJ7ImhINBKzIWslv-UvOWV6blnpztYKsexpxh_tVno9okHWI1HiESLLnz5XJ7ZHTA6WQ1EsB5fuUfTzUyGPEIuUmj2b3GcP7eYPQIGW85SBTPGbXtCUYJPzLlOHHCegxDxMfAVQzGRBgB5sxKF-rbl4vkyQv1iz1kOAM4aNCdspcPBNJjG63Krcg6THxgPzEV3RhoGxqZKu7HfjVUrcBv6cdPs5afkXlihwQBoSd4KryYsbRfglZ6gEMR7fA54nv18Tfdaqq-luri4uDyULTrK1mp6XSBcLSiS6c9XKkJZ5vWIAIK49Rn87WUuXCjYx3A5TwfCVkVXaDxDqmLIBK5quX6NfvE6JjwImmDCfPRcAPTEBgfrUjWh358gElsAgVs7wkYTxlZgpd2TnL-JL7L-KjISvCHkOEhJQetqd40OFz_F4IgpldHCuPzkUyz-MyiPSwOgmJ2x0Gg3cuBl6JdSADo8MS0uc14aUCJUbXpcn7hTInqruHIZiWiH2KypyCKTkgGO2jJo5Nhuuns6WqPjG6dgCDg6rfu3lwZsSbcxqVyxMudkQl4O1G0CZuUlbb9ZzOGtaf325aVg7pLBfv-FdeSBTEmdCdbdm9nx1907IoyrOyCWefMjhXhBV_QhqVnr33-Sazfq7hlu8CoLdgc_fP6InOmdG56LZ4sk11vjwE1Sdv7I9t8_FdXXfjzgxZ0K7BkG5pqWRx14OIMy6-6k6Yim_ZymKJehyO9FOGSRDlgd_vdXSvGUpl4EMA6xoIuK37vDrN14C06CLitq7Vy6IKDMgLtE5TTSzMIi9oKFXe9r2PSsU8x9bRPr-gYCCTRYh2ex-L4ZKMvXMrLWV4AC8zJwEsCIVi721Z-ZynQ_6SgAdKbxwQdYyxMMoXEqPcaL4mIj_GSY2YhQ3ApY_2zAvSL5ilbJ7xcLfHC7F1Q5Y0kmPzfHHFzDZ1_3WspaDCZeE-WS0Ph2fCWo7b3ZXaVbe-2KdK6bUzmJdyr7pehiFQudRJknfdaBs7liwq_n_-Y-tUe5AGk-38S67-V8sUEsqS73LjnIfxRDdUH2XZ2ngVtlNZVPamSQUlpBqFRVExr-8_2Job4cpH_01d56zQZnSDqvpgXterB_2uqJMooB__DeCWibHEiaDiINGphZqaIQgabZsg895tBVanYXND8-yEt5ohZI8I1imTty6Y7vFAgGE_9BFT8ID4Z6nHlifo8z5nWjgvlTsWyJdo5M86e59SHlcp-lvHV3iTwOhvoJCJ2171mpGVZp02XoXBnaOcfwbbUpUJzKwFY8ZA9qFRbHkFDk51bwjTX3UQcMf4CCD6PbXbKaC_PXEvTdv2fQ5-EIg0mrJcKLI85GLgDxjDrHEB5T0YlmTEQ
-      domain: 192.168.2.19
-      path: /
-      httpOnly: true
-      hostOnly: true
-      creation: 2024-12-30T13:47:39.426Z
-      lastAccessed: 2025-01-02T13:36:33.179Z
-      sameSite: lax
-      id: 3ecafa5b-b083-4b04-92b4-0b85bbc44f46
+    created: 1761420904252
+    modified: 1761420904252
 environments:
   name: Base Environment
   meta:
     id: env_99d30891da4bdcebc63947a8fc17f076de878684
-    created: 1735389609334
-    modified: 1735389609334
+    created: 1761420904249
+    modified: 1761420904249
     isPrivate: false
