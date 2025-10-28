@@ -12,33 +12,41 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { RegistrationComponent } from './components/user/registration/registration.component';
 import { AuthGuard } from './service/auth.guard';
 
-const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+// 1. IMPORTAR O NOVO COMPONENTE
+import { EventoPalestranteComponent } from './components/eventos/evento-palestrante/evento-palestrante.component';
 
-  { path: 'eventos', redirectTo: 'eventos/lista'},
-  { path: 'eventos', component: EventosComponent,
-  canActivate: [AuthGuard],
+const routes: Routes = [
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+
+  { path: 'eventos', redirectTo: 'eventos/lista' },
+  {
+    path: 'eventos', component: EventosComponent,
+    canActivate: [AuthGuard],
     children:
       [
-        {path: 'detalhes/:id', component: EventoDetalheComponent},
-        {path: 'detalhes', component: EventoDetalheComponent},
-        {path: 'lista', component: EventoListaComponent}
+        { path: 'detalhes/:id', component: EventoDetalheComponent },
+        { path: 'detalhes', component: EventoDetalheComponent },
+        { path: 'lista', component: EventoListaComponent },
+        // 2. ADICIONAR A NOVA ROTA AQUI
+        { path: 'palestrante', component: EventoPalestranteComponent }
       ]
   },
 
   {
     path: 'user', component: UserComponent,
     children:
-    [
-      {path: 'registration', component: RegistrationComponent},
-      {path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard]},
-      {path: 'login', component: LoginComponent}
-    ]
+      [
+        { path: 'registration', component: RegistrationComponent },
+        { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
+        { path: 'login', component: LoginComponent }
+      ]
   },
 
-  { path: 'contatos', component: ContatosComponent, canActivate: [AuthGuard]},
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-  { path: 'palestrantes', component: PalestrantesComponent, canActivate: [AuthGuard]},
+  { path: 'contatos', component: ContatosComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'palestrantes', component: PalestrantesComponent, canActivate: [AuthGuard] },
+  // Você tem a rota 'palestrantes' duplicada, pode remover uma
+  // { path: 'palestrantes', component: PalestrantesComponent, canActivate: [AuthGuard]}, 
 ];
 
 @NgModule({

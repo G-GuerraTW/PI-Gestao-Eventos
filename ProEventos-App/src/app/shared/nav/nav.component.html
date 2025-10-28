@@ -6,9 +6,32 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="eventos" routerLinkActive="active">Eventos</a>
-        </li>
+
+        <!-- **** INÍCIO DA CORREÇÃO **** -->
+        <!-- Adicionamos '(as any)' para forçar a comparação de string, ignorando o tipo 'Funcao' (enum) -->
+        <ng-container *ngIf="authService.currentUser$ | async as user; else loggedOutMenu">
+
+          <!-- 1. SE ESTIVER LOGADO E NÃO FOR PALESTRANTE -->
+          <li class="nav-item" *ngIf="(user.funcao as any) !== 'Palestrante'">
+            <a class="nav-link" aria-current="page" routerLink="eventos/lista" routerLinkActive="active">Eventos</a>
+          </li>
+          
+          <!-- 2. SE ESTIVER LOGADO E FOR PALESTRANTE -->
+          <li class="nav-item" *ngIf="(user.funcao as any) === 'Palestrante'">
+            <a class="nav-link" aria-current="page" routerLink="eventos/palestrante" routerLinkActive="active">Meus Eventos</a>
+          </li>
+        
+        </ng-container>
+
+        <!-- 3. TEMPLATE PARA QUANDO ESTIVER DESLOGADO (mas o menu estiver visível) -->
+        <ng-template #loggedOutMenu>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="eventos/lista" routerLinkActive="active">Eventos</a>
+          </li>
+        </ng-template>
+        <!-- **** FIM DA CORREÇÃO **** -->
+
+
         <li class="nav-item">
           <a class="nav-link" routerLink="palestrantes" routerLinkActive="active">Palestrantes</a>
         </li>
@@ -16,6 +39,8 @@
           <a class="nav-link" routerLink="contatos" routerLinkActive="active">Contatos</a>
         </li>
       </ul>
+
+      <!-- O restante (dropdown do usuário) continua igual -->
       <ul class="navbar-nav ms-auto me-5">
         <li class="nav-item" *ngIf="authService.currentUser$ | async as user">
           <div class="btn-group" dropdown>
@@ -34,3 +59,4 @@
     </div>
   </div>
 </nav>
+

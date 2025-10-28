@@ -5,31 +5,25 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Evento } from 'src/models/Evento';
 import { EventoService } from 'src/app/service/evento.service';
-// Importe o Enum Funcao
-import { Funcao } from 'src/models/Enum/Funcao.enum'; 
-// Importe o AuthService (assumindo o caminho)
-import { AuthService } from 'src/app/service/auth.service';
+// NOTA: Não precisamos mais importar Funcao ou AuthService aqui
 
 @Component({
-  selector: 'app-evento-lista',
-  templateUrl: './evento-lista.component.html',
-  styleUrls: ['./evento-lista.component.scss']
+  selector: 'app-evento-palestrante',
+  templateUrl: './evento-palestrante.component.html',
+  styleUrls: ['./evento-palestrante.component.scss']
 })
-export class EventoListaComponent implements OnInit {
+export class EventoPalestranteComponent implements OnInit {
 
+  // Injeções de serviço
   private eventoService = inject(EventoService);
   private modalService = inject(BsModalService);
   private toastR = inject(ToastrService);
   private ngxSpinnerService = inject(NgxSpinnerService);
   private router = inject(Router);
-  // Injete o AuthService
-  private authService = inject(AuthService); 
 
-  // modal
+  // Propriedades do componente
   modalRef?: BsModalRef;
   message?: string;
-
-  // Estilos
   isCollapsed = false;
   public eventos: Evento[] = [];
   public eventosFiltrados: Evento[] = [];
@@ -38,37 +32,15 @@ export class EventoListaComponent implements OnInit {
 
   public idEventoExclusao: number | null = null;
   public temaEventoExclusao: string | null = null;
-
-  // ---- NOVAS PROPRIEDADES PARA CONTROLE DE CARGO ----
-  public currentUserFuncao: Funcao = Funcao.NaoInformado;
-  public isPalestrante: boolean = false;
-  // ----------------------------------------------------
-
+  
+  // Não precisamos mais da propriedade 'isPalestrante' aqui
 
   ngOnInit(): void {
     this.ngxSpinnerService.show();
-    this.setCurrentUserRole(); // <- Chame o novo método
-    this.getEventos();
+    this.getMeusEventos(); // Chamando o método que busca eventos do palestrante
   }
 
-  // ---- NOVO MÉTODO PARA PEGAR O CARGO DO USUÁRIO ----
-  public setCurrentUserRole(): void {
-    const userJSON = localStorage.getItem('user');
-    if (userJSON) {
-      const user = JSON.parse(userJSON);
-      // Ajuste 'user.funcao' ou 'user.user.funcao' conforme sua estrutura no localStorage
-      const userRole: Funcao = user?.funcao || user?.user?.funcao; 
-      
-      if (userRole) {
-        this.currentUserFuncao = userRole;
-        this.isPalestrante = this.currentUserFuncao === Funcao.Palestrante;
-      }
-    }
-    // Se não achar, 'isPalestrante' continuará 'false' (NaoInformado/Participante)
-  }
-  // ----------------------------------------------------
-
-  public getEventos(): void {
+  public getMeusEventos(): void {
     const observer = {
       next: (_eventos: Evento[]) => {
         this.eventos = _eventos;
@@ -76,16 +48,20 @@ export class EventoListaComponent implements OnInit {
       },
       error: (error: any) => {
         this.ngxSpinnerService.hide();
-        this.toastR.error(`Erro inesperado: ${error.message}`);
+        this.toastR.error(`Erro ao carregar seus eventos: ${error.message}`, 'Erro');
       },
       complete: () => this.ngxSpinnerService.hide(),
     };
 
-    this.eventoService.getEvento().subscribe(observer);
+    // Usando o novo método do serviço!
+    this.eventoService.getEventosByPalestrante().subscribe(observer);
   }
 
-  // ... (o restante dos seus métodos get filtroLista, set filtroLista, openModal, etc. continuam iguais) ...
-  
+  //
+  // O restante do código é idêntico ao 'evento-lista.component.ts'
+  // (Lógica de filtro, modal, delete, etc.)
+  //
+
   filtrarEventos(filtrarPor: string): Evento[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
 
@@ -107,7 +83,7 @@ export class EventoListaComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<unknown>, event: MouseEvent, tema: string, eventoID: number) {
-    event.stopPropagation();
+    event.stopPropagation(); // Impede o clique de ir para a linha (Redirecionardetalhes)
     this.idEventoExclusao = eventoID;
     this.temaEventoExclusao = tema;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
@@ -121,11 +97,10 @@ export class EventoListaComponent implements OnInit {
         {
           next: () =>
             {
-              this.toastR.success(`Evento excluido com sucesso.`, 'Deletado!');
-              this.getEventos();
+              this.toastR.success(`Evento excluído com sucesso.`, 'Deletado!');
+              this.getMeusEventos(); // <-- Atualiza a lista chamando o método correto
               this.modalRef?.hide();
               this.ngxSpinnerService.hide();
-
             },
           error: (err) =>
             {
@@ -134,7 +109,6 @@ export class EventoListaComponent implements OnInit {
             }
         })
     }
-
     this.idEventoExclusao = null;
     this.temaEventoExclusao = null;
     this.modalRef?.hide();
@@ -145,24 +119,14 @@ export class EventoListaComponent implements OnInit {
     this.modalRef?.hide();
   }
 
+  // Navega para a página de detalhes quando a linha é clicada
   Redirecionardetalhes(id: number) {
       this.router.navigate(['eventos/detalhes', id]);
   }
 
+  // Navega para a página de detalhes (edição) quando o botão é clicado
   editarEvento(id: number, event: MouseEvent): void {
-    event.stopPropagation();
-    this.router.navigate([`eventos/detalhes/`, id]);
-  }
-
-  // ---- NOVO MÉTODO PARA O BOTÃO RESERVAR ----
-  reservarVaga(id: number, event: MouseEvent): void {
     event.stopPropagation(); // Impede o clique de ir para a linha (Redirecionardetalhes)
-    this.ngxSpinnerService.show();
-    
-    // ... Crie a lógica de reserva aqui (ex: chamar um service) ...
-    
-    console.log(`Reservar vaga para o evento ID: ${id}`);
-    this.toastR.info(`Funcionalidade "Reservar Vaga" (ID: ${id}) ainda não implementada.`, 'Aviso');
-    setTimeout(() => this.ngxSpinnerService.hide(), 1000);
+    this.router.navigate([`eventos/detalhes/`, id]);
   }
 }

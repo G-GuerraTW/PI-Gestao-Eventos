@@ -28,6 +28,7 @@ import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { RegistrationComponent } from './components/user/registration/registration.component';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { EventoPalestranteComponent } from './components/eventos/evento-palestrante/evento-palestrante.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     EventoListaComponent,
     UserComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    EventoPalestranteComponent
    ],
   imports: [
     BrowserModule,

@@ -104,18 +104,36 @@ namespace API.Controller
 
         [Authorize]
         [HttpGet("tema/")]
-        public async Task<IActionResult> GetEventoByTema(string tema) 
+        public async Task<IActionResult> GetEventoByTema(string tema)
         {
             try
             {
                 var evento = await _eventoSerivce.GetAllEventosByTemaAsync(User.GetUserId(), tema, false);
-                if(evento == null) return NoContent();
+                if (evento == null) return NoContent();
                 return Ok(evento);
             }
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                     $"Erro ao tenhtar recuperar eventos. Erro: {ex.Message}"
+                );
+            }
+        }
+        
+        [Authorize]
+        [HttpGet("todos/")]
+        public async Task<IActionResult> GetAllEventosAsync() 
+        {
+            try
+            {
+                var evento = await _eventoSerivce.GetAllEventosAsync(User.GetUserId(), false);
+                if(evento == null) return NoContent();
+                return Ok(evento);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}"
                 );
             }
         }
