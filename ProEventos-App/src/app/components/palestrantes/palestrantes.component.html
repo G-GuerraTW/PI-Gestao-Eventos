@@ -1,1 +1,72 @@
-<app-titulo [titulo]="'Palestrantes'" [iconClass]="'fa-solid fa-people-group'"></app-titulo>
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h2 class="mb-0">Palestrantes</h2>
+      <button type="button" class="btn btn-light">
+        <i class="fa fa-plus-circle me-2"></i>Novo Palestrante
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="Buscar por nome ou tema..." [(ngModel)]="filtroLista">
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead class="table-dark">
+            <tr class="text-center">
+              <th>#</th>
+              <th>Nome</th>
+              <th>Mini Currículo</th>
+              <th>Imagem</th>
+              <th>Telefone</th>
+              <th>Email</th>
+              <th>Redes Sociais</th>
+              <th>Eventos</th>
+              <th>Opções</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let palestrante of palestrantesFiltrados" class="text-center">
+              <td class="align-middle">{{palestrante.id}}</td>
+              <td class="align-middle">{{palestrante.nome}}</td>
+              <td class="align-middle">{{palestrante.miniCurriculo}}</td>
+              <td class="align-middle">
+                <img src="../../assets/img/{{palestrante.imagemURL}}" alt="" style="width: 80px;">
+              </td>
+              <td class="align-middle">{{palestrante.telefone}}</td>
+              <td class="align-middle">{{palestrante.email}}</td>
+              <td class="align-middle">
+                <a [href]="palestrante.redesSociais[0]?.url" target="_blank" *ngIf="palestrante.redesSociais.length > 0">
+                  {{palestrante.redesSociais[0]?.nome}}
+                </a>
+              </td>
+              <td class="align-middle">{{palestrante.eventos.length}}</td>
+              <td class="align-middle">
+                <div class="d-flex justify-content-center gap-2">
+                  <button tooltip="Editar" type="button" class="btn btn-warning btn-sm">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button tooltip="Excluir" type="button" class="btn btn-danger btn-sm">
+                    <i class="fa fa-trash-alt"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot *ngIf="palestrantesFiltrados && palestrantesFiltrados.length === 0">
+            <tr>
+              <td colspan="9" class="text-center">
+                <h4 class="text-muted">Nenhum palestrante encontrado.</h4>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
