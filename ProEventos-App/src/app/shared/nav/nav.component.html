@@ -7,23 +7,22 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
 
-        <!-- **** INÍCIO DA CORREÇÃO **** -->
-        <!-- Adicionamos '(as any)' para forçar a comparação de string, ignorando o tipo 'Funcao' (enum) -->
+        <!-- **** INÍCIO DA CORREÇÃO COM $any() **** -->
         <ng-container *ngIf="authService.currentUser$ | async as user; else loggedOutMenu">
 
-          <!-- 1. SE ESTIVER LOGADO E NÃO FOR PALESTRANTE -->
-          <li class="nav-item" *ngIf="(user.funcao as any) !== 'Palestrante'">
+          <!-- 1. CORRIGIDO: Usando $any() para o parser aceitar a comparação -->
+          <li class="nav-item">
             <a class="nav-link" aria-current="page" routerLink="eventos/lista" routerLinkActive="active">Eventos</a>
           </li>
           
-          <!-- 2. SE ESTIVER LOGADO E FOR PALESTRANTE -->
-          <li class="nav-item" *ngIf="(user.funcao as any) === 'Palestrante'">
+          <!-- 2. CORRIGIDO: Usando $any() para o parser aceitar a comparação -->
+          <li class="nav-item" *ngIf="$any(user.funcao) === 'Palestrante'">
             <a class="nav-link" aria-current="page" routerLink="eventos/palestrante" routerLinkActive="active">Meus Eventos</a>
           </li>
         
         </ng-container>
 
-        <!-- 3. TEMPLATE PARA QUANDO ESTIVER DESLOGADO (mas o menu estiver visível) -->
+        <!-- 3. TEMPLATE PARA QUANDO ESTIVER DESLOGADO -->
         <ng-template #loggedOutMenu>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" routerLink="eventos/lista" routerLinkActive="active">Eventos</a>
@@ -40,7 +39,7 @@
         </li>
       </ul>
 
-      <!-- O restante (dropdown do usuário) continua igual -->
+      <!-- Dropdown do Usuário -->
       <ul class="navbar-nav ms-auto me-5">
         <li class="nav-item" *ngIf="authService.currentUser$ | async as user">
           <div class="btn-group" dropdown>
@@ -59,4 +58,3 @@
     </div>
   </div>
 </nav>
-
