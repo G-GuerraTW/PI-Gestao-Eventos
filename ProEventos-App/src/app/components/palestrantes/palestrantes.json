@@ -1,0 +1,196 @@
+{
+  "id": 0,
+  "nome": "Eliel Silva",
+  "miniCurriculo": "Desenvolvedor backend especializado em APIs .NET e arquitetura limpa. Atua na Upper com soluções de fidelidade e microsserviços.",
+  "userId": 1,
+  "redesSociais": [
+    {
+      "id": 0,
+      "nome": "LinkedIn",
+      "url": "https://www.linkedin.com/in/el1ielsilva",
+      "eventoId": 1,
+      "evento": {
+        "id": 1,
+        "userID": 1,
+        "userDto": {
+          "userName": "eliel.silva",
+          "email": "eliel.silva@gmail.com",
+          "password": "********",
+          "primeiroNome": "Eliel",
+          "ultimoNome": "Silva",
+          "chavePalestrante": "UPR2025KEY"
+        },
+        "local": "São Paulo - SP",
+        "dataEvento": "2025-10-28T19:00:00Z",
+        "tema": "Inovação e Escalabilidade com .NET e Docker",
+        "qtdPessoas": 120000,
+        "imagemURL": "evento-inovacao-dotnet.png",
+        "telefone": "+55 (11) 99999-9999",
+        "email": "contato@evento-tech.com",
+        "lotes": [
+          {
+            "id": 1,
+            "nome": "Lote Promocional",
+            "preco": 100.0,
+            "dataInicio": "2025-09-01",
+            "dataFim": "2025-09-15",
+            "quantidade": 500,
+            "eventoId": 1,
+            "eventoDTO": "EventoTechSP2025"
+          }
+        ],
+        "redesSociais": [
+          "https://instagram.com/eventotechsp"
+        ],
+        "palestrantes": [
+          "Eliel Silva",
+          "Maria Andrade"
+        ]
+      },
+      "palestranteId": 1,
+      "palestrante": "Eliel Silva"
+    }
+  ],
+  "eventosPalestrantes": [
+    {
+      "eventoId": 1,
+      "evento": {
+        "id": 1,
+        "local": "Centro de Convenções São Paulo Expo",
+        "tema": "Inovação e Escalabilidade com .NET e Docker",
+        "dataEvento": "2025-10-28T19:00:00Z",
+        "qtdPessoas": 120000,
+        "imagemURL": "evento-inovacao-dotnet.png",
+        "telefone": "+55 (11) 99999-9999",
+        "email": "contato@evento-tech.com",
+        "lotes": [
+          {
+            "id": 1,
+            "nome": "Lote Promocional",
+            "dataInicio": "2025-09-01T00:00:00Z",
+            "dataFim": "2025-09-15T00:00:00Z",
+            "valor": 100.0,
+            "quantidade": 500,
+            "eventoId": 1,
+            "evento": "EventoTechSP2025"
+          }
+        ],
+        "redesSociais": [
+          {
+            "id": 1,
+            "nome": "Instagram",
+            "url": "https://instagram.com/eventotechsp",
+            "eventoId": 1,
+            "evento": "EventoTechSP2025",
+            "palestranteId": 1,
+            "palestrante": "Eliel Silva"
+          }
+        ],
+        "eventosPalestrantes": [
+          "Eliel Silva",
+          "Maria Andrade"
+        ],
+        "userId": 1,
+        "user": {
+          "id": 1,
+          "userName": "eliel.silva",
+          "normalizedUserName": "ELIEL.SILVA",
+          "email": "eliel.silva@upper.com",
+          "normalizedEmail": "ELIEL.SILVA@UPPER.COM",
+          "emailConfirmed": true,
+          "passwordHash": "AQAAAAEAACcQAAAAE12345HASH",
+          "securityStamp": "SEC123456",
+          "concurrencyStamp": "CONC123456",
+          "phoneNumber": "+55 (11) 99999-9999",
+          "phoneNumberConfirmed": true,
+          "twoFactorEnabled": false,
+          "lockoutEnd": null,
+          "lockoutEnabled": false,
+          "accessFailedCount": 0,
+          "primeiroNome": "Eliel",
+          "ultimoNome": "Silva",
+          "titulo": "Desenvolvedor Backend",
+          "descricao": "Especialista em .NET, Clean Architecture e SQL Server",
+          "funcao": "Speaker",
+          "imagemPerfil": "perfil-eliel.png",
+          "userRoles": [
+            {
+              "userId": 1,
+              "roleId": 1,
+              "user": "eliel.silva",
+              "role": {
+                "id": 2,
+                "name": "Palestrante",
+                "normalizedName": "PALESTRANTE",
+                "concurrencyStamp": "ROLE12345",
+                "userRoles": [
+                  "eliel.silva"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "palestranteId": 1,
+      "palestrante": {
+        "id": 1,
+        "nome": "Eliel Silva",
+        "miniCurriculo": "Desenvolvedor backend na Upper com foco em APIs escaláveis e Docker.",
+        "userId": 1,
+        "user": {
+          "id": 1,
+          "userName": "eliel.silva",
+          "normalizedUserName": "ELIEL.SILVA",
+          "email": "eliel.silva@gmail.com",
+          "normalizedEmail": "ELIEL.SILVA@UPPER.COM",
+          "emailConfirmed": true,
+          "passwordHash": "AQAAAAEAACcQAAAAE12345HASH",
+          "securityStamp": "SEC123456",
+          "concurrencyStamp": "CONC123456",
+          "phoneNumber": "+55 (11) 99999-9999",
+          "phoneNumberConfirmed": true,
+          "twoFactorEnabled": false,
+          "lockoutEnd": null,
+          "lockoutEnabled": false,
+          "accessFailedCount": 0,
+          "primeiroNome": "Eliel",
+          "ultimoNome": "Silva",
+          "titulo": "Desenvolvedor Backend",
+          "descricao": "Especialista em C#, SQL Server e Clean Architecture",
+          "funcao": "Palestrante",
+          "imagemPerfil": "perfil-eliel.png",
+          "userRoles": [
+            {
+              "userId": 0,
+              "roleId": 2,
+              "user": "eliel.silva",
+              "role": {
+                "id": 2,
+                "name": "Palestrante",
+                "normalizedName": "PALESTRANTE",
+                "concurrencyStamp": "ROLE12345",
+                "userRoles": [
+                  "eliel.silva"
+                ]
+              }
+            }
+          ]
+        },
+        "redesSociais": [
+          {
+            "id": 0,
+            "nome": "LinkedIn",
+            "url": "https://www.linkedin.com/in/elielsilva",
+            "eventoId": 200,
+            "evento": "EventoTechSP2025",
+            "palestranteId": 1,
+            "palestrante": "Eliel Silva"
+          }
+        ],
+        "eventosPalestrantes": [
+          "EventoTechSP2025"
+        ]
+      }
+    }
+  ]
+}

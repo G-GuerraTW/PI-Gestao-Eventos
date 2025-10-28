@@ -11,13 +11,16 @@ export class EventoService {
 
   baseURL = `${environment.baseUrl}/Evento`;
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {  }
 
   postEvento(evento: Evento): Observable<Evento> {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const token = user?.token;
 
-    return this.http.post<Evento>(this.baseURL, evento)
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<Evento>(this.baseURL, evento, { headers })
   }
 
   getEvento(): Observable<Evento[]> {
