@@ -4,6 +4,7 @@ namespace Domain.Enum
     {
         NaoInformado,
         Participante,
-        Palestrante
+        Palestrante,
+        Admin
     }
 }

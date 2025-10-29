@@ -126,7 +126,7 @@ namespace API.Controller
         {
             try
             {
-                var evento = await _eventoSerivce.GetAllEventosAsync(User.GetUserId(), false);
+                var evento = await _eventoSerivce.GetAllEventosAsync(User.GetUserId());
                 if(evento == null) return NoContent();
                 return Ok(evento);
             }

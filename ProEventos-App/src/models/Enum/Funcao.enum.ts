@@ -1,5 +1,6 @@
 export enum Funcao {
     NaoInformado,
     Participante,
-    Palestrante
+    Palestrante,
+    Admin
 }

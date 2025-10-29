@@ -91,7 +91,7 @@
                   {
                     'is-invalid': f.imagemURL.errors && f.imagemURL.touched,
                     'is-valid': f.imagemURL.valid && f.imagemURL.dirty
-                  }" formControlName="imagemURL" placeholder="imagem">
+                  }" formControlName="imagemURL" placeholder="Imagem deve finalizar com .png ou .jpg">
             <div *ngIf="f.imagemURL?.errors?.required && f.imagemURL?.touched" class="invalid-feedback">Imagem é
               obrigatório</div>
             <div *ngIf="f.imagemURL?.valid && f.imagemURL?.touched" class="valid-feedback">Imagem é Valida</div>

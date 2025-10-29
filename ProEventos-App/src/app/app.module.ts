@@ -30,6 +30,7 @@ import { RegistrationComponent } from './components/user/registration/registrati
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { EventoPalestranteComponent } from './components/eventos/evento-palestrante/evento-palestrante.component';
 import { PalestranteDetalheComponent } from './components/palestrantes/palestrante-detalhe/palestrante-detalhe.component';
+import { GerarChaveComponent } from './components/admin/gerar-chave/gerar-chave.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { PalestranteDetalheComponent } from './components/palestrantes/palestran
     LoginComponent,
     RegistrationComponent,
     EventoPalestranteComponent,
-    PalestranteDetalheComponent
+    PalestranteDetalheComponent,
+    GerarChaveComponent
    ],
   imports: [
     BrowserModule,

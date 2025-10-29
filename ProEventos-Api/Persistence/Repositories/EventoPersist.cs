@@ -15,8 +15,7 @@ namespace Persistence.Repositories
 
         public async Task<Evento[]> GetAllEventosAsync(int userId, bool IncludePalestrante = false)
         {
-            IQueryable<Evento> query = context.Eventos.Include(E => E.Lotes).Include(E => E.RedesSociais).AsNoTracking()
-                .Where(e => e.UserId == userId && e.UserId == userId);
+            IQueryable<Evento> query = context.Eventos.Include(E => E.Lotes).Include(E => E.RedesSociais).AsNoTracking();
 
             if(IncludePalestrante) query = query.Include(E => E.EventosPalestrantes).ThenInclude(EP => EP.Evento);
 
@@ -45,6 +44,14 @@ namespace Persistence.Repositories
             query = query.Where(E => E.Id == Id);
 
             return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<Evento[]> GetAllEventoPalestranteAsync(int userId)
+        {
+            IQueryable<Evento> query = context.Eventos.AsNoTracking()
+                .Where(E => E.UserId == userId);
+
+            return await query.ToArrayAsync();
         }
     }
 }

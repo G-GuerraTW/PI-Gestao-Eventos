@@ -12,44 +12,48 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { RegistrationComponent } from './components/user/registration/registration.component';
 import { AuthGuard } from './service/auth.guard';
 
-// 1. IMPORTAR O NOVO COMPONENTE
+// --- IMPORTS ADICIONADOS ---
 import { EventoPalestranteComponent } from './components/eventos/evento-palestrante/evento-palestrante.component';
-import { PalestranteDetalheComponent } from './components/palestrantes/palestrante-detalhe/palestrante-detalhe.component';
+import { GerarChaveComponent } from './components/admin/gerar-chave/gerar-chave.component'; // Ajuste o caminho se necessário
+import { AdminGuard } from './service/admin.guard'; // Importe o novo Guard
+// --- FIM DOS IMPORTS ---
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
 
-  { path: 'eventos', redirectTo: 'eventos/lista' },
-  {
-    path: 'eventos', component: EventosComponent,
-    canActivate: [AuthGuard],
+  { path: 'eventos', redirectTo: 'eventos/lista'},
+  { path: 'eventos', component: EventosComponent,
+    canActivate: [AuthGuard], // Protege todas as rotas filhas
     children:
       [
-        { path: 'detalhes/:id', component: EventoDetalheComponent },
-        { path: 'detalhes', component: EventoDetalheComponent },
-        { path: 'lista', component: EventoListaComponent },
-        // 2. ADICIONAR A NOVA ROTA AQUI
-        { path: 'palestrante', component: EventoPalestranteComponent }
+        {path: 'detalhes/:id', component: EventoDetalheComponent},
+        {path: 'detalhes', component: EventoDetalheComponent},
+        {path: 'lista', component: EventoListaComponent},
+        {path: 'palestrante', component: EventoPalestranteComponent}
       ]
   },
 
   {
     path: 'user', component: UserComponent,
     children:
-      [
-        { path: 'registration', component: RegistrationComponent },
-        { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
-        { path: 'login', component: LoginComponent }
-      ]
+    [
+      {path: 'registration', component: RegistrationComponent},
+      {path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard]},
+      {path: 'login', component: LoginComponent}
+    ]
   },
 
-  { path: 'contatos', component: ContatosComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'palestrantes', component: PalestrantesComponent, canActivate: [AuthGuard] },
-  { path: 'palestrantes/detalhe/:id', component: PalestranteDetalheComponent, canActivate: [AuthGuard] },
-  { path: 'palestrantes/detalhe', component: PalestranteDetalheComponent, canActivate: [AuthGuard] },
-  // Você tem a rota 'palestrantes' duplicada, pode remover uma
-  // { path: 'palestrantes', component: PalestrantesComponent, canActivate: [AuthGuard]}, 
+  { path: 'contatos', component: ContatosComponent, canActivate: [AuthGuard]},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: 'palestrantes', component: PalestrantesComponent, canActivate: [AuthGuard]},
+
+  // --- NOVA ROTA DE ADMIN ---
+  { 
+    path: 'gerar-chave', 
+    component: GerarChaveComponent, 
+    canActivate: [AuthGuard, AdminGuard] // Protegido por ambos
+  },
+  // --- FIM DA NOVA ROTA ---
 ];
 
 @NgModule({

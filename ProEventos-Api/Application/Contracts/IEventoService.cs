@@ -11,5 +11,6 @@ namespace Application.Contracts
         public Task<EventoDTO[]> GetAllEventosAsync(int userId, bool IncludePalestrante = false);
         public Task<EventoDTO[]> GetAllEventosByTemaAsync(int userId, string Tema,bool IncludePalestrante = false);
         public Task<EventoDTO> GetEventoByIdAsync(int userId, int Id, bool IncludePalestrante = false);        
+        public Task<EventoDTO[]> GetAllEventoPalestranteAsync(int userId);
     }
 }

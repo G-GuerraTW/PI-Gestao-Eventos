@@ -144,9 +144,9 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     // Inicializa o banco recriando do zero
-    var dbContext = app.Services.CreateScope().ServiceProvider.GetRequiredService<ProEventoContext>();
-    dbContext.Database.EnsureDeleted();
-    dbContext.Database.EnsureCreated();
+    // var dbContext = app.Services.CreateScope().ServiceProvider.GetRequiredService<ProEventoContext>();
+    // dbContext.Database.EnsureDeleted();
+    // dbContext.Database.EnsureCreated();
 
     // Habilita documentação da API
     app.UseSwagger();

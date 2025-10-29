@@ -129,5 +129,18 @@ namespace Application.Services
                 throw new Exception($"Erro ao recuperar Evento: {ex.Message}");
             }
         }
+
+        public async Task<EventoDTO[]> GetAllEventoPalestranteAsync(int userId)
+        {
+            try
+            {
+                var eventoRetorno = await eventoPersist.GetAllEventoPalestranteAsync(userId);
+                return _mapper.Map<EventoDTO[]>(eventoRetorno);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao recuperar Evento: {ex.Message}");
+            }
+        }
     }
 }

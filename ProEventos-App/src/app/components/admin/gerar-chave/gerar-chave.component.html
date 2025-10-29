@@ -1,0 +1,59 @@
+<!-- Assumindo que o seu app-titulo está disponível globalmente -->
+<app-titulo [titulo]="'Gerar Chave de Palestrante'" [iconClass]="'fa fa-key'"></app-titulo>
+
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-body p-4">
+      <h5 class="card-title">Gerar Nova Chave</h5>
+      <p class="card-text">
+        Clique no botão abaixo para gerar uma nova chave de uso único.
+        Esta chave deverá ser enviada ao novo palestrante para que ele possa se registar na plataforma.
+      </p>
+      <button
+        class="btn btn-primary"
+        (click)="gerarNovaChave()"
+        [disabled]="isLoading">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        <i *ngIf="!isLoading" class="fa fa-cogs me-2"></i>
+        {{ isLoading ? 'Gerando...' : 'Gerar Nova Chave' }}
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<!-- 
+  MODAL DA CHAVE
+  Este é o "pop up" que será aberto com o resultado.
+-->
+<ng-template #modalChave>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Chave Gerada com Sucesso</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="fecharModal()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- O objeto chaveGeradaObj só é preenchido antes do modal abrir -->
+    <div *ngIf="chaveGeradaObj">
+      <p>Envie esta chave para o palestrante:</p>
+      <div class="input-group">
+        <!-- Usamos um input readonly para facilitar a seleção e cópia -->
+        <input
+          #chaveInput
+          type="text"
+          class="form-control bg-light"
+          [value]="chaveGeradaObj.chave"
+          readonly
+        />
+        <button class="btn btn-outline-secondary" type="button" (click)="copiarChave(chaveInput)">
+          <i class="fa fa-copy me-1"></i> Copiar
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="fecharModal()">Fechar</button>
+  </div>
+</ng-template>
+
