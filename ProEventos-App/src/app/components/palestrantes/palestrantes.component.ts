@@ -25,6 +25,14 @@ export class PalestrantesComponent implements OnInit {
           {
             nome: 'LinkedIn',
             url: 'https://www.linkedin.com/in/eliel-silva-1a2b3c4d/'
+          },
+          {
+            nome: 'GitHub',
+            url: 'https://github.com/elielsilva'
+          },
+          {
+            nome: 'Twitter',
+            url: 'https://twitter.com/elielsilva'
           }
         ],
         eventos: [
@@ -57,6 +65,27 @@ export class PalestrantesComponent implements OnInit {
     this.palestrantesFiltrados = this._filtroLista
       ? this.filtrarPalestrantes(this._filtroLista)
       : this.palestrantes;
+  }
+
+  getIcon(redeSocial: string): string {
+    switch (redeSocial.toLowerCase()) {
+      case 'linkedin':
+        return 'fab fa-linkedin';
+      case 'github':
+        return 'fab fa-github';
+      case 'twitter':
+        return 'fab fa-twitter';
+      case 'instagram':
+        return 'fab fa-instagram';
+      case 'facebook':
+        return 'fab fa-facebook';
+      case 'youtube':
+        return 'fab fa-youtube';
+      case 'website':
+        return 'fas fa-globe';
+      default:
+        return 'fas fa-link';
+    }
   }
 
   filtrarPalestrantes(filtrarPor: string): any[] {

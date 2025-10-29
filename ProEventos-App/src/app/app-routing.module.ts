@@ -14,6 +14,7 @@ import { AuthGuard } from './service/auth.guard';
 
 // 1. IMPORTAR O NOVO COMPONENTE
 import { EventoPalestranteComponent } from './components/eventos/evento-palestrante/evento-palestrante.component';
+import { PalestranteDetalheComponent } from './components/palestrantes/palestrante-detalhe/palestrante-detalhe.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -45,6 +46,8 @@ const routes: Routes = [
   { path: 'contatos', component: ContatosComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'palestrantes', component: PalestrantesComponent, canActivate: [AuthGuard] },
+  { path: 'palestrantes/detalhe/:id', component: PalestranteDetalheComponent, canActivate: [AuthGuard] },
+  { path: 'palestrantes/detalhe', component: PalestranteDetalheComponent, canActivate: [AuthGuard] },
   // Você tem a rota 'palestrantes' duplicada, pode remover uma
   // { path: 'palestrantes', component: PalestrantesComponent, canActivate: [AuthGuard]}, 
 ];
