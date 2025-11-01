@@ -2,7 +2,7 @@
   <div class="card shadow-sm">
     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
       <h2 class="mb-0">Eventos</h2>
-      
+
       <!-- **** MOSTRAR BOTÃO APENAS SE FOR PALESTRANTE **** -->
       <button *ngIf="isPalestrante" type="button" class="btn btn-light" routerLink="/eventos/detalhes">
         <i class="fa fa-plus-circle me-2"></i>Novo Evento
@@ -19,7 +19,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="table-responsive">
         <table class="table table-hover table-striped">
           <thead class="table-dark">
@@ -53,11 +53,11 @@
               <td class="align-middle">{{evento.dataEvento | DateTimeFormat }}</td>
               <td class="align-middle d-none d-md-table-cell">{{evento.qtdPessoas}}</td>
               <td class="align-middle d-none d-md-table-cell">{{evento.lotes.length > 0 ? evento.lotes[0].nome : 'N/A'}}</td>
-              
+
               <!-- **** INÍCIO DA LÓGICA DE BOTÕES **** -->
               <td class="align-middle">
                 <div class="d-flex justify-content-center gap-2">
-                  
+
                   <!-- BOTÕES PARA PALESTRANTE -->
                   <ng-container *ngIf="isPalestrante">
                     <button tooltip="Editar" type="button" class="btn btn-warning btn-sm" (click)="editarEvento(evento.id, $event)">

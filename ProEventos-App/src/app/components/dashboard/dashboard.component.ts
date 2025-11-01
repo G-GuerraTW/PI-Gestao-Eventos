@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
 
   private eventoService = inject(EventoService);
   private modalService = inject(BsModalService);
-  private toastR = inject(ToastrService);            
+  private toastR = inject(ToastrService);
   private ngxSpinnerService = inject(NgxSpinnerService);
   private router = inject(Router);
 

@@ -6,9 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Evento } from 'src/models/Evento';
 import { EventoService } from 'src/app/service/evento.service';
 // Importe o Enum Funcao
-import { Funcao } from 'src/models/Enum/Funcao.enum'; 
-// Importe o AuthService (assumindo o caminho)
-import { AuthService } from 'src/app/service/auth.service';
+import { Funcao } from 'src/models/Enum/Funcao.enum';
 
 @Component({
   selector: 'app-evento-lista',
@@ -22,8 +20,6 @@ export class EventoListaComponent implements OnInit {
   private toastR = inject(ToastrService);
   private ngxSpinnerService = inject(NgxSpinnerService);
   private router = inject(Router);
-  // Injete o AuthService
-  private authService = inject(AuthService); 
 
   // modal
   modalRef?: BsModalRef;
@@ -44,7 +40,6 @@ export class EventoListaComponent implements OnInit {
   public isPalestrante: boolean = false;
   // ----------------------------------------------------
 
-
   ngOnInit(): void {
     this.ngxSpinnerService.show();
     this.setCurrentUserRole(); // <- Chame o novo método
@@ -57,8 +52,8 @@ export class EventoListaComponent implements OnInit {
     if (userJSON) {
       const user = JSON.parse(userJSON);
       // Ajuste 'user.funcao' ou 'user.user.funcao' conforme sua estrutura no localStorage
-      const userRole: Funcao = user?.funcao || user?.user?.funcao; 
-      
+      const userRole: Funcao = user?.funcao || user?.user?.funcao;
+
       if (userRole) {
         this.currentUserFuncao = userRole;
         this.isPalestrante = this.currentUserFuncao === Funcao.Palestrante;
@@ -85,7 +80,7 @@ export class EventoListaComponent implements OnInit {
   }
 
   // ... (o restante dos seus métodos get filtroLista, set filtroLista, openModal, etc. continuam iguais) ...
-  
+
   filtrarEventos(filtrarPor: string): Evento[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
 
@@ -158,9 +153,9 @@ export class EventoListaComponent implements OnInit {
   reservarVaga(id: number, event: MouseEvent): void {
     event.stopPropagation(); // Impede o clique de ir para a linha (Redirecionardetalhes)
     this.ngxSpinnerService.show();
-    
+
     // ... Crie a lógica de reserva aqui (ex: chamar um service) ...
-    
+
     console.log(`Reservar vaga para o evento ID: ${id}`);
     this.toastR.info(`Funcionalidade "Reservar Vaga" (ID: ${id}) ainda não implementada.`, 'Aviso');
     setTimeout(() => this.ngxSpinnerService.hide(), 1000);

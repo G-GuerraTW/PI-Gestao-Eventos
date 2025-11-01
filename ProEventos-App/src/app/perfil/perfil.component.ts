@@ -4,6 +4,7 @@ import { User } from 'src/models/User';
 import { UserService } from 'src/app/service/user.service';
 import { CustomValidators } from '../shared/custom-validators/custom-Validators.directive';
 import { UserDTO } from 'src/models/DTOs/UserDTO';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-perfil',
@@ -16,6 +17,7 @@ export class PerfilComponent implements OnInit {
 
   private fb = inject(FormBuilder);
   private userService = inject(UserService);
+  private authService = inject(AuthService);
 
   ngOnInit(): void {
     this.criarFormulario();
@@ -65,6 +67,7 @@ export class PerfilComponent implements OnInit {
 
       this.userService.updateUser(userUpdate).subscribe(
         (user: UserDTO) => {
+          this.authService.setCurrentUser(user);
           this.formularioPerfil.reset(user);
           this.carregarUsuario();
           console.log('Usuário atualizado com sucesso');

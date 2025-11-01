@@ -15,18 +15,15 @@
           <li class="nav-item" *ngIf="!isPalestrante(user)">
             <a class="nav-link" aria-current="page" routerLink="eventos/lista" routerLinkActive="active">Eventos</a>
           </li>
-          
+
           <!-- 2. Link "Meus Eventos" (SÓ para Palestrantes) -->
           <li class="nav-item" *ngIf="isPalestrante(user)">
             <a class="nav-link" aria-current="page" routerLink="eventos/palestrante" routerLinkActive="active">Meus Eventos</a>
           </li>
-        
+
           <!-- Links comuns para todos os logados -->
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isAdmin(user)">
             <a class="nav-link" routerLink="palestrantes" routerLinkActive="active">Palestrantes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="contatos" routerLinkActive="active">Contatos</a>
           </li>
 
           <!-- 3. Link "Gerar Chave" (SÓ para Admin) -->
@@ -51,7 +48,7 @@
           </li>
         </ng-template>
         <!-- Fim da Lógica de Menu Dinâmico -->
-        
+
       </ul>
 
       <!-- Dropdown do Usuário (sem alterações) -->

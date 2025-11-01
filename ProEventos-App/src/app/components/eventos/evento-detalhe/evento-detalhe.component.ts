@@ -27,84 +27,78 @@ export class EventoDetalheComponent implements OnInit {
   evento! : Evento
 
   ngOnInit(): void {
-
     this.validation();
     this.idEvento = this.route.snapshot.paramMap.get('id');
 
-    if(this.validaRota())
-      {
-        this.recuperarEvento();
-      }
+    if (this.validaRota()) {
+      this.ngxSpinnerService.show();
+      this.recuperarEvento();
+    }
   }
 
-  private recuperarEvento() {
-    if (!this.idEvento) return;
-
-    this._eventoService.getEventoById(this.idEvento).subscribe({
-      next: (evento) =>
-        {
-          this.evento = evento
-          this.form.patchValue(evento)
-        },
-      error: (err) =>
-        {
-          console.error('Erro ao recuperar evento', err);
-        }
-    })
-  }
-
-salvarAlteracao() {
-    this.ngxSpinnerService.show();
-
-    // 1. Validação primeiro
-    if (!this.form.valid) {
-      this.toastR.warning('Preencha todos os campos corretamente.');
-      this.ngxSpinnerService.hide(); // Esconde o spinner se o form for inválido
-      return; // Para a execução
+  private recuperarEvento(): void {
+    if (!this.idEvento) {
+      this.ngxSpinnerService.hide();
+      return;
     }
 
-    // 2. Estrutura IF / ELSE
+    this._eventoService.getEventoById(this.idEvento).subscribe({
+      next: (evento: Evento) => {
+        this.evento = { ...evento };
+        if (this.evento.dataEvento) {
+          this.evento.dataEvento = new Date(this.evento.dataEvento);
+        }
+        this.form.patchValue(this.evento);
+        this.toastR.info('Dados do evento carregados.', 'Carregado!');
+      },
+      error: (err) => {
+        console.error('Erro ao recuperar evento', err);
+        this.toastR.error('Erro ao carregar o evento.', 'Erro!');
+        this.ngxSpinnerService.hide();
+      },
+      complete: () => {
+        this.ngxSpinnerService.hide();
+      }
+    });
+  }
+
+  salvarAlteracao() {
+    this.ngxSpinnerService.show();
+
+    if (!this.form.valid) {
+      this.toastR.warning('Preencha todos os campos corretamente.');
+      this.ngxSpinnerService.hide();
+      return;
+    }
+
     if (this.validaRota()) {
-      
-      // --- MODO UPDATE (Atualizar) ---
-      this.evento = { ...this.form.value, id: this.idEvento };
+      this.evento = { id: this.idEvento, ...this.form.value };
 
       this._eventoService.updateEvento(this.idEvento, this.evento).subscribe({
         next: (evento: Evento) => {
-          this.evento = evento;
           this.form.patchValue(evento);
           this.toastR.success('Registro Atualizado com sucesso!');
-          
-          // CORREÇÃO: Devolver o palestrante à sua lista de eventos
-          this.router.navigate(['/eventos/palestrante']); 
+          this.router.navigate(['/dashboard']);
         },
         error: (err) => {
           console.error('Erro ao ATUALIZAR evento', err);
           this.toastR.error('Erro ao atualizar o evento.', 'Erro!');
-          this.ngxSpinnerService.hide(); // Esconde o spinner no erro
         },
-        complete: () => this.ngxSpinnerService.hide() // CORREÇÃO: (era .show())
-      });
+      }).add(() => this.ngxSpinnerService.hide());
 
     } else {
-      
-      // --- MODO CREATE (Criar Novo) ---
       this.evento = { ...this.form.value };
 
       this._eventoService.postEvento(this.evento).subscribe({
         next: (evento: Evento) => {
-          this.evento = evento;
-          this.form.patchValue(evento);
           this.toastR.success('Evento cadastrado com sucesso!');
-          this.router.navigate(['/eventos/palestrante']);
+          this.router.navigate([`/eventos/detalhes/${evento.id}`]);
         },
         error: (err) => {
           console.error('Erro ao REGISTRAR Evento: ', err);
           this.toastR.error('Erro ao cadastrar o evento.', 'Erro!');
-          this.ngxSpinnerService.hide(); // Esconde o spinner no erro
         },
-        complete: () => this.ngxSpinnerService.hide()
-      });
+      }).add(() => this.ngxSpinnerService.hide());
     }
   }
 

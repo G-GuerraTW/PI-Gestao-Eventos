@@ -1,7 +1,7 @@
 import { Component, inject, TemplateRef, ViewChild } from '@angular/core'; // 1. Imports atualizados
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { ChaveService, ChavePalestranteDTO } from 'src/app/service/chave.service';
+import { ChaveService } from 'src/app/service/chave.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal'; // 2. Imports do Modal
 import { ChavePalestrante } from 'src/models/ChavePalestrante';
 
@@ -18,11 +18,11 @@ export class GerarChaveComponent {
 
   public chaveGeradaObj: ChavePalestrante | null = null;
   public isLoading = false;
-  
+
   // 4. Referências para o Modal
   public modalRef?: BsModalRef;
   // @ViewChild procura pelo nome #modalChave no seu HTML
-  @ViewChild('modalChave') modalTemplate!: TemplateRef<ChavePalestrante>; 
+  @ViewChild('modalChave') modalTemplate!: TemplateRef<ChavePalestrante>;
 
   public gerarNovaChave(): void {
     this.isLoading = true;
@@ -35,11 +35,11 @@ export class GerarChaveComponent {
         this.toastR.success('Chave gerada com sucesso!', 'Sucesso');
         this.spinner.hide();
         this.isLoading = false;
-        
+
         // 6. ABRE O MODAL (o "pop up")
         // Usa o template #modalChave que está no ficheiro HTML
-        this.modalRef = this.modalService.show(this.modalTemplate, { 
-          class: 'modal-md' 
+        this.modalRef = this.modalService.show(this.modalTemplate, {
+          class: 'modal-md'
         });
       },
       error: (err) => {
@@ -63,7 +63,7 @@ export class GerarChaveComponent {
 
     try {
       // document.execCommand é mais seguro em iFrames
-      document.execCommand('copy'); 
+      document.execCommand('copy');
       this.toastR.info('Chave copiada para a área de transferência!');
     } catch (err) {
       this.toastR.warning('Não foi possível copiar a chave automaticamente.');
