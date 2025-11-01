@@ -16,10 +16,9 @@ class AdminPermissionsService {
       const user = JSON.parse(userJSON);
       
       // ---- CORREÇÃO AQUI ----
-      // O seu JSON de admin tem { "funcao": "3" }
-      // O seu código estava a comparar a string "3" com a string "Admin" (o que dá falso).
-      // A comparação correta é com a string "3".
-      if (user && user.funcao === "3") { // <-- LÓGICA CORRIGIDA
+      // O seu JSON mais recente envia { "funcao": "Admin" }
+      // A lógica foi atualizada para comparar a string "Admin"
+      if (user && user.funcao === "Admin") { // <-- LÓGICA CORRIGIDA
         return true;
       }
     }
