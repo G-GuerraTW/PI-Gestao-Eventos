@@ -1,5 +1,80 @@
 <app-titulo [titulo]="'Dashboard'" [iconClass]="'fa-solid fa-chart-simple'"></app-titulo>
+
 <div class="container mt-5">
+  <!-- Welcome Message -->
+  <div class="welcome-message mb-4">
+    <h2>Bem-vindo, usuário!</h2>
+    <p>Aqui está um resumo das suas atividades.</p>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="summary-card">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="icon-circle bg-primary">
+              <i class="fas fa-calendar-alt text-white"></i>
+            </div>
+            <div class="ms-3">
+              <h5 class="card-title">Total de Eventos</h5>
+              <p class="card-text">15</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="summary-card">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="icon-circle bg-success">
+              <i class="fas fa-calendar-check text-white"></i>
+            </div>
+            <div class="ms-3">
+              <h5 class="card-title">Próximos Eventos</h5>
+              <p class="card-text">5</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="summary-card">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="icon-circle bg-danger">
+              <i class="fas fa-calendar-times text-white"></i>
+            </div>
+            <div class="ms-3">
+              <h5 class="card-title">Eventos Realizados</h5>
+              <p class="card-text">10</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Event Chart -->
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="chart-card">
+        <div class="card-body">
+          <h5 class="card-title">Eventos por Mês</h5>
+          <div class="chart-container">
+            <div class="bar" style="height: 60%;"><span>Jan</span></div>
+            <div class="bar" style="height: 80%;"><span>Fev</span></div>
+            <div class="bar" style="height: 40%;"><span>Mar</span></div>
+            <div class="bar" style="height: 70%;"><span>Abr</span></div>
+            <div class="bar" style="height: 90%;"><span>Mai</span></div>
+            <div class="bar" style="height: 50%;"><span>Jun</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="card shadow-sm">
     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
       <h2 class="mb-0">Meus Eventos</h2>
