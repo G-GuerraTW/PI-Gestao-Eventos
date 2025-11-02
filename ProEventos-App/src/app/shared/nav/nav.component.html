@@ -11,7 +11,7 @@
         <ng-container *ngIf="authService.currentUser$ | async as user; else loggedOutMenu">
 
           <!-- 1. Link "Eventos" (SÓ para Participante/NaoInformado) -->
-          <li class="nav-item" *ngIf="!isPalestrante(user) && !isAdmin(user)">
+          <li class="nav-item">
             <a class="nav-link" aria-current="page" routerLink="eventos/lista" routerLinkActive="active">Eventos</a>
           </li>
           
@@ -24,9 +24,6 @@
           <!-- Links COMUNS (para todos os logados, incluindo Admin) -->
           <li class="nav-item">
             <a class="nav-link" routerLink="palestrantes" routerLinkActive="active">Palestrantes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="contatos" routerLinkActive="active">Contatos</a>
           </li>
           <!-- **** FIM DA CORREÇÃO **** -->
 
@@ -46,9 +43,6 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="palestrantes" routerLinkActive="active">Palestrantes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="contatos" routerLinkActive="active">Contatos</a>
           </li>
         </ng-template>
         <!-- Fim da Lógica de Menu Dinâmico -->

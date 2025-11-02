@@ -3,14 +3,14 @@
     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
       <h2 class="mb-0">Eventos</h2>
 
-      <!-- **** MOSTRAR BOTÃO APENAS SE FOR PALESTRANTE **** -->
+      <!-- Botão "Novo Evento" (só para Palestrante) -->
       <button *ngIf="isPalestrante" type="button" class="btn btn-light" routerLink="/eventos/detalhes">
         <i class="fa fa-plus-circle me-2"></i>Novo Evento
       </button>
 
     </div>
     <div class="card-body">
-      <!-- ... (seu filtro de busca continua igual) ... -->
+      <!-- Filtro -->
       <div class="row mb-4">
         <div class="col-md-6">
           <div class="input-group">
@@ -20,10 +20,10 @@
         </div>
       </div>
 
+      <!-- Tabela -->
       <div class="table-responsive">
         <table class="table table-hover table-striped">
           <thead class="table-dark">
-            <!-- ... (seu thead continua igual) ... -->
             <tr class="text-center">
               <th>#</th>
               <th>
@@ -41,8 +41,8 @@
             </tr>
           </thead>
           <tbody>
+            <!-- Linha da Tabela -->
             <tr *ngFor="let evento of eventosFiltrados" class="text-center" (click)="Redirecionardetalhes(evento.id)">
-              <!-- ... (suas colunas de dados continuam iguais) ... -->
               <td class="align-middle">{{evento.id}}</td>
               <td class="align-middle">
                 <img src="../../assets/img/{{evento.imagemURL}}" alt="" [collapse]="isCollapsed" [isAnimated]="true"
@@ -54,7 +54,7 @@
               <td class="align-middle d-none d-md-table-cell">{{evento.qtdPessoas}}</td>
               <td class="align-middle d-none d-md-table-cell">{{evento.lotes.length > 0 ? evento.lotes[0].nome : 'N/A'}}</td>
 
-              <!-- **** INÍCIO DA LÓGICA DE BOTÕES **** -->
+              <!-- Botões de Opções -->
               <td class="align-middle">
                 <div class="d-flex justify-content-center gap-2">
 
@@ -63,7 +63,7 @@
                     <button tooltip="Editar" type="button" class="btn btn-warning btn-sm" (click)="editarEvento(evento.id, $event)">
                       <i class="fa fa-edit"></i>
                     </button>
-                    <!-- **** CORREÇÃO AQUI (espaço removido) **** -->
+                    <!-- (Já com a correção do espaço que fizemos antes) -->
                     <button tooltip="Excluir" type="button" class="btn btn-danger btn-sm"
                       (click)="openModal(template, $event, evento.tema, evento.id)">
                       <i class="fa fa-trash-alt"></i>
@@ -72,19 +72,19 @@
 
                   <!-- BOTÃO PARA PARTICIPANTE / NAOINFORMADO -->
                   <ng-container *ngIf="!isPalestrante">
+                    <!-- **** ALTERAÇÃO AQUI **** -->
+                    <!-- Chama o novo modal de confirmação -->
                     <button tooltip="Reservar Vaga" type="button" class="btn btn-success btn-sm"
-                      (click)="reservarVaga(evento.id, $event)">
-                      <i class="fa fa-calendar-check"></i> <!-- Ícone de exemplo -->
+                      (click)="openConfirmarReserva(modalConfirmarReserva, evento.id, evento.tema, $event)">
+                      <i class="fa fa-calendar-check"></i>
                     </button>
                   </ng-container>
 
                 </div>
               </td>
-              <!-- **** FIM DA LÓGICA DE BOTÕES **** -->
-
             </tr>
           </tbody>
-          <!-- ... (seu tfoot continua igual) ... -->
+          <!-- Tfoot (sem eventos) -->
           <tfoot *ngIf="eventos && eventosFiltrados.length === 0">
             <tr>
               <td colspan="8" class="text-center">
@@ -98,7 +98,7 @@
   </div>
 </div>
 
-<!-- ... (seu modal <ng-template #template> e seu <ngx-spinner> continuam iguais) ... -->
+<!-- Modal de Exclusão (Seu modal antigo, sem alterações) -->
 <ng-template #template>
   <div class="modal-body text-center">
     <p>Deseja realmente excluir o evento <strong>{{temaEventoExclusao}}</strong> (ID: {{idEventoExclusao}})?</p>
@@ -108,5 +108,55 @@
     </div>
   </div>
 </ng-template>
+
+<!--
+  **** NOVO MODAL 1: CONFIRMAR RESERVA ****
+-->
+<ng-template #modalConfirmarReserva>
+  <div class="modal-body text-center">
+    <p>Deseja realmente reservar uma vaga para o evento
+      <br><strong>{{temaEventoParaReservar}}</strong>?
+    </p>
+    <div class="d-flex justify-content-center gap-2 mt-4">
+      <button type="button" class="btn btn-secondary" (click)="declineReserva()">Cancelar</button>
+      <button type="button" class="btn btn-success" (click)="confirmarReserva()">Sim, reservar</button>
+    </div>
+  </div>
+</ng-template>
+
+<!--
+  **** NOVO MODAL 2: EXIBIR BILHETE GERADO ****
+-->
+<ng-template #modalExibirTicket>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Vaga Reservada!</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="fecharModalTicket()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngIf="ticketGerado">
+      <p class="fw-bold text-danger">Anote a chave para utilizar no dia do evento, pois será necessário apresentar essa chave no local.</p>
+
+      <h5>Chave do Bilhete:</h5>
+      <div class="input-group">
+        <input
+          #chaveInput
+          type="text"
+          class="form-control bg-light"
+          [value]="ticketGerado.codigoTicket"
+          readonly
+        />
+        <button class="btn btn-outline-secondary" type="button" (click)="copiarChave(chaveInput)">
+          <i class="fa fa-copy me-1"></i> Copiar
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="fecharModalTicket()">Fechar</button>
+  </div>
+</ng-template>
+
 
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>

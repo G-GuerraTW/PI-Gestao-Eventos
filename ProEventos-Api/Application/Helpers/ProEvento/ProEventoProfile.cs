@@ -15,6 +15,7 @@ namespace Application.Helpers.ProEvento
             CreateMap<Palestrante, PalestranteDTO>().ReverseMap();
             CreateMap<RedeSocial, RedeSocialDTO>().ReverseMap();
             CreateMap<ChavePalestrantes, ChavePalestrantesDTO>().ReverseMap();
+            CreateMap<Ticket, TicketDTO>().ReverseMap();
 
             // Mapemanento da Autorizção
             CreateMap<User, UserDTO>().ReverseMap();

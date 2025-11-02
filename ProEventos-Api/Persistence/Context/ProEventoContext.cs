@@ -18,6 +18,7 @@ namespace Persistence.Context
         public DbSet<Palestrante> Palestrantes { get; set; }
         public DbSet<EventoPalestrante> EventosPalestrantes { get; set; }
         public DbSet<ChavePalestrantes> ChavePalestrantes { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {

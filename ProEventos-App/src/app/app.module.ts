@@ -31,6 +31,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { EventoPalestranteComponent } from './components/eventos/evento-palestrante/evento-palestrante.component';
 import { PalestranteDetalheComponent } from './components/palestrantes/palestrante-detalhe/palestrante-detalhe.component';
 import { GerarChaveComponent } from './components/admin/gerar-chave/gerar-chave.component';
+import { MinhasEntradasComponent } from './components/eventos/minhas-entradas/minhas-entradas.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { GerarChaveComponent } from './components/admin/gerar-chave/gerar-chave.
     RegistrationComponent,
     EventoPalestranteComponent,
     PalestranteDetalheComponent,
-    GerarChaveComponent
+    GerarChaveComponent,
+    MinhasEntradasComponent
    ],
   imports: [
     BrowserModule,
