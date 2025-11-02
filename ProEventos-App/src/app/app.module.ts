@@ -32,6 +32,8 @@ import { EventoPalestranteComponent } from './components/eventos/evento-palestra
 import { PalestranteDetalheComponent } from './components/palestrantes/palestrante-detalhe/palestrante-detalhe.component';
 import { GerarChaveComponent } from './components/admin/gerar-chave/gerar-chave.component';
 import { MinhasEntradasComponent } from './components/eventos/minhas-entradas/minhas-entradas.component';
+import { UserViewComponent } from './components/user-view/user-view.component';
+// import { HomeInitialComponent } from './components/home-initial/home-initial.component'; // Removed import
 
 @NgModule({
   declarations: [

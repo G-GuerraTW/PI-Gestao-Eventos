@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-light" *ngIf="showmenu()">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="dashboard">ProEventos</a>
+    <a class="navbar-brand" routerLink="/user-view">ProEventos</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -14,15 +14,18 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" routerLink="eventos/lista" routerLinkActive="active">Eventos</a>
           </li>
-          
+
           <!-- 2. Link "Meus Eventos" (SÓ para Palestrantes) -->
           <li class="nav-item" *ngIf="isPalestrante(user)">
             <a class="nav-link" aria-current="page" routerLink="eventos/palestrante" routerLinkActive="active">Meus Eventos</a>
           </li>
-        
-          <!-- **** CORREÇÃO AQUI **** -->
+
+          <li class="nav-item" *ngIf="isPalestrante(user)">
+            <a class="nav-link" aria-current="page" routerLink="dashboard" routerLinkActive="active">Dashboard</a>
+          </li>
+
           <!-- Links COMUNS (para todos os logados, incluindo Admin) -->
-          <li class="nav-item">
+          <li class="nav-item"  *ngIf="isAdmin(user) || isPalestrante(user)">
             <a class="nav-link" routerLink="palestrantes" routerLinkActive="active">Palestrantes</a>
           </li>
           <!-- **** FIM DA CORREÇÃO **** -->
@@ -46,7 +49,7 @@
           </li>
         </ng-template>
         <!-- Fim da Lógica de Menu Dinâmico -->
-        
+
       </ul>
 
       <!-- Dropdown do Usuário (sem alterações) -->

@@ -11,15 +11,19 @@ import { LoginComponent } from './components/user/login/login.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { RegistrationComponent } from './components/user/registration/registration.component';
 import { AuthGuard } from './service/auth.guard';
+import { RoleGuard } from './service/role.guard';
+import { UserViewComponent } from './components/user-view/user-view.component';
 
 // --- IMPORTS ADICIONADOS ---
 import { EventoPalestranteComponent } from './components/eventos/evento-palestrante/evento-palestrante.component';
 import { GerarChaveComponent } from './components/admin/gerar-chave/gerar-chave.component'; // Ajuste o caminho se necessário
 import { AdminGuard } from './service/admin.guard'; // Importe o novo Guard
+// import { HomeInitialComponent } from './components/home-initial/home-initial.component'; // Removido
 // --- FIM DOS IMPORTS ---
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  { path: '', redirectTo: 'user-view', pathMatch: 'full'},
+  { path: 'user-view', component: UserViewComponent, canActivate: [AuthGuard] },
 
   { path: 'eventos', redirectTo: 'eventos/lista'},
   { path: 'eventos', component: EventosComponent,
@@ -43,14 +47,12 @@ const routes: Routes = [
     ]
   },
 
-  { path: 'contatos', component: ContatosComponent, canActivate: [AuthGuard]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   { path: 'palestrantes', component: PalestrantesComponent, canActivate: [AuthGuard]},
 
-  // --- NOVA ROTA DE ADMIN ---
-  { 
-    path: 'gerar-chave', 
-    component: GerarChaveComponent, 
+  {
+    path: 'gerar-chave',
+    component: GerarChaveComponent,
     canActivate: [AuthGuard, AdminGuard] // Protegido por ambos
   },
   // --- FIM DA NOVA ROTA ---
