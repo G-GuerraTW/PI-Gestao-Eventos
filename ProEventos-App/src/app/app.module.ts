@@ -31,6 +31,8 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { EventoPalestranteComponent } from './components/eventos/evento-palestrante/evento-palestrante.component';
 import { PalestranteDetalheComponent } from './components/palestrantes/palestrante-detalhe/palestrante-detalhe.component';
 import { GerarChaveComponent } from './components/admin/gerar-chave/gerar-chave.component';
+import { UserViewComponent } from './components/user-view/user-view.component';
+// import { HomeInitialComponent } from './components/home-initial/home-initial.component'; // Removed import
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { GerarChaveComponent } from './components/admin/gerar-chave/gerar-chave.
     RegistrationComponent,
     EventoPalestranteComponent,
     PalestranteDetalheComponent,
-    GerarChaveComponent
+    GerarChaveComponent,
+    UserViewComponent
+    // HomeInitialComponent // Removed declaration
    ],
   imports: [
     BrowserModule,

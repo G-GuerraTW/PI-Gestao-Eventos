@@ -1,0 +1,70 @@
+<div class="user-view-container p-4">
+  <div class="text-center mb-4">
+    <h1 class="display-4">Bem-vindo ao ProEventos!</h1>
+    <p class="lead">Sua plataforma completa para gerenciamento e participação em eventos.</p>
+    <hr class="my-4">
+    <p>Explore os eventos abaixo e reserve sua vaga.</p>
+  </div>
+
+  <!-- Event list will be rendered here -->
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Próximos Eventos</h3>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead class="table-dark">
+            <tr class="text-center">
+              <th>#</th>
+              <th>
+                <button class="btn btn-link text-white p-0 m-0" (click)="isCollapsed = !isCollapsed"
+                  aria-label="Alternar exibição de imagem">
+                  Imagem
+                </button>
+              </th>
+              <th>Tema</th>
+              <th>Local</th>
+              <th>Data</th>
+              <th class="d-none d-md-table-cell">Qtd Pessoas</th>
+              <th class="d-none d-md-table-cell">Lotes</th>
+              <th>Opções</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let evento of eventosFiltrados" class="text-center" (click)="Redirecionardetalhes(evento.id)">
+              <td class="align-middle">{{evento.id}}</td>
+              <td class="align-middle">
+                <img src="../../assets/img/{{evento.imagemURL}}" alt="" [collapse]="isCollapsed" [isAnimated]="true"
+                  style="width: 80px;">
+              </td>
+              <td class="align-middle">{{evento.tema}}</td>
+              <td class="align-middle">{{evento.local}}</td>
+              <td class="align-middle">{{evento.dataEvento | DateTimeFormat }}</td>
+              <td class="align-middle d-none d-md-table-cell">{{evento.qtdPessoas}}</td>
+              <td class="align-middle d-none d-md-table-cell">{{evento.lotes.length > 0 ? evento.lotes[0].nome : 'N/A'}}</td>
+              <td class="align-middle">
+                <div class="d-flex justify-content-center gap-2">
+                  <ng-container *ngIf="!isPalestrante">
+                    <button tooltip="Reservar Vaga" type="button" class="btn btn-success btn-sm"
+                      (click)="reservarVaga(evento.id, $event)">
+                      <i class="fa fa-calendar-check"></i>
+                    </button>
+                  </ng-container>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot *ngIf="eventos && eventosFiltrados.length === 0">
+            <tr>
+              <td colspan="8" class="text-center">
+                <h4 class="text-muted">Nenhum evento encontrado.</h4>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

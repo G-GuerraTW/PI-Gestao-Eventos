@@ -28,24 +28,20 @@ export class LoginComponent {
         
         if (!userJSON) {
           this.toastR.error('Não foi possível obter os dados do usuário após o login.');
-          this.router.navigate(['/dashboard']); 
+          this.router.navigate(['/user/login']); 
           return;
         }
 
         const user = JSON.parse(userJSON);
-        const userRoleString: string = user?.funcao; 
+        const userRole: Funcao = user?.funcao || user?.user?.funcao;
 
-        // ---- ATUALIZAÇÃO AQUI ----
-        if (userRoleString === 'Palestrante') {
-          this.toastR.success('Login como Palestrante. Carregando seus eventos...', 'Sucesso');
-          // Mude de 'window.location.href' para 'this.router.navigate'
-          this.router.navigate(['/eventos/palestrante']); // <-- MUDANÇA
-        } 
-        else {
+        if (userRole === Funcao.Admin || userRole === Funcao.Palestrante) {
           this.toastR.success('Login efetuado com sucesso!', 'Sucesso');
-          this.router.navigate(['/eventos/lista']);
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.toastR.success('Login efetuado com sucesso!', 'Sucesso');
+          this.router.navigate(['/user-view']);
         }
-        // ---- FIM DA ATUALIZAÇÃO ----
       },
       (error: any) => {
         console.error(error);

@@ -1,13 +1,11 @@
-<app-titulo [titulo]="'Dashboard'" [iconClass]="'fa-solid fa-chart-simple'"></app-titulo>
+<app-titulo [titulo]="'Dashboard do Palestrante'" [iconClass]="'fa-solid fa-chart-line'"></app-titulo>
 
 <div class="container mt-5">
-  <!-- Welcome Message -->
   <div class="welcome-message mb-4">
-    <h2>Bem-vindo, usuário!</h2>
-    <p>Aqui está um resumo das suas atividades.</p>
+    <h2>Bem-vindo, {{ authService.currentUser?.primeiroNome }}!</h2>
+    <p>Aqui está um resumo dos seus eventos.</p>
   </div>
 
-  <!-- Summary Cards -->
   <div class="row mb-4">
     <div class="col-md-4">
       <div class="summary-card">
@@ -18,7 +16,7 @@
             </div>
             <div class="ms-3">
               <h5 class="card-title">Total de Eventos</h5>
-              <p class="card-text">15</p>
+              <p class="card-text">{{ totalEventos }}</p>
             </div>
           </div>
         </div>
@@ -33,7 +31,7 @@
             </div>
             <div class="ms-3">
               <h5 class="card-title">Próximos Eventos</h5>
-              <p class="card-text">5</p>
+              <p class="card-text">{{ eventosProximos }}</p>
             </div>
           </div>
         </div>
@@ -48,7 +46,7 @@
             </div>
             <div class="ms-3">
               <h5 class="card-title">Eventos Realizados</h5>
-              <p class="card-text">10</p>
+              <p class="card-text">{{ eventosRealizados }}</p>
             </div>
           </div>
         </div>
@@ -56,93 +54,4 @@
     </div>
   </div>
 
-  <!-- Event Chart -->
-  <div class="row mb-4">
-    <div class="col-md-12">
-      <div class="chart-card">
-        <div class="card-body">
-          <h5 class="card-title">Eventos por Mês</h5>
-          <div class="chart-container">
-            <div class="bar" style="height: 60%;"><span>Jan</span></div>
-            <div class="bar" style="height: 80%;"><span>Fev</span></div>
-            <div class="bar" style="height: 40%;"><span>Mar</span></div>
-            <div class="bar" style="height: 70%;"><span>Abr</span></div>
-            <div class="bar" style="height: 90%;"><span>Mai</span></div>
-            <div class="bar" style="height: 50%;"><span>Jun</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card shadow-sm">
-    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-      <h2 class="mb-0">Meus Eventos</h2>
-    </div>
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-hover table-striped">
-          <thead class="table-dark">
-            <tr class="text-center">
-              <th>#</th>
-              <th>Tema</th>
-              <th>Local</th>
-              <th>Data</th>
-              <th>Qtd Pessoas</th>
-              <th>Telefone</th>
-              <th>Email</th>
-              <th>Lotes</th>
-              <th>Redes Sociais</th>
-              <th>Palestrantes</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let evento of eventos" class="text-center">
-              <td class="align-middle">{{evento.id}}</td>
-              <td class="align-middle">{{evento.tema}}</td>
-              <td class="align-middle">{{evento.local}}</td>
-              <td class="align-middle">{{evento.dataEvento | DateTimeFormat }}</td>
-              <td class="align-middle">{{evento.qtdPessoas}}</td>
-              <td class="align-middle">{{evento.telefone}}</td>
-              <td class="align-middle">{{evento.email}}</td>
-              <td class="align-middle">{{evento.lotes.length > 0 ? evento.lotes[0].nome : 'N/A'}}</td>
-              <td class="align-middle">{{evento.redeSociais.length > 0 ? evento.redeSociais[0].nome : 'N/A'}}</td>
-              <td class="align-middle">{{evento.palestrantes.length > 0 ? evento.palestrantes[0].nome : 'N/A'}}</td>
-              <td class="align-middle">
-                <div class="d-flex justify-content-center gap-2">
-                  <button tooltip="Editar" type="button" class="btn btn-warning btn-sm" (click)="editarEvento(evento.id, $event)">
-                    <i class="fa fa-edit"></i>
-                  </button>
-                  <button tooltip="Excluir" type="button" class="btn btn-danger btn-sm"
-                    (click)="openModal(template, $event, evento.tema, evento.id )">
-                    <i class="fa fa-trash-alt"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot *ngIf="eventos && eventos.length === 0">
-            <tr>
-              <td colspan="11" class="text-center">
-                <h4 class="text-muted">Nenhum evento encontrado.</h4>
-              </td>
-            </tr>
-          </tfoot>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <ng-template #template>
-          <div class="modal-body text-center">
-            <p>Deseja realmente excluir o evento <strong>{{temaEventoExclusao}}</strong> (ID: {{idEventoExclusao}})?</p>
-            <div class="d-flex justify-content-center gap-2 mt-4">
-              <button type="button" class="btn btn-secondary" (click)="decline()">Cancelar</button>
-              <button type="button" class="btn btn-danger" (click)="confirm()">Excluir</button>
-            </div>
-          </div>
-        </ng-template>
-
-        <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
