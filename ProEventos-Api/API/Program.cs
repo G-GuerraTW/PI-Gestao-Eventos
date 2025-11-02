@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Domain.entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -90,6 +91,7 @@ builder.Services.AddScoped<IEventoPersist, EventoPersist>();
 builder.Services.AddScoped<IPalestrantePersist, PalestrantePersist>();
 builder.Services.AddScoped<IUserPersist, UserPersist>();
 builder.Services.AddScoped<IChavePalestrantesPersist, ChavePalestrantesPersist>();
+builder.Services.AddScoped<ITicketPersist, TicketPersist>();
 
 // Serviços
 builder.Services.AddScoped<IEventoService, EventoService>();
@@ -97,6 +99,7 @@ builder.Services.AddScoped<IPalestranteService, PalestranteService>();
 builder.Services.AddScoped<IChavePalestranteService, ChavePalestranteService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ITicketService, TicketService>();
 
 #endregion
 
@@ -143,10 +146,10 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    // Inicializa o banco recriando do zero
-    // var dbContext = app.Services.CreateScope().ServiceProvider.GetRequiredService<ProEventoContext>();
-    // dbContext.Database.EnsureDeleted();
-    // dbContext.Database.EnsureCreated();
+
+    var dbContext = app.Services.CreateScope().ServiceProvider.GetRequiredService<ProEventoContext>();
+    dbContext.Database.EnsureDeleted();
+    dbContext.Database.EnsureCreated();
 
     // Habilita documentação da API
     app.UseSwagger();
