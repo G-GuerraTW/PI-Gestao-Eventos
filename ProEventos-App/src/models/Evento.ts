@@ -13,6 +13,7 @@ export interface Evento
     imagemURL: string;
     telefone: string;
     email: string;
+    valor: number;
 
     //Propriedades Relacionais
     lotes: Lote[];

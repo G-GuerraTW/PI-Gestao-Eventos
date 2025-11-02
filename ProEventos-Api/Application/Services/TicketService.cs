@@ -3,6 +3,8 @@ using Domain.entities;
 using Application.DTOs;
 using Application.Contracts;
 using Persistence.Contracts;
+using System; // Adicione este 'using' se estiver em falta
+using System.Threading.Tasks; // Adicione este 'using' se estiver em falta
 
 namespace Application.Services
 {
@@ -11,14 +13,12 @@ namespace Application.Services
     private readonly IMapper _mapper;
         private readonly IGeralPersist _geralPersist;
         private readonly ITicketPersist _ticketPersist;
-        // Pode precisar de injetar IEventoPersist se o preço do bilhete
-        // vier de um Lote do Evento
         private readonly IEventoPersist _eventoPersist;
 
         public TicketService(IMapper mapper,
                              IGeralPersist geralPersist,
                              ITicketPersist ticketPersist,
-                             IEventoPersist eventoPersist) // Adicionada injeção
+                             IEventoPersist eventoPersist)
         {
             _mapper = mapper;
             _geralPersist = geralPersist;
@@ -33,23 +33,24 @@ namespace Application.Services
         {
             try
             {
-                // 1. Lógica de Negócio (Exemplo: buscar o preço do evento)
-                var evento = await _eventoPersist.GetEventoByIdAsync(userId, model.IdEvento, false);
+                // 1. Lógica de Negócio (Buscar o evento)
+                var evento = await _eventoPersist.GetEventoByParaTicketIdAsync(model.IdEvento);
                 if (evento == null) throw new Exception("Evento não encontrado.");
                 
-                // (Aqui você pode adicionar lógicas mais complexas,
-                // como buscar o preço do lote atual, etc.)
-                // Por agora, vamos usar um valor fixo ou 0.
-                decimal precoDoLote = 0; // Substitua pela sua lógica de Lotes
+                // **** CORREÇÃO AQUI ****
+                // Em vez de '0', lemos o 'valor' do Evento.
+                // Convertemos 'double' (do Evento) para 'decimal' (do Bilhete).
+                decimal precoDoLote = (decimal)evento.valor; 
+                // **********************
 
                 // 2. Mapear DTO para Entidade
                 var ticket = _mapper.Map<Ticket>(model);
 
                 // 3. Definir propriedades de controlo
                 ticket.IdUsuario = userId;
-                ticket.ValorTicket = precoDoLote; 
+                ticket.ValorTicket = precoDoLote; // <-- Agora usa o valor correto
                 ticket.DataEntrada = DateTime.Now;
-                ticket.StatusTicket = false; // Define um estado inicial
+                ticket.StatusTicket = false; // Define um estado inicial (bool)
                 ticket.CodigoTicket = Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
 
                 // 4. Persistir
@@ -76,9 +77,9 @@ namespace Application.Services
         {
             try
             {
-                // 1. Buscar o bilhete (o repositório deve verificar a posse do userId)
+                // 1. Buscar o bilhete
                 var ticket = await _ticketPersist.GetTicketsByIdAsync(ticketId);
-                if (ticket == null) return null; // Ou throw new Exception
+                if (ticket == null) return null;
 
                 // 2. Garantir consistência dos IDs
                 model.Id = ticketId;
@@ -113,6 +114,10 @@ namespace Application.Services
             {
                 var ticket = await _ticketPersist.GetTicketsByIdAsync(ticketId);
                 if (ticket == null) throw new Exception("Bilhete não encontrado ou não pertence ao utilizador.");
+
+                // NOTA: Aqui seria bom verificar se ticket.IdUsuario == userId
+                // (O seu código atual permite um admin apagar bilhetes de outros)
+                // if (ticket.IdUsuario != userId) throw new Exception("Acesso negado.");
 
                 _geralPersist.Delete(ticket);
                 return await _geralPersist.SaveChangesAsync();
@@ -158,5 +163,57 @@ namespace Application.Services
                 throw new Exception($"Erro ao recuperar bilhete por ID: {ex.Message}");
             }
         }
+
+        public async Task<TicketDTO> GetTicketByCodigoAsync(string codigo)
+        {
+            try
+            {
+                var ticket = await _ticketPersist.GetTicketByCodigoAsync(codigo);
+                if (ticket == null) return null; 
+
+                return _mapper.Map<TicketDTO>(ticket);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao recuperar bilhete por código: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Marca um bilhete como "Utilizado" (StatusTicket = true).
+        /// </summary>
+        public async Task<TicketDTO> UsarTicketAsync(int ticketId)
+        {
+            try
+            {
+                // (Assumindo que GetTicketByIdAsync(id) existe no persist)
+                var ticket = await _ticketPersist.GetTicketsByIdAsync(ticketId); 
+                
+                if (ticket == null) throw new Exception("Bilhete não encontrado.");
+                
+                // O seu backend usa 'bool' (false = Ativo, true = Usado)
+                if (ticket.StatusTicket == true) throw new Exception("Este bilhete JÁ FOI UTILIZADO.");
+
+                // **** ALTERAÇÃO AQUI ****
+                // A Lógica de Negócio agora é mais simples
+                ticket.StatusTicket = true; // Marca como usado
+                // A linha 'ticket.DataUso = DateTime.Now;' foi REMOVIDA
+                // ************************
+                
+                _geralPersist.Update(ticket);
+
+                if (await _geralPersist.SaveChangesAsync())
+                {
+                    // Retorna o bilhete atualizado
+                    return _mapper.Map<TicketDTO>(ticket);
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao tentar utilizar o bilhete: {ex.Message}");
+            }
+        }
     }
 }
+

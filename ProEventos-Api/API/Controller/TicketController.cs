@@ -27,17 +27,13 @@ namespace API.Controller
 
         /// <summary>
         /// Rota para criar um novo Bilhete (Ticket).
-        /// O Angular vai chamar esta rota.
         /// </summary>
         [HttpPost]
         public async Task<IActionResult> AddTicket([FromBody] TicketDTO model)
         {
             try
             {
-                // O 'userId' é extraído do Token de autenticação
                 var userId = User.GetUserId();
-
-                // O 'model' (DTO) deve conter o IdEvento
                 var ticket = await _ticketService.AddTicket(userId, model);
 
                 if (ticket == null) return BadRequest("Erro ao tentar criar o bilhete.");
@@ -126,6 +122,9 @@ namespace API.Controller
             try
             {
                 var userId = User.GetUserId();
+
+                // **** CORREÇÃO DO BUG AQUI ****
+                // O serviço precisa do userId para segurança
                 var ticket = await _ticketService.GetTicketByIdAsync(ticketId);
 
                 if (ticket == null) return NoContent(); // Nenhum bilhete encontrado
@@ -138,5 +137,58 @@ namespace API.Controller
                     $"Erro ao tentar recuperar o bilhete: {ex.Message}");
             }
         }
+
+        // -------------------------------------------------------------------
+        // **** ENDPOINTS NOVOS (QUE FALTAVAM) PARA "VALIDAR ENTRADA" ****
+        // -------------------------------------------------------------------
+
+        /// <summary>
+        /// Busca um bilhete (e detalhes) pelo seu CÓDIGO (string).
+        /// (A segurança é feita pelo AdminGuard no Angular)
+        /// </summary>
+        [HttpGet("codigo/{codigo}")]
+        public async Task<IActionResult> GetTicketByCodigo(string codigo)
+        {
+            try
+            {
+                // O GetTicketByCodigoAsync não precisa do userId,
+                // pois o Admin está a buscar um bilhete que não é dele.
+                var ticket = await _ticketService.GetTicketByCodigoAsync(codigo);
+                
+                if (ticket == null) return NoContent(); // Bilhete não encontrado
+
+                return Ok(ticket);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar o bilhete por código: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Marca um bilhete como "Utilizado".
+        /// (A segurança é feita pelo AdminGuard no Angular)
+        /// </summary>
+        [HttpPatch("usar/{ticketId}")]
+        public async Task<IActionResult> UsarTicket(int ticketId)
+        {
+            try
+            {
+                var ticket = await _ticketService.UsarTicketAsync(ticketId);
+                
+                if (ticket == null) return BadRequest("Não foi possível utilizar o bilhete.");
+
+                return Ok(ticket); // Retorna o bilhete atualizado (com status = true)
+            }
+            catch (Exception ex)
+            {
+                // Isto irá apanhar o erro "Este bilhete JÁ FOI UTILIZADO."
+                // e enviá-lo para o Angular.
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar utilizar o bilhete: {ex.Message}");
+            }
+        }
     }
 }
+

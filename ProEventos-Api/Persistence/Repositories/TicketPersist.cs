@@ -28,5 +28,16 @@ namespace Persistence.Repositories
         {
             return await context.Tickets.AsNoTracking().FirstOrDefaultAsync(ticket => ticket.Id == ticketId);
         }
+
+        public async Task<Ticket> GetTicketByCodigoAsync(string codigo)
+        {
+            IQueryable<Ticket> query = this.context.Tickets // (Use o seu DbContext aqui)
+                .Include(t => t.User)     // <-- Mude de 'IdUsuario' para 'User'
+                .Include(t => t.Evento);  // <-- Mude de 'IdEvento' para 'Evento'
+                // ************************
+
+            return await query.AsNoTracking()
+                              .FirstOrDefaultAsync(t => t.CodigoTicket.ToUpper() == codigo.ToUpper());
+        }
     }
 }

@@ -1,0 +1,91 @@
+<!-- Título da Página -->
+<app-titulo [titulo]="'Validação de Entradas'" [iconClass]="'fa fa-check-square'"></app-titulo>
+
+<div class="container mt-4">
+
+  <!-- 1. Formulário de Busca -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <form (ngSubmit)="buscarTicket()">
+        <div class="row">
+          <div class="col-12">
+            <label for="codigoBusca">Código do Bilhete</label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                id="codigoBusca"
+                placeholder="Insira o código do bilhete..."
+                [(ngModel)]="codigoBusca"
+                name="codigoBusca"
+                [disabled]="isLoading"
+              />
+              <button class="btn btn-primary" type="submit" [disabled]="isLoading">
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <i *ngIf="!isLoading" class="fa fa-search"></i>
+                {{ isLoading ? 'Buscando...' : 'Buscar' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Área de Resultado (Só aparece se encontrar um bilhete) -->
+  <div *ngIf="ticketEncontrado" class="card shadow-sm mt-4 animated fadeIn">
+    <div class="card-header">
+      <h4 class="mb-0">Detalhes do Bilhete</h4>
+    </div>
+    <div class="card-body">
+      
+      <!-- Feedback de Status -->
+      <div *ngIf="ticketEncontrado.statusTicket === false" class="alert alert-success text-center">
+        <h5 class="alert-heading mb-0">
+          <i class="fa fa-check-circle me-2"></i>BILHETE ATIVO E VÁLIDO
+        </h5>
+      </div>
+      <div *ngIf="ticketEncontrado.statusTicket === true" class="alert alert-danger text-center">
+        <h5 class="alert-heading mb-0">
+          <i class="fa fa-times-circle me-2"></i>BILHETE JÁ UTILIZADO
+        </h5>
+      </div>
+
+      <!-- Detalhes -->
+      <!-- **** CORREÇÃO DOS AVISOS (remoção do '?.' ) **** -->
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Utilizador:</strong> {{ ticketEncontrado.user.primeiroNome }} {{ ticketEncontrado.user.ultimoNome }}</p>
+          <p><strong>Email:</strong> {{ ticketEncontrado.user.email }}</p>
+          <p><strong>Valor Pago:</strong> {{ ticketEncontrado.valorTicket | currency: 'BRL' }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Evento:</strong> {{ ticketEncontrado.evento.tema }}</p>
+          <p><strong>Data do Evento:</strong> {{ ticketEncontrado.evento.dataEvento | DateTimeFormat }}</p>
+          <p><strong>Local:</strong> {{ ticketEncontrado.evento.local }}</p>
+        </div>
+      </div>
+      <!-- **** FIM DA CORREÇÃO **** -->
+
+      <hr>
+
+      <!-- Botões de Ação -->
+      <div class="d-flex justify-content-end gap-2">
+        <button class="btn btn-outline-secondary" (click)="limparBusca()">
+          Limpar (Próximo)
+        </button>
+        <button
+          class="btn btn-success btn-lg"
+          (click)="usarTicket()"
+          [disabled]="isLoading || ticketEncontrado.statusTicket === true">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+          <i *ngIf="!isLoading" class="fa fa-check"></i>
+          {{ (ticketEncontrado.statusTicket === true) ? 'Já Utilizado' : 'Confirmar Entrada (Usar Bilhete)' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

@@ -15,7 +15,7 @@ namespace Domain.entities
         public IEnumerable<Lote> Lotes { get; set; } = new List<Lote>();
         public IEnumerable<RedeSocial> RedesSociais { get; set; } = new List<RedeSocial>();
         public IEnumerable<EventoPalestrante> EventosPalestrantes { get; set; } = new List<EventoPalestrante>();
-
+        public double valor { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
     }

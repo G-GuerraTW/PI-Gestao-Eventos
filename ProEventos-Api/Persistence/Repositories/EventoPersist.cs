@@ -53,5 +53,10 @@ namespace Persistence.Repositories
 
             return await query.ToArrayAsync();
         }
+
+        public async Task<Evento> GetEventoByParaTicketIdAsync(int Id)
+        {
+            return await context.Eventos.FirstOrDefaultAsync(E => E.Id == Id);
+        }
     }
 }

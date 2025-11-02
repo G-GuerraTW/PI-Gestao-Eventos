@@ -13,5 +13,7 @@ namespace Application.Contracts
         public Task<bool> DeleteTicket(int userId, int usuarioId);
         public Task<TicketDTO[]> GetAllTicketByUsuario(int userId);
         Task<TicketDTO> GetTicketByIdAsync(int ticketId);
+        Task<TicketDTO> GetTicketByCodigoAsync(string codigo);
+        Task<TicketDTO> UsarTicketAsync(int ticketId);
     }
 }

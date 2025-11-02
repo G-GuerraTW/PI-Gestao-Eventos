@@ -147,9 +147,9 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
 
-    var dbContext = app.Services.CreateScope().ServiceProvider.GetRequiredService<ProEventoContext>();
-    dbContext.Database.EnsureDeleted();
-    dbContext.Database.EnsureCreated();
+    //var dbContext = app.Services.CreateScope().ServiceProvider.GetRequiredService<ProEventoContext>();
+    //dbContext.Database.EnsureDeleted();
+    //dbContext.Database.EnsureCreated();
 
     // Habilita documentação da API
     app.UseSwagger();

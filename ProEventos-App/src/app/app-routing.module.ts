@@ -18,6 +18,8 @@ import { UserViewComponent } from './components/user-view/user-view.component';
 import { EventoPalestranteComponent } from './components/eventos/evento-palestrante/evento-palestrante.component';
 import { GerarChaveComponent } from './components/admin/gerar-chave/gerar-chave.component'; // Ajuste o caminho se necessário
 import { AdminGuard } from './service/admin.guard'; // Importe o novo Guard
+import { MinhasEntradasComponent } from './components/eventos/minhas-entradas/minhas-entradas.component';
+import { ValidarEntradaComponent } from './components/admin/validar-entrada/validar-entrada.component';
 // import { HomeInitialComponent } from './components/home-initial/home-initial.component'; // Removido
 // --- FIM DOS IMPORTS ---
 
@@ -33,7 +35,8 @@ const routes: Routes = [
         {path: 'detalhes/:id', component: EventoDetalheComponent},
         {path: 'detalhes', component: EventoDetalheComponent},
         {path: 'lista', component: EventoListaComponent},
-        {path: 'palestrante', component: EventoPalestranteComponent}
+        {path: 'palestrante', component: EventoPalestranteComponent},
+        {path: 'minhas-entradas', component: MinhasEntradasComponent}
       ]
   },
 
@@ -54,6 +57,11 @@ const routes: Routes = [
     path: 'gerar-chave',
     component: GerarChaveComponent,
     canActivate: [AuthGuard, AdminGuard] // Protegido por ambos
+  },
+  { 
+    path: 'validar-entrada',
+    component: ValidarEntradaComponent,
+    canActivate: [AuthGuard, AdminGuard]
   },
   // --- FIM DA NOVA ROTA ---
 ];

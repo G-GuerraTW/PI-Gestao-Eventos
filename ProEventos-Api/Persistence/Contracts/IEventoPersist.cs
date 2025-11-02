@@ -8,5 +8,7 @@ namespace Persistence.Contracts
         public Task<Evento[]> GetAllEventosByTemaAsync(int userId, string Tema,bool IncludePalestrante = false);
         public Task<Evento> GetEventoByIdAsync(int userId, int Id, bool IncludePalestrante = false);
         public Task<Evento[]> GetAllEventoPalestranteAsync(int userId);
+
+        public Task<Evento> GetEventoByParaTicketIdAsync(int Id);
     }
 }

@@ -33,6 +33,7 @@ import { PalestranteDetalheComponent } from './components/palestrantes/palestran
 import { GerarChaveComponent } from './components/admin/gerar-chave/gerar-chave.component';
 import { MinhasEntradasComponent } from './components/eventos/minhas-entradas/minhas-entradas.component';
 import { UserViewComponent } from './components/user-view/user-view.component';
+import { ValidarEntradaComponent } from './components/admin/validar-entrada/validar-entrada.component';
 // import { HomeInitialComponent } from './components/home-initial/home-initial.component'; // Removed import
 
 @NgModule({
@@ -57,7 +58,8 @@ import { UserViewComponent } from './components/user-view/user-view.component';
     PalestranteDetalheComponent,
     GerarChaveComponent,
     MinhasEntradasComponent,
-    UserViewComponent
+    UserViewComponent,
+    ValidarEntradaComponent
    ],
   imports: [
     BrowserModule,

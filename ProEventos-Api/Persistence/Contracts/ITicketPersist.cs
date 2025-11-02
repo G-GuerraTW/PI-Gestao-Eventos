@@ -10,5 +10,6 @@ namespace Persistence.Contracts
     {
         public Task<Ticket[]> GetAllTicketByUsuario(int userId);
         public Task<Ticket> GetTicketsByIdAsync(int ticketId);
+        public Task<Ticket> GetTicketByCodigoAsync(string codigo);
     }
 }

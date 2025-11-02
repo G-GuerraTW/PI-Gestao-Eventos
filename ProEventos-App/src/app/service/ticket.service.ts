@@ -22,21 +22,64 @@ export class TicketService {
   }
 
   /**
-   * Cria um novo ticket para um evento.
-   * O backend [Authorize] irá extrair o idUsuario do token.
-   * @param idEvento O ID do evento para o qual o ticket está a ser gerado.
+   * Cria um novo bilhete para um evento.
    */
   public postTicket(idEvento: number): Observable<Ticket> {
-    // O payload que a API espera. Ajuste se for diferente.
-    // Assumindo que a API espera um objeto com o id do evento.
-    const payload = { idEvento: idEvento }; 
-    
+
+    // Payload (DTO "falso") para passar na validação [Required] da API
+    const payload: Partial<Ticket> = {
+      idEvento: idEvento,
+      codigoTicket: '',
+      // O seu backend usa 'bool', por isso enviamos 'false'
+      statusTicket: false 
+    };
+
     return this.http.post<Ticket>(
-      this.baseURL, 
-      payload, 
+      this.baseURL,
+      payload,
       { headers: this.getAuthHeaders() }
     );
   }
 
-  // (Aqui ficará o futuro método getMinhasReservas())
+  /**
+   * Busca todos os bilhetes (reservas) do utilizador logado.
+   * Chama o endpoint [HttpGet("minhas-reservas")]
+   */
+  public getMinhasReservas(): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(
+      `${this.baseURL}/minhas-reservas`,
+      { headers: this.getAuthHeaders() }
+    );
+  }
+
+  // ----------------------------------------------------------------
+  // **** NOVOS MÉTODOS ADICIONADOS PARA A "VALIDAR ENTRADA" ****
+  // ----------------------------------------------------------------
+
+  /**
+   * **** NOVO MÉTODO 1 ****
+   * Busca os detalhes de um bilhete pelo seu código (string).
+   * Chama o endpoint [HttpGet("codigo/{codigo}")]
+   */
+  public getTicketByCodigo(codigo: string): Observable<Ticket> {
+    return this.http.get<Ticket>(
+      `${this.baseURL}/codigo/${codigo}`,
+      { headers: this.getAuthHeaders() }
+    );
+  }
+
+  /**
+   * **** NOVO MÉTODO 2 ****
+   * Envia um pedido para marcar o bilhete como "utilizado".
+   * Chama o endpoint [HttpPatch("usar/{ticketId}")]
+   */
+  public usarTicket(ticketId: number): Observable<Ticket> {
+    // Usamos PATCH para uma atualização parcial (mudar o status)
+    // O backend não espera body, mas o HttpClient envia {}
+    return this.http.patch<Ticket>(
+      `${this.baseURL}/usar/${ticketId}`,
+      {}, // Body vazio
+      { headers: this.getAuthHeaders() }
+    );
+  }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.Identity;
 
 namespace Domain.entities
 {
@@ -27,5 +28,8 @@ namespace Domain.entities
         
         // Status atual do ticket (ex: "Vendido", "Validado", "Cancelado").
         public bool StatusTicket { get; set; } 
+
+        public User User { get; set; }
+        public Evento Evento { get; set; }
     }
 }

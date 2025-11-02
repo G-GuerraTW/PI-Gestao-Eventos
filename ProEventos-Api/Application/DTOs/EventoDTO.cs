@@ -34,6 +34,8 @@ namespace Application.DTOs
             [Display(Name = "e-mail")]
             [EmailAddress(ErrorMessage = "É necessário ser um {0} válido")]
             public string Email { get; set; }
+            
+            public double valor { get; set; }
 
             public IEnumerable<LoteDTO> Lotes { get; set; } = new List<LoteDTO>();
             public IEnumerable<RedeSocialDTO> RedesSociais { get; set; } = new List<RedeSocialDTO>();

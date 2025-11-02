@@ -1,1 +1,113 @@
-<p>minhas-entradas works!</p>
+<!-- Título da Página (Assume que <app-titulo> está no app.module.ts) -->
+<app-titulo [titulo]="'Minhas Entradas'" [iconClass]="'fa fa-ticket-alt'"></app-titulo>
+
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+
+      <!-- Filtro (Segue o padrão do projeto) -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-text"><i class="fa fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="Buscar por código ou ID do evento..." [(ngModel)]="filtroLista">
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabela de Bilhetes -->
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead class="table-dark">
+            <tr class="text-center">
+              <th>ID do Evento</th>
+              <th>Data da Reserva</th>
+              <th>Código do Bilhete</th>
+              <th>Status</th>
+              <th>Opções</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- (Ajuste 'ticket.idEvento' para 'ticket.evento.tema' se o seu backend devolver o objeto Evento completo) -->
+            <tr *ngFor="let ticket of ticketsFiltrados" class="text-center">
+              <td class="align-middle">{{ticket.idEvento}}</td>
+              <td class="align-middle">{{ticket.dataEntrada | DateTimeFormat }}</td>
+              <td class="align-middle">
+                <code>{{ticket.codigoTicket}}</code>
+              </td>
+              <td class="align-middle">
+                <!-- Exemplo de como mostrar status (Ajuste a lógica para bool 'false' ou string 'Ativo') -->
+                <span class="badge" [ngClass]="(ticket.statusTicket === true || ticket.statusTicket === false) ? 'bg-success' : 'bg-secondary'">
+                  {{ (ticket.statusTicket === true || ticket.statusTicket === false) ? 'Ativo' : 'Utilizado' }}
+                </span>
+              </td>
+              <td class="align-middle">
+                <button tooltip="Ver Detalhes" type="button" class="btn btn-info btn-sm"
+                  (click)="openModalDetalhes(modalDetalhesTicket, ticket, $event)">
+                  <i class="fa fa-eye"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+          <!-- Tfoot (sem bilhetes) -->
+          <tfoot *ngIf="ticketsFiltrados.length === 0">
+            <tr>
+              <td colspan="8" class="text-center">
+                <h4 class="text-muted">Nenhuma entrada encontrada.</h4>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--
+  **** MODAL DE DETALHES DO BILHETE ****
+-->
+<ng-template #modalDetalhesTicket>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Detalhes da sua Entrada</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="fecharModal()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- Verifica se o bilhete foi selecionado -->
+    <div *ngIf="ticketSelecionado">
+      <h5 class="text-center text-primary">Apresente este código no dia do evento!</h5>
+      
+      <div class="text-center my-4">
+        <label>Seu Código de Acesso:</label>
+        <h1 class="display-4" style="font-family: 'Courier New', Courier, monospace;">
+          {{ticketSelecionado.codigoTicket}}
+        </h1>
+      </div>
+
+      <div class="input-group mb-3">
+        <input
+          #chaveInput
+          type="text"
+          class="form-control bg-light"
+          [value]="ticketSelecionado.codigoTicket"
+          readonly
+        />
+        <button class="btn btn-outline-secondary" type="button" (click)="copiarChave(chaveInput)">
+          <i class="fa fa-copy me-1"></i> Copiar
+        </button>
+      </div>
+
+      <hr>    
+      <p><strong>Data da Reserva:</strong> {{ticketSelecionado.dataEntrada | DateTimeFormat }}</p>
+      <p><strong>Valor Pago:</strong> {{ticketSelecionado.valorTicket | currency: 'BRL' }}</p>
+      <p><strong>Status:</strong> {{ (ticketSelecionado.statusTicket === true || ticketSelecionado.statusTicket === false) ? 'Ativo (Ainda não utilizado)' : 'Já Utilizado' }}</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="fecharModal()">Fechar</button>
+  </div>
+</ng-template>
+
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
