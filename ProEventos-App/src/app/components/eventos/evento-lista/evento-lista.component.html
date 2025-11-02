@@ -1,9 +1,9 @@
+<!-- **** INÍCIO: src/app/components/eventos/evento-lista/evento-lista.component.html **** -->
 <div class="container mt-5">
   <div class="card shadow-sm">
     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
       <h2 class="mb-0">Eventos</h2>
 
-      <!-- Botão "Novo Evento" (só para Palestrante) -->
       <button *ngIf="isPalestrante" type="button" class="btn btn-light" routerLink="/eventos/detalhes">
         <i class="fa fa-plus-circle me-2"></i>Novo Evento
       </button>
@@ -41,12 +41,13 @@
             </tr>
           </thead>
           <tbody>
-            <!-- Linha da Tabela -->
             <tr *ngFor="let evento of eventosFiltrados" class="text-center" (click)="Redirecionardetalhes(evento.id)">
               <td class="align-middle">{{evento.id}}</td>
               <td class="align-middle">
-                <img src="../../assets/img/{{evento.imagemURL}}" alt="" [collapse]="isCollapsed" [isAnimated]="true"
-                  style="width: 80px;">
+                <!-- Correção do Collapse (já deve estar no seu) -->
+                <div [collapse]="isCollapsed" [isAnimated]="true">
+                   <img src="../../assets/img/{{evento.imagemURL}}" alt="" style="width: 80px;">
+                </div>
               </td>
               <td class="align-middle">{{evento.tema}}</td>
               <td class="align-middle">{{evento.local}}</td>
@@ -63,7 +64,6 @@
                     <button tooltip="Editar" type="button" class="btn btn-warning btn-sm" (click)="editarEvento(evento.id, $event)">
                       <i class="fa fa-edit"></i>
                     </button>
-                    <!-- (Já com a correção do espaço que fizemos antes) -->
                     <button tooltip="Excluir" type="button" class="btn btn-danger btn-sm"
                       (click)="openModal(template, $event, evento.tema, evento.id)">
                       <i class="fa fa-trash-alt"></i>
@@ -72,19 +72,21 @@
 
                   <!-- BOTÃO PARA PARTICIPANTE / NAOINFORMADO -->
                   <ng-container *ngIf="!isPalestrante">
-                    <!-- **** ALTERAÇÃO AQUI **** -->
-                    <!-- Chama o novo modal de confirmação -->
+                    
+                    <!-- **** CORREÇÃO PRINCIPAL AQUI **** -->
+                    <!-- A função no .ts chama-se 'openConfirmarReserva' -->
                     <button tooltip="Reservar Vaga" type="button" class="btn btn-success btn-sm"
                       (click)="openConfirmarReserva(modalConfirmarReserva, evento.id, evento.tema, $event)">
                       <i class="fa fa-calendar-check"></i>
                     </button>
+                    <!-- **** FIM DA CORREÇÃO **** -->
+                    
                   </ng-container>
 
                 </div>
               </td>
             </tr>
           </tbody>
-          <!-- Tfoot (sem eventos) -->
           <tfoot *ngIf="eventos && eventosFiltrados.length === 0">
             <tr>
               <td colspan="8" class="text-center">
@@ -98,7 +100,7 @@
   </div>
 </div>
 
-<!-- Modal de Exclusão (Seu modal antigo, sem alterações) -->
+<!-- Modal de Exclusão (Antigo) -->
 <ng-template #template>
   <div class="modal-body text-center">
     <p>Deseja realmente excluir o evento <strong>{{temaEventoExclusao}}</strong> (ID: {{idEventoExclusao}})?</p>
@@ -110,7 +112,7 @@
 </ng-template>
 
 <!--
-  **** NOVO MODAL 1: CONFIRMAR RESERVA ****
+  **** NOVO MODAL 1: CONFIRMAR RESERVA (Obrigatório) ****
 -->
 <ng-template #modalConfirmarReserva>
   <div class="modal-body text-center">
@@ -125,7 +127,7 @@
 </ng-template>
 
 <!--
-  **** NOVO MODAL 2: EXIBIR BILHETE GERADO ****
+  **** NOVO MODAL 2: EXIBIR BILHETE GERADO (Obrigatório) ****
 -->
 <ng-template #modalExibirTicket>
   <div class="modal-header">
@@ -158,5 +160,5 @@
   </div>
 </ng-template>
 
-
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<!-- **** FIM: src/app/components/eventos/evento-lista/evento-lista.component.html **** -->

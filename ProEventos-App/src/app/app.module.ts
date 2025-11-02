@@ -56,7 +56,8 @@ import { UserViewComponent } from './components/user-view/user-view.component';
     EventoPalestranteComponent,
     PalestranteDetalheComponent,
     GerarChaveComponent,
-    MinhasEntradasComponent
+    MinhasEntradasComponent,
+    UserViewComponent
    ],
   imports: [
     BrowserModule,
