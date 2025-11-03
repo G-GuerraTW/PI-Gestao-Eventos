@@ -59,14 +59,17 @@
     <div class="col-md-12">
       <div class="chart-card">
         <div class="card-body">
-          <h5 class="card-title">Eventos por Mês</h5>
-          <div class="chart-container">
-            <div class="bar" style="height: 60%;"><span>Jan</span></div>
-            <div class="bar" style="height: 80%;"><span>Fev</span></div>
-            <div class="bar" style="height: 40%;"><span>Mar</span></div>
-            <div class="bar" style="height: 70%;"><span>Abr</span></div>
-            <div class="bar" style="height: 90%;"><span>Mai</span></div>
-            <div class="bar" style="height: 50%;"><span>Jun</span></div>
+          <h5 class="card-title">Proporção de Eventos</h5>
+          <div class="chart-container-proportional">
+            <div class="bar-proportional bg-success" [style.width.%]="percentEventosProximos">
+              <span *ngIf="percentEventosProximos > 0">Próximos: {{ percentEventosProximos | number:'1.0-0' }}%</span>
+            </div>
+            <div class="bar-proportional bg-danger" [style.width.%]="percentEventosRealizados">
+              <span *ngIf="percentEventosRealizados > 0">Realizados: {{ percentEventosRealizados | number:'1.0-0' }}%</span>
+            </div>
+          </div>
+          <div *ngIf="totalEventos === 0" class="text-center mt-3">
+            <p>Nenhum evento cadastrado para exibir a proporção.</p>
           </div>
         </div>
       </div>

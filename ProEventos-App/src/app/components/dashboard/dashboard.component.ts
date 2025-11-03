@@ -23,6 +23,8 @@ export class DashboardComponent implements OnInit {
   public totalEventos: number = 0;
   public eventosProximos: number = 0;
   public eventosRealizados: number = 0;
+  public percentEventosProximos: number = 0;
+  public percentEventosRealizados: number = 0;
 
   ngOnInit(): void {
     this.ngxSpinnerService.show();
@@ -34,8 +36,17 @@ export class DashboardComponent implements OnInit {
       next: (_eventos: Evento[]) => {
         this.eventos = _eventos;
         this.totalEventos = _eventos.length;
-        this.eventosProximos = _eventos.filter(e => new Date() > new Date()).length;
-        this.eventosRealizados = this.totalEventos - this.eventosProximos;
+        const hoje = new Date();
+        this.eventosProximos = _eventos.filter(e => e.dataEvento && new Date(e.dataEvento) > hoje).length;
+        this.eventosRealizados = _eventos.filter(e => e.dataEvento && new Date(e.dataEvento) <= hoje).length;
+
+        if (this.totalEventos > 0) {
+          this.percentEventosProximos = (this.eventosProximos / this.totalEventos) * 100;
+          this.percentEventosRealizados = (this.eventosRealizados / this.totalEventos) * 100;
+        } else {
+          this.percentEventosProximos = 0;
+          this.percentEventosRealizados = 0;
+        }
       },
       error: (error: any) => {
         this.ngxSpinnerService.hide();
