@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { Palestrante } from 'src/models/Palestrante';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-palestrantes',
@@ -6,54 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./palestrantes.component.scss']
 })
 export class PalestrantesComponent implements OnInit {
-  public palestrantes: any = [];
-  public palestrantesFiltrados: any = [];
+  public palestrantes: Palestrante[] = [];
+  public palestrantesFiltrados: Palestrante[] = [];
   public _filtroLista = '';
 
-  constructor() { }
+  private userService = inject(UserService);
 
   ngOnInit() {
-    this.palestrantes = [
-      {
-        id: 1,
-        nome: 'Eliel Silva',
-        miniCurriculo: 'Desenvolvedor Full Stack',
-        imagemURL: 'img1.png',
-        telefone: '123456789',
-        email: 'eliel@example.com',
-        redesSociais: [
-          {
-            nome: 'LinkedIn',
-            url: 'https://www.linkedin.com/in/eliel-silva-1a2b3c4d/'
-          },
-          {
-            nome: 'GitHub',
-            url: 'https://github.com/elielsilva'
-          },
-          {
-            nome: 'Twitter',
-            url: 'https://twitter.com/elielsilva'
-          }
-        ],
-        eventos: [
-          {
-            id: 1,
-            tema: 'Angular'
-          }
-        ]
+    this.getPalestrantes();
+  }
+
+  public getPalestrantes(): void {
+    this.userService.getPalestrantes().subscribe(
+      (palestrantes: Palestrante[]) => {
+        this.palestrantes = palestrantes;
+        this.palestrantesFiltrados = this.palestrantes;
       },
-      {
-        id: 2,
-        nome: 'João da Silva',
-        miniCurriculo: 'Desenvolvedor Back End',
-        imagemURL: 'img2.png',
-        telefone: '987654321',
-        email: 'joao@example.com',
-        redesSociais: [],
-        eventos: []
+      (error: any) => {
+        console.error(error);
       }
-    ];
-    this.palestrantesFiltrados = this.palestrantes;
+    );
   }
 
   public get filtroLista(): string {
@@ -67,33 +41,13 @@ export class PalestrantesComponent implements OnInit {
       : this.palestrantes;
   }
 
-  getIcon(redeSocial: string): string {
-    switch (redeSocial.toLowerCase()) {
-      case 'linkedin':
-        return 'fab fa-linkedin';
-      case 'github':
-        return 'fab fa-github';
-      case 'twitter':
-        return 'fab fa-twitter';
-      case 'instagram':
-        return 'fab fa-instagram';
-      case 'facebook':
-        return 'fab fa-facebook';
-      case 'youtube':
-        return 'fab fa-youtube';
-      case 'website':
-        return 'fas fa-globe';
-      default:
-        return 'fas fa-link';
-    }
-  }
-
-  filtrarPalestrantes(filtrarPor: string): any[] {
+  filtrarPalestrantes(filtrarPor: string): Palestrante[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
 
-    return this.palestrantes.filter((palestrante: { nome: string; miniCurriculo: string; }) =>
-      palestrante.nome.toLocaleLowerCase().includes(filtrarPor) ||
-      palestrante.miniCurriculo.toLocaleLowerCase().includes(filtrarPor)
+    return this.palestrantes.filter((palestrante) =>
+      palestrante.primeiroNome.toLocaleLowerCase().includes(filtrarPor) ||
+      palestrante.ultimoNome.toLocaleLowerCase().includes(filtrarPor) ||
+      (palestrante.descricao && palestrante.descricao.toLocaleLowerCase().includes(filtrarPor))
     );
   }
 }

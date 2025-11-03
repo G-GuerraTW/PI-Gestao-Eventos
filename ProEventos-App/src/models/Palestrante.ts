@@ -1,13 +1,12 @@
-import { Evento } from "./Evento";
-import { RedeSocial } from "./RedeSocial"
-import { User } from "./User"
-
 export interface Palestrante {
-    id: number;
-    nome: string;
-    miniCurriculo: string;
-    userId: number;
-    user: User;
-    redeSocial: RedeSocial[];
-    eventoPalestrante: Evento[];
+    id: string;
+    titulo: string;
+    userName: string;
+    primeiroNome: string;
+    ultimoNome: string;
+    email: string;
+    phoneNumber: string | null;
+    funcao: string;
+    descricao: string | null;
+    password?: string | null;
 }

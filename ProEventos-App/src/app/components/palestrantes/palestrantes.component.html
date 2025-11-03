@@ -8,7 +8,7 @@
         <div class="col-md-6">
           <div class="input-group">
             <span class="input-group-text"><i class="fa fa-search"></i></span>
-            <input type="text" class="form-control" placeholder="Buscar por nome ou tema..." [(ngModel)]="filtroLista">
+            <input type="text" class="form-control" placeholder="Buscar por nome ou descrição..." [(ngModel)]="filtroLista">
           </div>
         </div>
       </div>
@@ -16,39 +16,27 @@
         <table class="table table-hover table-striped">
           <thead class="table-dark">
             <tr class="text-center">
-              <th>#</th>
+              <th>Título</th>
+              <th>Username</th>
               <th>Nome</th>
-              <th>Mini Currículo</th>
-              <th>Imagem</th>
-              <th>Telefone</th>
               <th>Email</th>
-              <th>Redes Sociais</th>
-              <th>Eventos</th>
+              <th>Telefone</th>
+              <th>Descrição</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let palestrante of palestrantesFiltrados" class="text-center">
-              <td class="align-middle">{{palestrante.id}}</td>
-              <td class="align-middle">{{palestrante.nome}}</td>
-              <td class="align-middle">{{palestrante.miniCurriculo}}</td>
-              <td class="align-middle">
-                <img src="../../assets/img/{{palestrante.imagemURL}}" alt="" style="width: 80px;">
-              </td>
-              <td class="align-middle">{{palestrante.telefone}}</td>
+              <td class="align-middle">{{palestrante.titulo}}</td>
+              <td class="align-middle">{{palestrante.userName}}</td>
+              <td class="align-middle">{{palestrante.primeiroNome}} {{palestrante.ultimoNome}}</td>
               <td class="align-middle">{{palestrante.email}}</td>
-              <td class="align-middle">
-                <div class="d-flex justify-content-center gap-2">
-                  <a *ngFor="let redeSocial of palestrante.redesSociais" [href]="redeSocial.url" target="_blank" class="btn btn-sm btn-light">
-                    <i [class]="getIcon(redeSocial.nome)"></i>
-                  </a>
-                </div>
-              </td>
-              <td class="align-middle">{{palestrante.eventos.length}}</td>
+              <td class="align-middle">{{palestrante.phoneNumber}}</td>
+              <td class="align-middle">{{palestrante.descricao}}</td>
             </tr>
           </tbody>
           <tfoot *ngIf="palestrantesFiltrados && palestrantesFiltrados.length === 0">
             <tr>
-              <td colspan="9" class="text-center">
+              <td colspan="6" class="text-center">
                 <h4 class="text-muted">Nenhum palestrante encontrado.</h4>
               </td>
             </tr>

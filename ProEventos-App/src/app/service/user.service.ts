@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/enviroment/enviroment';
 import { UserDTO } from 'src/models/DTOs/UserDTO';
+import { Palestrante } from 'src/models/Palestrante';
 import { User } from 'src/models/User';
 
 @Injectable({
@@ -36,5 +37,14 @@ export class UserService {
     });
 
     return this.http.put<UserDTO>(`${this.baseURL}/Update`, user, { headers });
+  }
+
+  getPalestrantes(): Observable<Palestrante[]> {
+        const userStorege = JSON.parse(localStorage.getItem('user') || '{}');
+    const token = userStorege?.token;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<Palestrante[]>(`${this.baseURL}/palestrantes`, { headers });
   }
 }
