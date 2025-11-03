@@ -7,5 +7,6 @@ namespace Persistence.Contracts
         public Task<IEnumerable<User>> GetUsersAsync();
         public Task<User> GetUserByIdAsync(int id);
         public Task<User> GetUserByUsernameAsync(string username);
+        public Task<IEnumerable<User>> GetUsersPalestrantesAsync();
     }
 }

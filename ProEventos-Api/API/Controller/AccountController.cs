@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controller
-{   
+{
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
@@ -35,6 +35,21 @@ namespace API.Controller
             }
         }
 
+        [HttpGet("palestrantes")]
+        public async Task<IActionResult> GetPalestrantes()
+        {
+            try
+            {
+                return Ok(await accountService.GetPalestrantes());
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar Usuário. Erro: {ex.Message}");
+            }
+        }
+
+
         [HttpPost("Register")]
         [AllowAnonymous]
         public async Task<IActionResult> RegisterUser(UserDTO userDTO)
@@ -44,7 +59,7 @@ namespace API.Controller
                 if (await accountService.UserExists(userDTO.UserName)) return BadRequest("Usuario já Existe");
 
                 var user = await accountService.CreateAccountAssync(userDTO);
-                if(user != null) return Ok(user);
+                if (user != null) return Ok(user);
 
                 return BadRequest("Usuário não criado, tente novamente.");
 
@@ -62,10 +77,10 @@ namespace API.Controller
             try
             {
                 var user = await accountService.GetUserByUsernameAsync(User.GetUserName());
-                if(user == null) return Unauthorized("Usuário Inválido.");
+                if (user == null) return Unauthorized("Usuário Inválido.");
 
                 var userReturn = await accountService.UpdateAccount(userUpdateDTO);
-                if(userReturn != null) return Ok(userReturn);
+                if (userReturn != null) return Ok(userReturn);
                 else return BadRequest("Erro ao alterar Usuário.");
             }
             catch (Exception ex)
@@ -82,12 +97,12 @@ namespace API.Controller
             try
             {
                 var user = await this.accountService.GetUserByUsernameAsync(userLogin.UserName);
-                if(user == null) return Unauthorized("Usuário ou senha está errado.");
+                if (user == null) return Unauthorized("Usuário ou senha está errado.");
 
                 var result = await accountService.CheckUserPasswordAsync(user, userLogin.Password);
-                if(!result.Succeeded) return Unauthorized();
+                if (!result.Succeeded) return Unauthorized();
 
-                return Ok(new 
+                return Ok(new
                 {
                     userName = user.UserName,
                     PrimeiroNome = user.PrimeiroNome,

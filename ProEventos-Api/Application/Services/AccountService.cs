@@ -1,14 +1,12 @@
-using AutoMapper;
-using Domain.Identity;
-using Application.DTOs;
 using Application.Contracts;
-using Persistence.Contracts;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Persistence.Repositories;
+using Application.DTOs;
+using AutoMapper;
 using Domain.entities;
 using Domain.Enum;
-using AutoMapper.Internal.Mappers;
+using Domain.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Persistence.Contracts;
 
 namespace Application.Services
 {
@@ -21,7 +19,8 @@ namespace Application.Services
         private readonly IGeralPersist geralPersist;
         private readonly IChavePalestrantesPersist chavePersist;
 
-        public AccountService(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IUserPersist userPersist, IGeralPersist geralPersist, IChavePalestrantesPersist chavePersist)
+        public AccountService(UserManager<User> userManager, SignInManager<User> signInManager,
+            IMapper mapper, IUserPersist userPersist, IGeralPersist geralPersist, IChavePalestrantesPersist chavePersist)
         {
             this.userManager = userManager;
             this.mapper = mapper;
@@ -29,18 +28,34 @@ namespace Application.Services
             this.signInManager = signInManager;
             this.geralPersist = geralPersist;
             this.chavePersist = chavePersist;
-            
+
         }
+
+        public async Task<IEnumerable<UserUpdateDTO>> GetPalestrantes()
+        {
+            try
+            {
+                var users = await userPersist.GetUsersPalestrantesAsync();
+
+                return mapper.Map<IEnumerable<UserUpdateDTO>>(users);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao tentar Recuperar pelestrantes. Erro: {ex.Message}");
+            }
+        }
+
+
         public async Task<SignInResult> CheckUserPasswordAsync(UserUpdateDTO userUpdateDTO, string password)
         {
             try
             {
-                var user = await userManager.Users.SingleOrDefaultAsync(U => U.UserName == userUpdateDTO.UserName);  
+                var user = await userManager.Users.SingleOrDefaultAsync(U => U.UserName == userUpdateDTO.UserName);
                 return await signInManager.CheckPasswordSignInAsync(user, password, false);
             }
             catch (Exception ex)
             {
-                
+
                 throw new Exception($"Erro ao tentar verificar password. Erro: {ex.Message}");
             }
         }
@@ -76,7 +91,7 @@ namespace Application.Services
                     {
                         chave.Utilizada = true;
                         chave.DataUso = DateTime.Now;
-                        chave.UserId = user.Id; 
+                        chave.UserId = user.Id;
 
                         geralPersist.Update(chave);
                         if (!await geralPersist.SaveChangesAsync())
@@ -84,7 +99,7 @@ namespace Application.Services
                             throw new Exception("Usuário criado, mas falha ao atualizar o status da Chave Palestrante.");
                         }
                     }
-                    
+
                     var userRetorno = mapper.Map<UserDTO>(user);
                     return userRetorno;
                 }
@@ -103,14 +118,14 @@ namespace Application.Services
             {
                 var user = await userManager.FindByNameAsync(username);
 
-                if(user == null) return null;
+                if (user == null) return null;
 
                 var userRetorno = mapper.Map<UserUpdateDTO>(user);
                 return userRetorno;
             }
             catch (Exception ex)
             {
-                
+
                 throw new Exception($"Erro ao tentar Recuperar Usuario. Erro: {ex.Message}");
             }
         }
@@ -120,7 +135,7 @@ namespace Application.Services
             try
             {
                 var user = await userPersist.GetUserByUsernameAsync(userUpdateDTO.UserName);
-                if(user == null) return null;
+                if (user == null) return null;
 
                 var token = await userManager.GeneratePasswordResetTokenAsync(user);
                 var result = await userManager.ResetPasswordAsync(user, token, userUpdateDTO.Password);
@@ -128,7 +143,7 @@ namespace Application.Services
                 mapper.Map(userUpdateDTO, user);
                 userPersist.Update(user);
 
-                if(await userPersist.SaveChangesAsync()) 
+                if (await userPersist.SaveChangesAsync())
                 {
                     var userRetorno = await userPersist.GetUserByUsernameAsync(user.UserName);
                     return mapper.Map<UserUpdateDTO>(userRetorno);
@@ -137,7 +152,7 @@ namespace Application.Services
             }
             catch (Exception ex)
             {
-                
+
                 throw new Exception($"Erro ao tentar Atualizar Cadastro. Erro: {ex.Message}");
             }
         }
@@ -150,7 +165,7 @@ namespace Application.Services
             }
             catch (Exception ex)
             {
-                
+
                 throw new Exception($"Erro ao tentar verificar Username. Erro: {ex.Message}");
             }
         }

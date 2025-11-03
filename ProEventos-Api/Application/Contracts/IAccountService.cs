@@ -10,5 +10,6 @@ namespace Application.Contracts
         Task<SignInResult> CheckUserPasswordAsync(UserUpdateDTO userUpdateDTO, string password);
         Task<UserDTO> CreateAccountAssync(UserDTO userDTO);
         Task<UserUpdateDTO> UpdateAccount(UserUpdateDTO userUpdateDTO);
+        Task<IEnumerable<UserUpdateDTO>> GetPalestrantes();
     }
 }

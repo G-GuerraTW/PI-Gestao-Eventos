@@ -3,6 +3,7 @@ using Domain.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using Persistence.Contracts;
+using Domain.Enum;
 
 namespace Persistence.Repositories
 {
@@ -24,8 +25,13 @@ namespace Persistence.Repositories
         }
 
         public async Task<User> GetUserByUsernameAsync(string username)
-        {                               //Espera que só exista um elemento que satisfaça a condição, Se encontrar mais de um, lança exceção, Se não encontrar nenhum, retorna null.
+        {
             return await context.Users.SingleOrDefaultAsync(U => U.UserName == username);
+        }
+
+        public async Task<IEnumerable<User>> GetUsersPalestrantesAsync()
+        {
+            return await context.Users.Where(u => u.Funcao == Funcao.Palestrante).ToListAsync();
         }
     }
 }
