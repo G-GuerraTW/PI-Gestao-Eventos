@@ -16,7 +16,7 @@ export class NavComponent {
 
   // Esta função já esconde o menu na tela de login
   showmenu(): boolean {
-    return this.router.url !== '/user/login';
+    return this.router.url !== '/user/login' && this.router.url !== '/user/registration';
   }
 
   logout() {

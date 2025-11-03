@@ -1,6 +1,10 @@
 <nav class="navbar navbar-expand-lg bg-light" *ngIf="showmenu()">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/dashboard">ProEventos</a>
+    <a class="navbar-brand" *ngIf="authService.currentUser$ | async as user; else defaultLogoLink"
+       [routerLink]="isPalestrante(user) ? '/dashboard' : '/user-view'">ProEventos</a>
+    <ng-template #defaultLogoLink>
+      <a class="navbar-brand" routerLink="/user-view">ProEventos</a>
+    </ng-template>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,11 +14,11 @@
         <!-- Início da Lógica de Menu Dinâmico -->
         <ng-container *ngIf="authService.currentUser$ | async as user; else loggedOutMenu">
 
-          <!-- 1. Link "Eventos" (SÓ para Participante/NaoInformado) -->
+          <!-- 1. Link "Evento  s" (SÓ para Participante/NaoInformado)
           <li class="nav-item" *ngIf="isParticipante(user)">
             <a class="nav-link" aria-current="page" routerLink="eventos/lista" routerLinkActive="active">Eventos</a>
-          </li>
-          
+          </li> -->
+
           <!-- **** NOVO LINK "MINHAS ENTRADAS" **** -->
           <li class="nav-item" *ngIf="isParticipante(user)">
             <a class="nav-link" aria-current="page" routerLink="eventos/minhas-entradas" routerLinkActive="active">Minhas Entradas</a>
@@ -62,7 +66,7 @@
           </li> -->
         </ng-template>
         <!-- Fim da Lógica de Menu Dinâmico -->
-        
+
       </ul>
 
       <!-- Dropdown do Usuário (sem alterações) -->

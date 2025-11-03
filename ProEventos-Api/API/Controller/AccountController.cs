@@ -49,7 +49,6 @@ namespace API.Controller
             }
         }
 
-
         [HttpPost("Register")]
         [AllowAnonymous]
         public async Task<IActionResult> RegisterUser(UserDTO userDTO)
